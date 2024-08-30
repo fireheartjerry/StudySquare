@@ -1,1 +1,1 @@
-# recesshacks-4.0
+Repository for Recess Hacks 4.0 hackathon.
