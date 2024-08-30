@@ -1,0 +1,11 @@
+secret_key.txt
+session
+__pycache__
+test.txt
+test2.txt
+backups
+dl
+logs
+static
+settings.py
+problemdatabase.db

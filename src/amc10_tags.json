@@ -1,0 +1,4358 @@
+[
+    {
+        "id": "02_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p04",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10A_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "02_amc10A_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p14",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10A_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "02_amc10A_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10A_p22",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10A_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "02_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p03",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10B_p06",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10B_p07",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10B_p08",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "02_amc10B_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "02_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p15",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10B_p16",
+        "category": "Number theory"
+    },
+    {
+        "id": "02_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10B_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10B_p19",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10B_p23",
+        "category": "Algebra"
+    },
+    {
+        "id": "02_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "02_amc10B_p25",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p03",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p07",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10A_p08",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p14",
+        "category": "Number theory"
+    },
+    {
+        "id": "03_amc10A_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10A_p16",
+        "category": "Number theory"
+    },
+    {
+        "id": "03_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10A_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10A_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10A_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10A_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10A_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "03_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10B_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10B_p07",
+        "category": "Number theory"
+    },
+    {
+        "id": "03_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p10",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p13",
+        "category": "Number theory"
+    },
+    {
+        "id": "03_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10B_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10B_p18",
+        "category": "Number theory"
+    },
+    {
+        "id": "03_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10B_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "03_amc10B_p22",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "03_amc10B_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "03_amc10B_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "04_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10A_p07",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10A_p10",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10A_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10A_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10A_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10A_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10A_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10A_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10A_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p01",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10B_p02",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p04",
+        "category": "Number theory"
+    },
+    {
+        "id": "04_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p06",
+        "category": "Number theory"
+    },
+    {
+        "id": "04_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10B_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p19",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "04_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "04_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "04_amc10B_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p05",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10A_p15",
+        "category": "Number theory"
+    },
+    {
+        "id": "05_amc10A_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10A_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10A_p21",
+        "category": "Number theory"
+    },
+    {
+        "id": "05_amc10A_p22",
+        "category": "Number theory"
+    },
+    {
+        "id": "05_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10A_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "05_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10B_p11",
+        "category": "Number theory"
+    },
+    {
+        "id": "05_amc10B_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10B_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "05_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "05_amc10B_p22",
+        "category": "Number theory"
+    },
+    {
+        "id": "05_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "05_amc10B_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "05_amc10B_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10A_p10",
+        "category": "Number theory"
+    },
+    {
+        "id": "06_amc10A_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10A_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10A_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10A_p22",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10A_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p04",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p06",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10B_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "06_amc10B_p22",
+        "category": "Algebra"
+    },
+    {
+        "id": "06_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "06_amc10B_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "07_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p03",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10A_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10A_p17",
+        "category": "Number theory"
+    },
+    {
+        "id": "07_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10A_p23",
+        "category": "Number theory"
+    },
+    {
+        "id": "07_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10A_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "07_amc10B_p01",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p04",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "07_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10B_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10B_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "07_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "07_amc10B_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "07_amc10B_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "08_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p02",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p03",
+        "category": "Number theory"
+    },
+    {
+        "id": "08_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10A_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "08_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p06",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p08",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p15",
+        "category": "Number theory"
+    },
+    {
+        "id": "08_amc10B_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10B_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "08_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10B_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "08_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "08_amc10B_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p02",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p06",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p09",
+        "category": "Number theory"
+    },
+    {
+        "id": "09_amc10A_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10A_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10A_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "09_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p04",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10B_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "09_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p21",
+        "category": "Number theory"
+    },
+    {
+        "id": "09_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "09_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "09_amc10B_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p02",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p09",
+        "category": "Number theory"
+    },
+    {
+        "id": "10_amc10A_p10",
+        "category": "Number theory"
+    },
+    {
+        "id": "10_amc10A_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10A_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10A_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "10_amc10A_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "10_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p02",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p03",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p05",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p06",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10B_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "10_amc10B_p21",
+        "category": "Number theory"
+    },
+    {
+        "id": "10_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "10_amc10B_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "10_amc10B_p25",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p08",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10A_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10A_p19",
+        "category": "Number theory"
+    },
+    {
+        "id": "11_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p03",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p08",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10B_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10B_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "11_amc10B_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p19",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "11_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p23",
+        "category": "Number theory"
+    },
+    {
+        "id": "11_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "11_amc10B_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p02",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p04",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10A_p05",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10A_p10",
+        "category": "Number theory"
+    },
+    {
+        "id": "12_amc10A_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10A_p12",
+        "category": "Number theory"
+    },
+    {
+        "id": "12_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10A_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10A_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p19",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10A_p22",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10A_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10A_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p02",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p03",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p04",
+        "category": "Number theory"
+    },
+    {
+        "id": "12_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10B_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "12_amc10B_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10B_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "12_amc10B_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "12_amc10B_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p03",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p07",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p19",
+        "category": "Number theory"
+    },
+    {
+        "id": "13_amc10A_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p21",
+        "category": "Number theory"
+    },
+    {
+        "id": "13_amc10A_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10A_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p09",
+        "category": "Number theory"
+    },
+    {
+        "id": "13_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10B_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10B_p18",
+        "category": "Number theory"
+    },
+    {
+        "id": "13_amc10B_p19",
+        "category": "Algebra"
+    },
+    {
+        "id": "13_amc10B_p20",
+        "category": "Number theory"
+    },
+    {
+        "id": "13_amc10B_p21",
+        "category": "Number theory"
+    },
+    {
+        "id": "13_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "13_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "13_amc10B_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "13_amc10B_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "14_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p03",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10A_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p07",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10A_p08",
+        "category": "Number theory"
+    },
+    {
+        "id": "14_amc10A_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10A_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10A_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10A_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "14_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10B_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p12",
+        "category": "Number theory"
+    },
+    {
+        "id": "14_amc10B_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10B_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10B_p17",
+        "category": "Number theory"
+    },
+    {
+        "id": "14_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10B_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "14_amc10B_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "14_amc10B_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "14_amc10B_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p02",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10A_p03",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p10",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10A_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10A_p15",
+        "category": "Number theory"
+    },
+    {
+        "id": "15_amc10A_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10A_p20",
+        "category": "Number theory"
+    },
+    {
+        "id": "15_amc10A_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10A_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10B_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10B_p05",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10B_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10B_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p10",
+        "category": "Number theory"
+    },
+    {
+        "id": "15_amc10B_p11",
+        "category": "Number theory"
+    },
+    {
+        "id": "15_amc10B_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10B_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10B_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "15_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "15_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p23",
+        "category": "Number theory"
+    },
+    {
+        "id": "15_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "15_amc10B_p25",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10A_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10A_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10A_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10A_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10A_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10A_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10A_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10A_p22",
+        "category": "Number theory"
+    },
+    {
+        "id": "16_amc10A_p23",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10A_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "16_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10B_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10B_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "16_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10B_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "16_amc10B_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "16_amc10B_p25",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10A_p03",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10A_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10A_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10A_p08",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10A_p10",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10A_p13",
+        "category": "Number theory"
+    },
+    {
+        "id": "17_amc10A_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10A_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p16",
+        "category": "Number theory"
+    },
+    {
+        "id": "17_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p20",
+        "category": "Number theory"
+    },
+    {
+        "id": "17_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10A_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10A_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10A_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p06",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10B_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10B_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "17_amc10B_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10B_p14",
+        "category": "Number theory"
+    },
+    {
+        "id": "17_amc10B_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10B_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "17_amc10B_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10B_p20",
+        "category": "Number theory"
+    },
+    {
+        "id": "17_amc10B_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10B_p23",
+        "category": "Number theory"
+    },
+    {
+        "id": "17_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "17_amc10B_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p03",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10A_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p07",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10A_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10A_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10A_p17",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10A_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10A_p19",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10A_p22",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10A_p25",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10B_p01",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10B_p03",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p04",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10B_p05",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10B_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10B_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10B_p11",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10B_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10B_p13",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10B_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10B_p16",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p19",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10B_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "18_amc10B_p21",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "18_amc10B_p23",
+        "category": "Number theory"
+    },
+    {
+        "id": "18_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "18_amc10B_p25",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p06",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10A_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10A_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10A_p09",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10A_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10A_p11",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10A_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10A_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10A_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10A_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10A_p18",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10A_p19",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10A_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10A_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p02",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p07",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10B_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p12",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10B_p13",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p14",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10B_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10B_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p19",
+        "category": "Number theory"
+    },
+    {
+        "id": "19_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10B_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "19_amc10B_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "19_amc10B_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "19_amc10B_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p06",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p07",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10A_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10A_p13",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p14",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p15",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10A_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p17",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10A_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10A_p21",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10A_p22",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10A_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10A_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10B_p04",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10B_p05",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "20_amc10B_p07",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10B_p08",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10B_p09",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p12",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10B_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10B_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10B_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10B_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "20_amc10B_p22",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10B_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "20_amc10B_p24",
+        "category": "Number theory"
+    },
+    {
+        "id": "20_amc10B_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p03",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p07",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p11",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10A_p12",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10A_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10A_p14",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10A_p15",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10A_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10A_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10A_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10A_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10B_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10B_p04",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p05",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10B_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10B_p07",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10B_p09",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10B_p10",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p12",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10B_p13",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10B_p14",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10B_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10B_p16",
+        "category": "Number theory"
+    },
+    {
+        "id": "21_amc10B_p17",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p18",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p19",
+        "category": "Algebra"
+    },
+    {
+        "id": "21_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10B_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "21_amc10B_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "21_amc10B_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p03",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p05",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p07",
+        "category": "Number theory"
+    },
+    {
+        "id": "22_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10A_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10A_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10A_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10A_p16",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p17",
+        "category": "Number theory"
+    },
+    {
+        "id": "22_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10A_p19",
+        "category": "Number theory"
+    },
+    {
+        "id": "22_amc10A_p20",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10A_p21",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10A_p22",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10A_p23",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10A_p24",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10A_p25",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p02",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10B_p03",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10B_p04",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p06",
+        "category": "Number theory"
+    },
+    {
+        "id": "22_amc10B_p07",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p08",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10B_p09",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p11",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p12",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10B_p13",
+        "category": "Number theory"
+    },
+    {
+        "id": "22_amc10B_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10B_p15",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p16",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10B_p17",
+        "category": "Number theory"
+    },
+    {
+        "id": "22_amc10B_p18",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10B_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "22_amc10B_p23",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "22_amc10B_p24",
+        "category": "Algebra"
+    },
+    {
+        "id": "22_amc10B_p25",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10A_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10A_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10A_p03",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10A_p04",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10A_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10A_p06",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10A_p07",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10A_p08",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10A_p09",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10A_p10",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10A_p11",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p12",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10A_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p14",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10A_p15",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10A_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p18",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p19",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p20",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10A_p21",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10A_p22",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p23",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10A_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10A_p25",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10B_p01",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10B_p02",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10B_p03",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10B_p04",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10B_p05",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10B_p06",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10B_p08",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10B_p09",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10B_p10",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10B_p11",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10B_p12",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10B_p13",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10B_p14",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10B_p15",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10B_p16",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10B_p17",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10B_p18",
+        "category": "Number theory"
+    },
+    {
+        "id": "23_amc10B_p19",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10B_p20",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10B_p21",
+        "category": "Counting and probability"
+    },
+    {
+        "id": "23_amc10B_p22",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10B_p23",
+        "category": "Algebra"
+    },
+    {
+        "id": "23_amc10B_p24",
+        "category": "Geometry"
+    },
+    {
+        "id": "23_amc10B_p25",
+        "category": "Geometry"
+    }
+]
