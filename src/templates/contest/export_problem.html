@@ -1,0 +1,19 @@
+{% extends "contest/layout.html" %}
+
+{% block title %}Export {{ data["name"] }}{% endblock %}
+{% block active %}Contests{% endblock %}
+
+{% block main %}
+<h1>Export <a href="{{ request.path[:-7] }}">{{ data["name"] }}</a></h1>
+<p>
+	Are you sure you want to export {{ data["name"] }} to the Practice tab?
+</p>
+<form method="post">
+    <div class="form-floating">
+        <input class="form-control mb-3" id="pv" type="number" name="point_value" placeholder="New Point Value: (Empty to Keep Original)">
+        <label for="pv">New Point Value: (Empty to Keep Original)</label>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Confirm">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+{% endblock %}

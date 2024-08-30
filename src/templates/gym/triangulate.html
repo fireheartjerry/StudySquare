@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block title %}Triangulate - Play{% endblock %}
+{% block active %}Math Gym{% endblock %}
+
+{% block main %}
+<style>
+    .dark .instructions {
+        background-color: #121212!important;
+    }
+    
+    .dark .info-section {
+        background-color: #777777!important;
+    }
+
+    canvas {
+        cursor: crosshair;
+    }
+
+    .triangulate-time-left {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 24px;
+        font-weight: bold;
+        color: #1abc9c!important;
+        background-color: #496684;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+
+    .gradient-button {
+        background: linear-gradient(to right, #741f22, #ff4242, #741f22);
+        border: none;
+        color: white;
+        padding: 15px 30px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 24px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255, 154, 158, 0.5);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .gradient-button:hover {
+        background-position: right center;
+        transform: scale(1.1);
+    }
+</style>
+<h1>Triangulate</h1>
+<p>Play this fun math game involving speed and accuracy!</p>
+{% if no_account %}
+    <p>Create an account to play rated games!</p>
+{% else %}
+    {% if not rated %}
+        <p id="countdown" style="font-size: 24px; margin-bottom: 10px;">Next rated game in <span class="triangulate-time-left">{{ time_left }}</span></p>
+    {% endif %}
+{% endif %}
+<div class="{% if rated %}gradient-button{% else %}btn btn-outline-primary{% endif %}" id="start-game" style="font-size: 40px">{% if rated %}Play <b>Rated</b> Game{% else %}Play Unrated Game{% endif %}</div>
+<br><br>
+<a href="/mathgym/triangulate/leaderboard" id="lb-btn" class="gradient-button" style="font-size: 40px">Leaderboard</a>
+<div id="game-div" class="hidden">
+    <div class="row">
+        <div class="info-section col-sm" style="top: 0; background-color: white; padding: 10px; border: 2px solid #741f22; border-radius: 10px; box-shadow: 0 0 10px rgba(116, 31, 34, 0.5); text-align: center;">
+            <h1 style="font-size: 50px; margin-bottom: 10px; color: #741f22!important; text-shadow: 2px 2px 4px rgba(116, 31, 34, 0.5);">Triangulate</h1>
+            <p id="best" style="font-size: 26px; margin-bottom: 5px; color: #741f22!important; text-shadow: 1px 1px 2px rgba(116, 31, 34, 0.5);">Your best score (lower is better): {{ best_score }}</p>
+            <p id="current" style="font-size: 26px; margin-bottom: 5px; color: #741f22!important; text-shadow: 1px 1px 2px rgba(116, 31, 34, 0.5);">Your current score (lower is better): 0</p>
+        </div><br>
+        <div class="instructions col-sm" style="background-color: #f2f2f2; padding: 20px; border-radius: 10px; z-index: 9999; border: 2px solid black; border-radius: 5px; width: 96%; left: 2%;">
+            <p id="text" style="font-size: 40px; margin-bottom: 10px; font-weight: bold;">Find the location of the centroid!</p>
+            <p id="explanation" style="font-size: 25px; margin-top: 10px;">The centroid is the intersection of the medians of the triangle. It can be seen as an average of the vertices of the triangle.</p>
+            <hr>
+            <p id="stats" style="font-size: 25px; font-weight: bold; color: blue; margin-bottom: 5px;"></p>
+            <button class="btn btn-lg btn-success hidden" id="submit" style="font-size: 25px;">Play Again (unrated)</button>
+        </div>
+    </div>
+    <br>
+    <canvas id="game" width="250" height="250" style="display: block; background-color: #f2f2f2; margin: 0 auto;border: 1px solid black; border-radius: 5px;"></canvas>
+</div>
+<form method="post" id="game-submit">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+<script src="/assets/js/triangulate.js"></script>
+<script>
+    let timerInterval = setInterval(decrementTimer, 500);
+    let timerElement = document.querySelector('.triangulate-time-left');
+
+    function updateTimer() {
+        timerElement.textContent = `${String(Math.max(hours, 0)).padStart(2, '0')}:${String(Math.max(minutes, 0)).padStart(2, '0')}:${String(Math.max(seconds, 0)).padStart(2, '0')}`;
+    }
+
+    function decrementTimer() {
+        function formatDate(raw) {
+            var split = raw.split(" ");
+            var date_split = split[0].split("-");
+            var final = date_split[1] + "/" + date_split[2] + "/" + date_split[0] + " " + split[1];
+            return new Date(final + " UTC");
+        }
+
+        let currentTime = new Date();
+        var endTime = formatDate("{{ end_time }}")
+        let timeDiff = Math.floor((endTime - currentTime) / 1000); // time difference in seconds
+        if (timeDiff <= 0) {
+            clearInterval(timerInterval);
+            window.location.href = '/mathgym/triangulate';
+        } else {
+            hours = Math.floor(timeDiff / 3600);
+            minutes = Math.floor((timeDiff % 3600) / 60);
+            seconds = timeDiff % 60;
+            updateTimer();
+        }
+    }
+</script>
+{% endblock %}

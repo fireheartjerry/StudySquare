@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Team Account{% endblock %}
+{% block active %}Admin Console{% endblock %}
+
+{% block main %}
+<h1 class="text-center">Create Team Account</h1>
+<br>
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="form-floating">
+        <input autocomplete="off"
+               autofocus class="form-control mb-3"
+               name="username"
+               id="username"
+               placeholder="Username"
+               required>
+        <label for="username">Username</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control mb-3"
+               name="email"
+               id="email"
+               placeholder="Email Address"
+               type="email"
+               required>
+        <label for="email">Email</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control mb-3"
+               name="password"
+               id="password"
+               placeholder="Password"
+               type="password"
+           autocomplete="new-password"
+           required>
+        <label for="password">Password</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control mb-3"
+               name="confirmation"
+               id="confirmation"
+               placeholder="Confirmation"
+               type="password"
+           autocomplete="new-password"
+           required>
+        <label for="confirmation">Confirmation</label>
+    </div>
+    <button class="btn btn-primary" type="submit" id="register">Register</button>
+    {% if USE_CAPTCHA %}
+        <script src="https://hcaptcha.com/1/api.js" async defer></script>
+        <hr>
+        <div class="h-captcha" data-sitekey= {{ site_key }} ></div>
+    {% endif %}
+</form>
+<br>
+{% endblock %}
+{% block script %}
+<script>
+    const newPassword = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmation");
+    document.querySelector("form").addEventListener("submit", event => {
+        if (newPassword.value != confirmPassword.value) {
+            makeAlert("Passwords do not match");
+            event.preventDefault();
+        }
+        if (newPassword.value.length < 8) {
+            makeAlert("Password must be at least 8 characters");
+            event.preventDefault();
+        }
+    });
+
+    function makeAlert(message) {
+        var tmp = document.createElement('div');
+        tmp.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                             ${message}
+                             <button type="button"
+                                     class="btn-close"
+                                     data-bs-dismiss="alert"
+                                     aria-label="Close"></button>
+                         </div>`;
+        document.querySelector("main").prepend(tmp.firstChild);
+    }
+
+    var username = document.getElementById("username");
+    var email = document.getElementById("email");
+    var password = document.getElementById("password");
+    var confirmation = document.getElementById("confirmation");
+    var registerbtn = document.getElementById("register");
+
+    // Function to update the button style based on input values
+    function updateButtonStyle() {
+        if (username.value.trim() !== "" && email.value.trim() !== "" && username.value.trim() !== "" && confirmation.value.trim() !== "") {
+            registerbtn.style.transition = "background-color 0.5s";
+            registerbtn.style.backgroundColor = "#741F22";
+        } else {
+            registerbtn.style.transition = "background-color 0.5s";
+            registerbtn.style.backgroundColor = "";
+        }
+    }
+
+    // Add input event listeners to both fields
+    username.addEventListener("input", updateButtonStyle);
+    email.addEventListener("input", updateButtonStyle);
+    password.addEventListener("input", updateButtonStyle);
+    confirmation.addEventListener("input", updateButtonStyle);
+</script>
+{% endblock %}

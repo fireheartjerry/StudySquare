@@ -1,0 +1,539 @@
+{% extends "layout.html" %}
+
+{% block title %}Problems{% endblock %}
+{% block active %}Practice{% endblock %}
+
+{% block main %}
+<h1>{% if selected %}"{{ selected }}"{% else %}All{% endif %} Problems</h1>
+{% if is_ongoing_contest %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+        <span>There is currently an ongoing contest. To view it, go to the <a href="/contests">Contests</a> page.</span><br>
+        <span>These are only <b>practice problems unrelated to the contest</b>.</span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+</div>
+{% endif %}
+There have been a total of <b>{{ subs }}</b> submissions to <b>{{ submitted_problems }}</b> problems, while <b style="color: #741f22;">{{ empty_problems }}</b> problems wait for one solve!
+<br><br>
+<div id="pagination" style="display: inline-block; min-height: 42px" data-pages="{{ length }}"></div><br>
+<span class="lead">Click on a column title to sort by that column.</span>
+<div class="flex-desktop">
+    <div style="flex: 3.1; overflow-x: auto;">
+        <table class="table table-hover table-full-width">
+            <thead class="table-dark" style="position: sticky; top: 0;">
+                <tr>
+                    <th scope="col" style="width: 9%;">Status</th>
+                    <th scope="col" id="name-col" style="width: 30%; cursor: pointer;">Name</th>
+                    <th scope="col" style="width: 29%;">Tags <a class="badge bg-info rounded-pill growable" target="_blank" href="/settings?&highlight_tags=1" style="padding: 6px; text-align: center; margin-left: 5px;">{% if show_tags %}Hide Tags{% else %}Show Tags{% endif %}</span></th>
+                    <th scope="col" id="cat-col" style="width: 16%; cursor: pointer;">Category</th>
+                    <th scope="col" id="points-col" style="width: 8%; cursor: pointer;">Value</th>
+                    <th scope="col" id="solved-col" style="width: 8%; cursor: pointer;">Users</th>
+                </tr>
+            </thead>
+            <tbody class="lead">
+                {% for row in data %}
+                <tr>
+                    <td>
+                        {% if row["id"] in solved %}
+                            <img class="icon growable"
+                                src="/assets/images/checkmark.png"
+                                data-toggle="tooltip"
+                                alt="Solved"
+                                title="You have solved this problem."
+                                style="width: 24px; height: 24px;"
+                                onerror="this.src='/assets/images/check.png'">
+                        {% elif row["id"] in incorrect %}
+                            <img class="icon growable"
+                                src="/assets/images/blank.png"
+                                data-toggle="tooltip"
+                                alt="Attempted"
+                                title="You have attempted this problem."
+                                style="width: 24px; height: 24px;"
+                                onerror="this.src='/assets/images/blank.png'">
+                        {% else %}
+                            <img class="icon growable"
+                                src="/assets/images/wrong.png"
+                                data-toggle="tooltip"
+                                alt="Did not attempt"
+                                title="You have not attempted this problem."
+                                style="width: 24px; height: 24px;"
+                                onerror="this.src='/assets/images/times.png'">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/problem/{{ row["id"] }}">{{ row["name"] }}</a>
+                        {% if row["private"] %}<span class="badge bg-secondary mx-1" title="This is a private problem." data-toggle="tooltip">Private</span>{% endif %}
+                    </td>
+                    <td>
+                        {% if show_tags %}
+                            {% if row["tags"] %}
+                                {% for tag in row["tags"] %}
+                                    <span class="badge bg-primary rounded-pill" style="padding: 6px; text-align: center; margin-top: 5px;">{{ tag }}</span>
+                                {% endfor %}
+                            {% else %}
+                                <span class="badge bg-secondary rounded-pill" style="padding: 6px; text-align: center;">No tags</span>
+                            {% endif %}
+                        {% else %}
+                            <a class="badge bg-danger rounded-pill growable" target="_blank" href="/settings?&highlight_tags=1" style="padding: 6px; text-align: center;">Hidden</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ row["category"] }}</td>
+                    <td>{{ row["point_value"] }}</td>
+                    {% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+                        <td><a href="/admin/submissions?problem_id={{ row["id"] }}&correct=AC">
+                            {{ row["sols"] }}
+                        </a></td>
+                    {% else %}
+                        <td><a href="/submissions?problem_id={{ row["id"] }}&correct=AC">
+                            {{ row["sols"] }}
+                        </a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style="flex: 1.4; margin-left: 1.5%; height: auto;">
+        <div class="card sticky" style="overflow-y: scroll; height: 57vh;">
+            <center><h2 style="font-weight: bold;">Filter Problems</h2></center>
+            <div id="search">
+                <div class="form-floating" style="display: flex; margin-bottom: -10px;">
+                    <input value="{{default}}" class="form-control mb-3" type="text" id="searchProblem">
+                    <label for="search for anything in the problem description">Search Keywords</label>
+                    <div class="input-group-append">
+                        <button onclick="search_problems()" class="btn btn-outline-info" id="search-problem" type="button" style="margin-top: 0px; padding: 7px; font-size: 20px; cursor: pointer; margin-left: 5px; width: 100%; height: 80%;">Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown mb-2">
+                <button class="btn btn-primary dropdown-toggle bg-transparent p-2 w-100 fs-5" data-toggle="dropdown" style="border: 1.5px solid #741F22; color: #741F22;"><b>Filter Category<span class="caret bg-white"></span></b></button>
+                <div class="dropdown-menu w-100" style="max-height: 250px; overflow-y: auto; z-index: 9999;" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item category-select" id="filter-no-categories"><option>All</option></a>
+                    <li><div class="dropdown-divider mb-3" style="margin-left: 2px;"><div></li>
+                    {% for category in categories %}
+                        {% if selected == category['category'] %}
+                            <a title="You are currently filtering this category." class="dropdown-item"><option disabled style="background-color: lightgray; cursor: not-allowed;">{{ category['category'] }}</option></a>
+                        {% else %}
+                            <a class="dropdown-item category-select" style="color: white!important; z-index: 9999!important;"><option>{{ category['category'] }}</option></a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="title-search" style="margin-bottom: -1em;">
+                <div class="form-floating d-flex">
+                    <input class="form-control mb-3" type="text" id="search-by-title" placeholder=""{% if title %} value="{{ title }}"{% endif %}>
+                    <label for="search-by-title">Title / ID</label>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-info" id="filter-problem-name" type="button" style="margin-top: 0px; padding: 7px; font-size: 20px; cursor: pointer; margin-left: 5px; width: 100%; height: 80%;">Filter</button>
+                    </div>
+                </div>
+            </div>
+            <div id="points-search">
+                <button class="btn btn-outline-info w-100 d-block mb-3 fs-4" id="filter-points" type="button" style="cursor: pointer;">Filter by Points</button>
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <b style="font-size: 23px;">Points Range:</b>
+                    <span class="values" style="margin-left: 10px; display: block;">
+                        <span id="range1">1</span>
+                        <span>&dash;</span>
+                        <span id="range2">10</span>
+                    </span>
+                </div> <br>
+                <div class="slider-container">
+                    <div class="slider-track"></div>
+                    <div class="slider-container">
+                        <input type="range" style="display: block; transform: translateY(-350%);" min="1" max="10" value="{{ plb }}" id="slider-1" oninput="slideOne()">
+                        <input type="range" style="display: block; transform: translateY(-450%);" min="1" max="10" value="{{ pub }}" id="slider-2" oninput="slideTwo()">
+                        <div class="slider-track"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="tag-search">
+                <button class="btn btn-outline-info w-100 d-block mb-3 fs-4" id="filter-tags" style="cursor: pointer;">Filter by Tags</button> 
+                <div id="tags" style="height: 250px; overflow-y: scroll; border: 1px solid gray; border-radius: 5px; padding: 2px;">
+                    <ul id="taglist" class="list-group">
+                        {% for tag in tags %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center"
+                                style="background-color: white;">
+                                <label class="check-container">
+                                    <input type="checkbox" {{ 'checked' if selected_tags and tag in selected_tags }} id="{{ tag }}">
+                                    <span class="checkmark"></span>
+                                    <div style="color: black;">{{ tag }}</div>
+                                </label><br>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                </div>
+            </div>
+            <button class="btn btn-outline-info w-100 fs-5 mb-2" id="zero-solves">Problems with Zero Solves</button>
+            <button class="btn btn-outline-info w-100 fs-5 mb-2" id="client-hide-solves">Problems I Haven't Solved</button>
+            <button class="btn btn-outline-info w-100 fs-5 mb-2" id="silly" title="Problems where your first submission was WA">Problems I sillied on</button>
+            <button class="btn btn-outline-info w-100 fs-5" id="get-random-item">Get Random Problem</button>
+            <hr>
+            <a href="/problems" class="btn btn-outline-danger w-100 fs-5" id="reset-filters">Reset Filters</a>
+        </div>
+        <div class="card sticky mt-1" style="top: 60vh; height: 39vh; overflow-y: scroll;">
+            <center><h2 style="font-weight: bold;" class="mb-2">Popular Problems</h2></center>
+            {% for problem in top_5_problems %}
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">{{ problem['name'] }}</h5>
+                    <small class="text-muted d-flex">{{ problem['sols'] }} solves<br>{{ problem['point_value'] }} points</small>
+                </div>
+                <p class="card-text text-secondary">{{ problem['category'] }}</p>
+                <a href="/problem/{{ problem['id'] }}" class="btn btn-sm btn-outline-primary">View Problem</a>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    const initial_items={{ selectable_problems | tojson }};
+    let items=[...initial_items];
+    // Filter by points
+    let sliderOne = document.getElementById("slider-1");
+    let sliderTwo = document.getElementById("slider-2");
+    let displayValOne = document.getElementById("range1");
+    let displayValTwo = document.getElementById("range2");
+    let minGap = 0;
+    let sliderTrack = document.querySelector(".slider-track");
+    let sliderMaxValue = 10; // Update the maximum value here
+
+    function search_problems(){
+        var inputText = document.getElementById("searchProblem").value;
+
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('keywords')) {
+            url.searchParams.set('keywords', inputText);
+        } else {
+            if (url.search) {
+                url.search += '&keywords='+inputText;
+            } else {
+                url.search = '?keywords='+inputText;
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+
+        window.location.href = link;
+    }
+
+    function get_random_item(){
+        if(items.length==0){
+            alert("no problems available");
+            return;
+        }
+
+        const randomItem = items[Math.floor(Math.random() * items.length)];
+        const link = "/problem/" + encodeURIComponent(randomItem);
+        window.location.href = link;
+
+        return;
+    }
+    
+    function slideOne(){
+        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+            sliderOne.value = parseInt(sliderTwo.value) - minGap;
+        }
+        displayValOne.textContent = sliderOne.value;
+        fillColor();
+    }
+
+    function slideTwo(){
+        if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+            sliderTwo.value = parseInt(sliderOne.value) + minGap;
+        }
+        displayValTwo.textContent = sliderTwo.value;
+        fillColor();
+    }
+
+    function fillColor(){
+        percent1 = (sliderOne.value / sliderMaxValue) * 100;
+        percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+        sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #3264fe ${percent1}% , #3264fe ${percent2}%, #dadae5 ${percent2}%)`;
+    }
+
+    window.addEventListener("load", function(){
+        slideOne();
+        slideTwo();
+    });
+
+    document.querySelectorAll('.category-select').forEach(function(item) {
+        const categoryValue = item.textContent.trim();
+        const url = new URL(document.location.href);
+
+        if (url.searchParams.has('category')) {
+            url.searchParams.set('category', categoryValue);
+        } else {
+            if (url.search) {
+                url.search += '&category=' + categoryValue;
+            } else {
+                url.search = '?category=' + categoryValue;
+            }
+        } if (item.textContent == "All") {
+            url.searchParams.delete('category')
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        } if (url.searchParams.has('title')) {
+            url.searchParams.delete('title')
+        }
+        
+        item.href = url.toString();
+    });
+
+    document.querySelector("#zero-solves").addEventListener("click", function () {    
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('nosolves')) {
+            url.searchParams.set('nosolves', 'true');
+        } else {
+            if (url.search) {
+                url.search += '&nosolves=true';
+            } else {
+                url.search = '?nosolves=true';
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    document.querySelector("#client-hide-solves").addEventListener("click", function () {    
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('clienthidesolves')) {
+            url.searchParams.set('clienthidesolves', 'true');
+        } else {
+            if (url.search) {
+                url.search += '&clienthidesolves=true';
+            } else {
+                url.search = '?clienthidesolves=true';
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    document.querySelector("#silly").addEventListener("click", function () {    
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('silly')) {
+            url.searchParams.set('silly', 'true');
+        } else {
+            if (url.search) {
+                url.search += '&silly=true';
+            } else {
+                url.search = '?silly=true';
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    document.querySelector("#name-col").addEventListener("click", function () {    
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('order')) {
+            if (url.searchParams.get('order') == 'name') {
+                url.searchParams.set('order', '-name');
+            } else {
+                url.searchParams.set('order', 'name');
+            }
+        } else {
+            if (url.search) {
+                url.search += '&order=name';
+            } else {
+                url.search = '?order=name';
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    document.querySelector("#cat-col").addEventListener("click", function () {    
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('order')) {
+            if (url.searchParams.get('order') == 'category') {
+                url.searchParams.set('order', '-category');
+            } else {
+                url.searchParams.set('order', 'category');
+            }
+        } else {
+            if (url.search) {
+                url.search += '&order=category';
+            } else {
+                url.search = '?order=category';
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    document.querySelector("#points-col").addEventListener("click", function () {    
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('order')) {
+            if (url.searchParams.get('order') == 'points') {
+                url.searchParams.set('order', '-points');
+            } else {
+                url.searchParams.set('order', 'points');
+            }
+        } else {
+            if (url.search) {
+                url.search += '&order=points';
+            } else {
+                url.search = '?order=points';
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    document.querySelector("#solved-col").addEventListener("click", function () {    
+        const url = new URL(document.location.href);
+        if (url.searchParams.has('order')) {
+            if (url.searchParams.get('order') == 'solves') {
+                url.searchParams.set('order', '-solves');
+            } else {
+                url.searchParams.set('order', 'solves');
+            }
+        } else {
+            if (url.search) {
+                url.search += '&order=solves';
+            } else {
+                url.search = '?order=solves';
+            }
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    filter_btn = document.querySelector("#filter-problem-name");
+    title_search = document.querySelector("#search-by-title");
+
+    filter_btn.addEventListener("click", handleTitleFilter);
+    title_search.addEventListener("keypress", function (event) {
+        if (event.key === 'Enter') {
+            handleTitleFilter();
+        }
+    });
+    
+    function handleTitleFilter() {
+        const search = title_search.value.trim();
+        const url = new URL(document.location.href);
+    
+        if (url.searchParams.has('title')) {
+            url.searchParams.set('title', search);
+        } else {
+            if (url.search) {
+                url.search += '&title=' + search;
+            } else {
+                url.search = '?title=' + search;
+            }
+        } if (search == "") {
+            url.searchParams.delete('title');
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    }
+
+    const url = new URL(document.location.href);
+    url.searchParams.delete('category');
+    document.querySelector("#filter-no-categories").href = url.toString();
+
+    var no_tag = document.querySelector('#None');
+    var other_tags = document.querySelectorAll('input[type="checkbox"]:not(#None)');
+    no_tag.addEventListener('change', function () {
+        other_tags.forEach(function (checkbox) {
+            checkbox.disabled = no_tag.checked;
+            if (no_tag.checked) {
+                checkbox.checked = false;
+            } if (checkbox.disabled) {
+                checkbox.parentNode.style.color = '#808080';
+                checkbox.parentNode.style.textDecoration = 'line-through';
+                checkbox.parentNode.style.cursor = 'not-allowed';
+                checkbox.parentNode.title = 'You cannot select this because you have selected the "None" value.';
+            } else {
+                checkbox.parentNode.style.color = '';
+                checkbox.parentNode.style.textDecoration = '';
+                checkbox.parentNode.style.cursor = '';
+                checkbox.parentNode.title = '';
+            }
+        });
+    });
+
+    document.querySelector("#filter-tags").addEventListener("click", function () {
+        let checked_values = JSON.stringify([...document.querySelectorAll('#taglist input:checked')].map(checkbox => checkbox.id)).trim();
+        if (checked_values == "[\"None\"]") {
+            checked_values = "[]";
+        } const tagsearch = encodeURIComponent(checked_values);
+        const url = new URL(document.location.href);
+    
+        if (url.searchParams.has('tags')) {
+            url.searchParams.set('tags', tagsearch);
+        } else {
+            if (url.search) {
+                url.search += '&tags=' + tagsearch;
+            } else {
+                url.search = '?tags=' + tagsearch;
+            }
+        } if (checked_values == "[]") {
+            url.searchParams.delete('tags');
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+
+        window.location.href = decodeURIComponent(url.toString());
+    });
+
+    document.querySelector("#filter-points").addEventListener("click", function () {
+        const url = new URL(document.location.href);
+        const range1 = document.getElementById("range1").textContent;
+        const range2 = document.getElementById("range2").textContent;
+
+    
+        if (url.searchParams.has('plb')) {
+            url.searchParams.set('plb', range1);
+        } else {
+            if (url.search) {
+                url.search += '&plb=' + range1;
+            } else {
+                url.search = '?plb=' + range1;
+            }
+        }
+        
+        if (url.searchParams.has('pub')) {
+            url.searchParams.set('pub', range2);
+        } else {
+            if (url.search) {
+                url.search += '&pub=' + range2;
+            } else {
+                url.search = '?pub=' + range2;
+            }
+        }
+        
+        if (range1 == "0" && range2 == "10") {
+            url.searchParams.delete('points');
+        } if (url.searchParams.has('page')) {
+            url.searchParams.delete('page')
+        }
+    
+        window.location.href = url.toString();
+    });
+
+    document.getElementById('get-random-item').addEventListener('click', get_random_item);
+</script>
+{% endblock %}

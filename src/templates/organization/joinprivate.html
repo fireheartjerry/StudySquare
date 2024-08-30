@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Join Private Organization{% endblock %}
+{% block active %}Organizations{% endblock %}
+
+{% block main %}
+<h1>Join "{{ org_data['name'] }}"</h1>
+<form autocomplete="off" method="post" id="create" name="create">
+    <div class="card">
+        <b>To join this organization you must enter the password.</b>
+        <div class="card-body">
+            <div class="form-floating">
+                <input autofocus
+                    class="form-control mb-3"
+                    name="password"
+                    id="password"
+                    placeholder="Enter Organization Password"
+                    type="password"
+                    autocomplete="new-password"
+                    required>
+                <label for="name">Enter Organization Password</label>
+            </div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <input class="btn btn-success btn-lg fw-bold" type="submit" id="submit" name="submit" value="Join" style="width: 100%; font-size: 25px;">
+        </div>
+    </div>
+</form>
+{% endblock %}

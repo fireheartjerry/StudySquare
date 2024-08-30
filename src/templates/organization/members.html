@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+
+{% block title %}Members - {{ org_data['name'] }}{% endblock %}
+{% block active %}Organizations{% endblock %}
+
+{% block main %}
+<h1>Members of "{{ org_data['name'] }}"</h1>
+{% if check_perm(["ADMIN", "SUPERADMIN"]) or is_owner %}
+    <div id="confirm" class="hidden">
+        <form method="post" style="margin-bottom: 1rem;">
+            <input type="hidden" name="user_id">
+            <input class="btn btn-danger" type="submit">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        </form>
+    </div>
+{% endif %}
+<table class="table table-hover table-full-width">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col" style="width: 13%;">Rank</th>
+            <th scope="col" style="width: 25%;">Username</th>
+            <th scope="col" style="width: 19%;">Points</th>
+            <th scope="col" style="width: 19%;">Contests Participated</th>
+            <th scope="col" style="width: 19%;">Problems Solved</th>
+            {% if check_perm(["ADMIN", "SUPERADMIN"]) or is_owner %}
+                <th scope="col" style="width: 15%;">Actions</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in range(user_data | length) %}
+            {% if not user_data[i]["banned"] %}
+                <tr {% if user_data[i]["username"] == client_username %}data-toggle="tooltip" title="This is you!"{% endif %}>
+                    <td {% if user_data[i]["username"] == client_username %}class="client-username"{% endif %}>
+                        {{ i+1 }}
+                        {% if user_data[i]["image"] %}
+                            <img src="{{ user_data[i]["image"] }}"
+                            class="icon growable"
+                            style="width: 24px; margin-left: 10px;"
+                            title="{{ user_data[i]["title"] }}"
+                            data-toggle="tooltip">
+                        {% endif %}
+                    </td>
+                    <td class="username{% if user_data[i]["username"] == client_username %} client-username{% endif %}"><a href="/users/{{ user_data[i]["username"] }}/profile">{{ user_data[i]["username"] }}</a></td>
+                    <td>{{ user_data[i]["total_points"] }}</td>
+                    <td>{{ user_data[i]["contests_completed"] }}</td>
+                    <td>{{ user_data[i]["problems_solved"] }}</td>
+                    {% if check_perm(["ADMIN", "SUPERADMIN"]) or is_owner %}
+                        <td>
+                            <a href="#" data-id="{{ user_data[i]['id'] }}" data-username="{{ user_data[i]['username'] }}">
+                                <img src="/assets/images/remove.png"
+                                     onerror="this.src='/assets/images/restrict.png'"
+                                     class="icon remove-user"
+                                     data-toggle="tooltip"
+                                     alt="Remove user"
+                                     title="Remove user">
+                            </a>
+                            <a href="#" data-id="{{ user_data[i]['id'] }}" data-username="{{ user_data[i]['username'] }}">
+                                <img src="/assets/images/transfer.png"
+                                     class="icon transfer-ownership"
+                                     data-toggle="tooltip"
+                                     alt="Transfer ownership"
+                                     title="Transfer ownership">
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+{% block script %}
+<script>
+    const path = "{{ request.path }}";
+    const confirmDiv = document.getElementById("confirm");
+    for (let node of document.getElementsByClassName("remove-user")) {
+        node.parentElement.addEventListener("click", function() {
+            var username = this.getAttribute("data-username");
+            var userId = this.getAttribute("data-id");
+            confirmDiv.style.display = "block";
+            confirmDiv.querySelector(".btn")
+                    .setAttribute("value", `Are you sure you want to remove ${username} from this organization?` +
+                                           " The user will have to rejoin or send a new request to come back. Click here to confirm.");
+            confirmDiv.querySelector("input[name=user_id]").setAttribute("value", userId);
+            confirmDiv.querySelector("form").setAttribute("action", path + "/remove");
+        });
+    }
+    for (let node of document.getElementsByClassName("transfer-ownership")) {
+        node.parentElement.addEventListener("click", function() {
+            var username = this.getAttribute("data-username");
+            var userId = this.getAttribute("data-id");
+            confirmDiv.style.display = "block";
+            confirmDiv.querySelector(".btn")
+                    .setAttribute("value", `Are you sure you want to transfer ownership to ${username}?` +
+                                           " This action is irreversible. Click here to confirm.");
+            confirmDiv.querySelector("input[name=user_id]").setAttribute("value", userId);
+            confirmDiv.querySelector("form").setAttribute("action", path + "/transfer");
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,313 @@
+{% extends "contest/layout.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block active %}Contests{% endblock %}
+
+{% if style in ["amc", "aime"] %}
+{% block preload %}
+
+{% endblock %}
+{% endif %}
+
+{% block main %}
+{% if ended %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <span>This contest has ended, so solving a question will not contribute to your points or scoreboard.</span>
+        <br><span>The submission limit has also been lifted.</span>
+        <br><span>You can hover over a problem to see its ID.</span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+    </div>
+{% else %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {% if style == "guts" %}
+        <span>Since this is a <a href="https://hmmt.fandom.com/wiki/Guts_Round">guts type</a> contest, the submission limit for every problem is <b>1</b>.</span>
+        <br><span>You must have one submission in each required problem to view the next problem, you can view requirements in show/hide requirements.</span>
+        {% else %}
+        <span>The contest default limit is {{ default_limit }}.</span>
+        {% endif %}
+        <br><span>You can hover over a problem to see its ID.</span>
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close">
+        </button>
+    </div>
+{% endif %}
+<div style="position: relative; margin-bottom: 0.5rem;">
+    <h1 style="display: inline;">{{ title }}</h1>
+        <span data-toggle="tooltip" title="This is a(n) {{ style }} contest." class="badge bg-primary rounded-pill growable ml-2">{{ style|upper }}</span>
+        {% if private %}<a href="/organization/{{ private_org }}" class="badge bg-secondary rounded-pill growable mx-1" title='This contest is private to the organization "{{ org_name }}"' data-toggle="tooltip">Private</a>{% endif %}
+
+        <span class="dropdown" id="contest-dropdown" style="display: inline-flex; margin-left: 15px;">
+       	    <button class="btn btn-primary dropdown-toggle" data-bs-hover="dropdown"><b>Contest Actions</b><span class="caret"></span></button>
+            <ul class="dropdown-menu dropdown-menu-end animate" id="contest-dropdown-menu" style="width: 200px;">
+                {% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+                    <a class="dropdown-item" href="/admin/submissions?contest_id={{ request.path[9:] }}">All Submissions</a>
+                    <a class="dropdown-item" href="/admin/submissions?username={{ username }}&contest_id={{ request.path[9:] }}">My Submissions</a>
+                {% elif ended %}
+                    <a class="dropdown-item" href="/submissions?contest_id={{ request.path[9:] }}">All Submissions</a>
+                    <a class="dropdown-item" href="/submissions?username={{ username }}&contest_id={{ request.path[9:] }}">My Submissions</a>
+                {% endif %}
+                {% if scoreboard %}
+                    <a class="dropdown-item" href="{{ request.path }}/scoreboard">View Scoreboard</a>
+                {% endif %}
+                {% if check_perm(["CONTENT_MANAGER"]) %}
+                    <div class="dropdown-divider" style="margin-bottom: 10px;"></div>
+                    <a class="dropdown-item" href="{{ request.path }}/addproblem">Add Problem</a>
+                    <a class="dropdown-item" href="{{ request.path }}/exportall">Export All</a>
+                    <a class="dropdown-item" href="{{ request.path }}/drafts">View Draft Problems</a>
+                    {% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+                        <a class="dropdown-item" href="{{ request.path }}/notify">Notify Participants</a>
+                        {% if ended %}
+                        <a class="dropdown-item" href="#" id="update-ratings">Update Ratings</a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+	    </ul>
+        </div>
+    </div>
+</div>
+{% if ended %}
+    <div id="confirm-rate" class="hidden">
+        <form method="post" style="margin-bottom: 1rem;" id="form-problem-rate" action="/contest/{{ contest_id }}/rate">
+            <input class="btn btn-danger"
+                type="submit"
+                value="Are you sure you want to update contest ratings?">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        </form>
+    </div>
+{% endif %}
+{% if style in ["guts", "standard"] %}
+<div style="overflow-x: auto;">
+    <table class="table table-hover table-full-width">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 10%;">Status</th>
+                <th scope="col" style="width: 60%;">Name</th>
+                <th scope="col" style="width: 10%;">Category</th>
+                <th scope="col" style="width: 10%;">Value</th>
+                <th scope="col" style="width: 10%;">Users</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+                <tr>
+                    <td>
+                        {% if show_verdict %}
+                            {% if row['solved'] %}
+                                <img class="icon growable"
+                                    src="/assets/images/checkmark.png"
+                                    data-toggle="tooltip"
+                                    alt="Solved"
+                                    title="You have correctly answered this problem.{% if row['viewable'] == 2 %} Furthermore, you can no longer view this problem.{% endif %}"
+                                    style="width: 24px; height: 24px;"
+                                    onerror="this.src='/assets/images/check.png'">
+                            {% elif submitted[row['problem_id']] %}
+                                <img class="icon growable"
+                                    src="/assets/images/blank.png"
+                                    data-toggle="tooltip"
+                                    alt="Attempted"
+                                    title="You have submitted an incorrect answer to this problem.{% if row['viewable'] == 2 %} Furthermore, you can no longer view this problem.{% endif %}"
+                                    style="width: 24px; height: 24px;"
+                                    onerror="this.src='/assets/images/blank.png'">
+                            {% else %}
+                                <img class="icon growable"
+                                    src="/assets/images/wrong.png"
+                                    data-toggle="tooltip"
+                                    alt="Did not attempt"
+                                    title="You have not attempted this problem." 
+                                    style="width: 24px; height: 24px;"
+                                    onerror="this.src='/assets/images/times.png'">
+                            {% endif %}
+                        {% else %}
+                            {% if submitted[row['problem_id']] %}
+                                <img class="icon growable"
+                                    src="/assets/images/blank.png"
+                                    data-toggle="tooltip"
+                                    alt="Attempted"
+                                    title="You have submitted to this problem.{% if row['viewable'] == 2 %} Furthermore, you can no longer view this problem.{% endif %}"
+                                    style="width: 24px; height: 24px;"
+                                    onerror="this.src='/assets/images/blank.png'">
+                            {% else %}
+                                <img class="icon growable"
+                                    src="/assets/images/wrong.png"
+                                    data-toggle="tooltip"
+                                    alt="Did not attempt"
+                                    title="You have not attempted this problem." 
+                                    style="width: 24px; height: 24px;"
+                                    onerror="this.src='/assets/images/times.png'">
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if (row['viewable'] == 1 or row['viewable'] == 2 and not ended) or check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+                            <a data-toggle="tooltip" title="{{ row['problem_id'] }}" href="{{ request.path }}/problem/{{ row['problem_id'] }}">
+                                {{ row["name"] }}
+                            </a>
+                        {% elif row['viewable'] == 4 %}
+                            <span data-toggle="tooltip" title="You have completed this set, you may no longer view it." style="cursor: not-allowed;">{{ row["name"] }}</span>
+                        {% else %}
+                            <span data-toggle="tooltip" title="You have not made all the required submissions to view this problem." style="cursor: not-allowed;">{{ row["name"] }}</span>
+                            <span class="badge bg-primary rounded-pill growable" style="padding: 7px; margin-left: 10px; cursor: pointer" id="req-view-{{ loop.index }}">Show/hide requirements</span> <br>
+                            <div style="display: none;" id="req-{{ loop.index }}">
+                                <span style="margin-top: 10px; margin-right: 10px; color: #741F22; font-size: 20px;"><b>Requirements:</b></span>
+                                {% for req in row["required"] %}
+
+                                    <span data-toggle="tooltip" title="{% if submitted[req] %}Nice! {% endif %}You{% if submitted[req] %} have made a submission to {% else %} must submit to{% endif %} '{{ id_to_names[req] }}'{% if not submitted[req] %} to view this problem{% endif %}" class="badge {% if submitted[req] %}bg-secondary text-decoration-line-through{% else %}bg-info{% endif %} rounded-pill growable" style="padding: 7px; margin-right: 10px; margin-top: 10px; cursor: pointer;">{{ id_to_names[req] }}</span>
+
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </td>
+                    <td>{{ row["category"] }}</td>
+                    {% if row["dynamic"] %}
+                        <td title="This problem is dynamically scored">{{ row["point_value"] }}D</td>
+                    {% else %}
+                        <td>{{ row["point_value"] }}</td>
+                    {% endif %}
+                    {% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+                        <td><a href="/admin/submissions?problem_id={{ row['problem_id'] }}&contest_id={{ request.path[9:] }}&correct=AC">
+                            {{ row["sols"] }}
+                        </a></td>
+                    {% elif ended %}
+                        <td>{{ row["sols"] }}</td>
+                    {% else %}
+                        <td title="You are not allowed to view this." data-toggle="tooltip">N/A</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% elif style == "amc" %}
+{% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+<div id="confirm" class="hidden">
+    <form method="post" style="margin-bottom: 1rem;" id="form-problem-delete">
+        <input class="btn btn-danger"
+            type="submit"
+            id="problem-delete">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+</div>
+{% endif %}
+<div id="problems" class="hidden">
+    <hr>
+    {% for i in range(problem_cnt) %}
+        <div class="d-flex">
+            <span class="fw-bold fs-2 mb-1"><b><u>Problem {{ i + 1 }}</u></b></span>
+            <span><a href="./{{ contest_id }}/problem/p{{ "%02d" % (i + 1) }}/edit" >
+                <img src="/assets/images/pencil.svg"
+                    onerror="this.src='/assets/images/pencil.png'"
+                    alt="Edit problem {{ i+1 }}"
+                    class="icon svg-brand growable mx-3 mt-3"
+                    style="width: 16px; height: 16px;">
+            </a></span>
+            <span><a data-id="{{ contest_id }}"
+            data-pnum="{{ i + 1 }}"
+            href="#"
+            class="btn-delete"
+            style="width: 16px; height: 16px;">
+                <img src="/assets/images/trash.svg"
+                    onerror="this.src='/assets/images/trash.png'"
+                    alt="Delete announcement"
+                    class="icon svg-brand growable mt-3">
+            </a></span>
+        </div>
+        <div style="padding: 0.75em 1em 0; border: 1.5px solid #741f22; border-radius: 1em; background-color: #FCF5E5;" class="mb-3">
+            <div id="problem-{{i}}" class="contest-problem"></div>
+        </div>
+        <div class="d-flex">
+            <span style="flex: 0.5;" class="fw-bold">Select your option [P{{ i+1 }}]:</span>
+            <select class="form-select form-select-lg answer-choices lead fs-3" aria-label="Select option" id="select-{{ i+1 }}" style="flex: 3.5;">
+                <option class="lead fs-3" value="blank" selected>Blank</option>
+                <option class="lead fs-3" value="A">A</option>
+                <option class="lead fs-3" value="B">B</option>
+                <option class="lead fs-3" value="C">C</option>
+                <option class="lead fs-3" value="D">D</option>
+                <option class="lead fs-3" value="E">E</option>
+            </select>
+        </div>
+        <hr style="width: 100%;">
+    {% endfor %}
+    <form action="/contest/{{ contest_id }}/submit" method="POST" id="user-responses">
+        {% for i in range(problem_cnt) %}
+            <input type="hidden" name="p{{ i + 1 }}" value="blank">
+        {% endfor %}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input class="btn btn-primary btn-lg" id="submit-btn" type="submit" value="Submit Answers" style="width: 100%;">
+    </form>
+</div>
+{% endif %}
+{% endblock %}
+{% block script %}
+<script>
+    for (let i = 1; i <= {{ data|length }}; i++) {
+        requirement_btn = document.querySelector("#req-view-"+i);
+        if (requirement_btn) {
+            requirement_btn.addEventListener("click", function() {
+                var element = document.querySelector("#req-" + i);
+    
+                if (element.style.display === "none") {
+                    element.style.display = "block"; // or any other display value you want
+                } else {
+                    element.style.display = "none";
+                }
+            });
+        }
+    }
+
+    {% if rated %}
+        document.querySelector("#update-ratings").addEventListener("click", function() {
+            document.getElementById("confirm-rate").style.display = "block";
+        });
+    {% endif %}
+
+    {% if style == "amc" %}
+    const contestId = "{{ request.path.split('/')[2] }}";
+    const problem_cnt = {{ problem_cnt }};
+    for (let i = 1; i <= problem_cnt; i++) {
+        fetch("/api/contest{% if private %}private{% else %}public{% endif %}/problem?cid=" + contestId + "&pid=p" + i.toString().padStart(2, '0')).then(b => b.text())
+                .then(b => JSON.parse(b)).then(b => {
+            if (b["status"] !== "success") {
+                console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+                return;
+            } document.querySelector("#problem-" + (i - 1)).innerHTML = b["data"]["description_html"];
+            renderLatex();
+        });
+    } document.querySelector("#problems").classList.remove("hidden");
+    document.querySelectorAll(".answer-choices").forEach((dropdown, i) => {
+        dropdown.value = localStorage.getItem(`p${i + 1}`) || "blank";
+        document.querySelector(`input[name="p${i + 1}"]`).value = dropdown.value;
+    });
+
+    document.querySelectorAll(".answer-choices").forEach((dropdown, i) => {
+        dropdown.addEventListener("change", function() {
+            document.querySelector(`input[name="p${i + 1}"]`).value = dropdown.value;
+            localStorage.setItem(`p${i + 1}`, dropdown.value);
+        });
+    });
+
+    for (let node of document.getElementsByClassName("btn-delete")) {
+        node.addEventListener("click", function() {
+            let cid = this.getAttribute("data-id");
+            let pnum = this.getAttribute("data-pnum");
+            document.getElementById("confirm").style.display = "block";
+            document.querySelector("#problem-delete").value = `Are you sure you want to delete Problem ${pnum}? Click here to confirm.`;
+            document.querySelector("#form-problem-delete").action = `/contest/{{ contest_id }}/problem/p${pnum.toString().padStart(2, '0')}/delete`;
+        });
+    }
+
+    document.querySelector("#submit-btn").addEventListener("click", function() {
+        // Confirm they want to submit Answers
+        if (!confirm("Are you sure you want to submit your answers? You cannot change your answer choices nor can you return to the problems.")) {
+            event.preventDefault();
+            return;
+        }
+    });
+    {% endif %}
+</script>
+{% endblock %}

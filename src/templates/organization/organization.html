@@ -1,0 +1,196 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ data['name'] }}{% endblock %}
+{% block active %}Organizations{% endblock %}
+
+{% block main %}
+<h1>Organization - <b>{{ data['name'] }}</b></h1><hr>
+{% if inside_organization %}
+    <div id="confirm" class="hidden">
+        <form method="post" style="margin-bottom: 1rem;">
+            <input type="hidden" name="user_id">
+            <input class="btn btn-danger" style="display: block;" type="submit">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        </form>
+    </div>
+{% endif %}
+<div id="confirm" class="hidden">
+    <form method="post" style="margin-bottom: 1rem;">
+        <input type="hidden" name="user_id">
+        <input class="btn btn-danger" type="submit">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+</div>
+<div class="flex">
+    <div style="flex: 3; padding: 4px; word-break: break-word; min-width: 0px;">
+        <h4><b>Owner:</b> <a href="/users/{{ owner }}/profile">{{ owner }}</a></h4>
+        <h4><b>Date Created:</b> {{ data['date_created'] }}</h4>
+        <h4><b>Member Count:</b> {{ member_count }}</h4>
+        <hr>
+        <div id="org-description"></div>
+        {% if data['private'] and inside_organization %}
+            <hr>
+            <h3>Upcoming Contests</h3>
+            {% if upcoming_contests | length == 0 %}
+                <p><em>There are no upcoming contests in this organization.</em></p>
+            {% else %}
+                <table class="table table-hover table-full-width">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" style="width: 40%;">Contest Name</th>
+                            <th scope="col" style="width: 30%;">Start Time</th>
+                            <th scope="col" style="width: 30%;">End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contest in upcoming_contests %}
+                            <tr>
+                                <td><a href="/contest/{{ contest['id'] }}">{{ contest['name'] }}</a></td>
+                                <td>{{ contest['start'] }}</td>
+                                <td>{{ contest['end'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            <h3>Current Contests</h3>
+            {% if current_contests | length == 0 %}
+                <p><em>There are no current contests in this organization.</em></p>
+            {% else %}
+                <table class="table table-hover table-full-width">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" style="width: 40%;">Contest Name</th>
+                            <th scope="col" style="width: 30%;">Start Time</th>
+                            <th scope="col" style="width: 30%;">End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contest in current_contests %}
+                            <tr>
+                                <td><a href="/contest/{{ contest['id'] }}">{{ contest['name'] }}</a></td>
+                                <td>{{ contest['start'] }}</td>
+                                <td>{{ contest['end'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            <h3>Past Contests</h3>
+            {% if past_contests | length == 0 %}
+                <p><em>There are no past contests in this organization.</em></p>
+            {% else %}
+                <table class="table table-hover table-full-width">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" style="width: 40%;">Contest Name</th>
+                            <th scope="col" style="width: 30%;">Start Time</th>
+                            <th scope="col" style="width: 30%;">End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for contest in past_contests %}
+                            <tr>
+                                <td><a href="/contest/{{ contest['id'] }}">{{ contest['name'] }}</a></td>
+                                <td>{{ contest['start'] }}</td>
+                                <td>{{ contest['end'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        {% endif %}
+    </div>
+    <div style="flex: 1.75; padding: 4px;">
+        {% if check_perm(["ADMIN", "SUPERADMIN"]) or owned %}
+            <h3>Admin Actions</h3>
+            <a href="/organizations">Back to all organizations</a> <br>
+            <div class="btn-group btn-group d-flex" role="group" aria-label="Manage Members &amp; Description">
+                <a class="btn btn-outline-primary" href="/organization/{{ data['id'] }}/members" role="button" style="margin-top: 8px;">View Members</a>
+                <a class="btn btn-secondary" href="/organization/{{ data['id'] }}/dashboard" style="margin-top: 8px;" role="button">Dashboard</a>
+            {% if not inside_organization %}
+                <a class="btn btn-warning" href="/organization/{{ data['id'] }}/{% if data['private'] %}joinprivate{% else %}join{% endif %}" role="button" style="margin-top: 8px;">Join</a>
+                </div>
+            {% elif not owned %}
+                </div>
+                <hr>
+                <div class="btn btn-danger leave-btn" role="button">Leave</div>
+            {% else %}
+                </div>
+                {% if data['private'] %}
+                <div class="btn-group btn-group-sm d-flex mt-2" role="group" aria-label="Contests &amp; Problems">
+                    <a class="btn btn-outline-info flex-fill" href="/problems?category={{ data['name'] }}" role="button">View Private Problems</a>
+                    <a class="btn btn-outline-info flex-fill" href="/contests" role="button">View Private Contests</a>
+                </div>
+            {% endif %}
+            {% endif %}
+        {% elif inside_organization %}
+            <h3>Actions</h3>
+            <a href="/organizations">Back to all organizations</a> <hr>
+            <a class="btn btn-outline-primary mt-1" href="/organization/{{ data['id'] }}/members" role="button">View Members</a>
+            {% if data['private'] %}
+                <br>
+                <div class="btn-group btn-group-sm d-flex" role="group" aria-label="Contests &amp; Problems">
+                    <a class="btn btn-outline-primary flex-fill" href="/problems?category={{ data['name'] }}" role="button">View Private Problems</a>
+                    <a class="btn btn-outline-primary flex-fill" href="/contests" role="button">View Private Contests</a>
+                </div>
+            {% endif %}
+            {% if not owned %}
+                <hr>
+                <div class="btn btn-danger leave-btn" role="button">Leave</div>
+            {% endif %}
+        {% else %}
+            <h3>Actions</h3>
+            <a href="/organizations">Back to all organizations</a> <br>
+            <a class="btn btn-outline-primary" href="/organization/{{ data['id'] }}/members" role="button" style="margin-top: 8px;">View Members</a>
+            {% if session.user_id %}
+                <a class="btn btn-warning" href="/organization/{{ data['id'] }}/{% if data['private'] %}joinprivate{% else %}join{% endif %}" role="button" style="margin-top: 8px;">Join</a>
+            {% endif %}
+        {% endif %}
+        <br>
+        <div class="card mt-2">
+            <h3>Leaderboard</h3>
+            <table class="table table-hover ">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" style="width: 30%; font-size: 15px;">Rank</th>
+                        <th scope="col" style="width: 40%; font-size: 15px;">Username</th>
+                        <th scope="col" style="width: 30%; font-size: 15px;">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(all_time_points | length) %}
+                        <tr>
+                            <td>{{ i + 1 }}</td>
+                            <td class="username"><a href="/users/{{ all_time_points[i]["username"] }}/profile">{{ all_time_points[i]["username"] }}</a></td>
+                            <td>{{ all_time_points[i]["total_points"] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    fetch("/api/organizations?id="+{{ data['id'] }}).then(b => b.text()).then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            conWsole.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        }
+        document.getElementById("org-description").innerHTML = b["data"]["description_html"];
+        renderLatex();
+    });
+
+    let confirmDiv = document.getElementById("confirm");
+    document.querySelector(".leave-btn").addEventListener("click", function() {
+        confirmDiv.style.display = "block";
+        confirmDiv.querySelector(".btn")
+                .setAttribute("value", "Are you sure you want to leave this organization?" +
+                                       " Click here to confirm");
+        confirmDiv.querySelector("input[name=user_id]").setAttribute("value", {{ session.user_id }});
+        confirmDiv.querySelector("form").setAttribute("action", "/organization/{{ data['id'] }}/leave");
+    });
+</script>
+{% endblock %}

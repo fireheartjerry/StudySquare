@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+{% block active %}Home{% endblock %}
+
+{% block main %}
+<h1>Announcements</h1>
+{% if is_ongoing_contest %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+        There is currently an ongoing contest. To view it, go to the <a href="/contests">Contests</a> page.
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+</div>
+{% endif %}
+{% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+<div id="confirm" class="hidden">
+    <form method="post" style="margin-bottom: 1rem;" action="/admin/deleteannouncement">
+        <input class="btn btn-danger"
+            type="submit"
+            value="Are you sure you want to delete this announcement? Click here to confirm.">
+        <input type="hidden" name="aid" value="">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+</div>
+{% endif %}
+<div class="flex-desktop">
+    <div style="flex: 3.5; overflow-x: auto">
+        {% for announcement in data %}
+            <div class="card post-card" style="border-radius: 15px;">
+                <div class="see-more-wrapper">
+                    <a href="#" class="see-more" style="margin-left: 8px;">See More</a>
+                </div>
+                <h3>{{ announcement["name"] }}</h3>
+                <p style="margin: 0;">Posted <span class="dt">{{ announcement["date"] }}</span></p>
+                <div id="announcement-{{ announcement['id'] }}" class="hidden smarkdown"></div>
+                {% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+                    <a href="/admin/editannouncement/{{ announcement['id'] }}"
+                    style="position: absolute; top: 12px; right: 36px;">
+                        <img src="/assets/images/pencil.svg"
+                            onerror="this.src='/assets/images/pencil.png'"
+                            alt="Edit announcement"
+                            class="icon svg-brand growable">
+                    </a>
+                    <a data-id="{{ announcement['id'] }}"
+                    href="#"
+                    class="btn-delete"
+                    style="position: absolute; top: 12px; right: 16px;">
+                        <img src="/assets/images/trash.svg"
+                            onerror="this.src='/assets/images/trash.png'"
+                            alt="Delete announcement"
+                            class="icon svg-brand growable">
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <div style="flex: 1;" class="mx-2">
+        <div class="card sticky" style="max-height: 275px; top: 1em!important;" id="all-time-lb">
+            <h3>Most Points (All Time)</h3>
+            <table class="table table-hover table-full-width">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" style="width: 30%; font-size: 15px;">Rank</th>
+                        <th scope="col" style="width: 40%; font-size: 15px;">Username</th>
+                        <th scope="col" style="width: 30%; font-size: 15px;">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(points_all_time | length) %}
+                        <tr>
+                            <td>{{ i + 1 }}</td>
+                            <td class="username" data-rating="{{ points_all_time[i]["rating"] }}" data-admin="{{ points_all_time[i]["admin"] }}"><a href="/users/{{ points_all_time[i]["username"] }}/profile">{{ points_all_time[i]["username"] }}</a></td>
+                            <td>{{ points_all_time[i]["total_points"] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="card sticky mt-2" style="top: 300px;" id="last-week-lb">
+            <h3>Most Points (Last 7 Days)</h3>
+            <table class="table table-hover table-full-width">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" style="width: 30%; font-size: 15px;">Rank</th>
+                        <th scope="col" style="width: 40%; font-size: 15px;">Username</th>
+                        <th scope="col" style="width: 30%; font-size: 15px;">Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in range(points_last_week | length) %}
+                        <tr>
+                            <td>{{ i + 1 }}</td>
+                            <td class="username" data-rating="{{ points_last_week[i]["rating"] }}" data-admin="{{ points_last_week[i]["admin"] }}"><a href="/users/{{ points_last_week[i]["username"] }}/profile">{{ points_last_week[i]["username"] }}</a></td>
+                            <td>{{ points_last_week[i]["total_points"] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="pagination" data-pages="{{ length }}"></div>
+{% endblock %}
+{% block script %}
+<script>
+    const idList = []
+    {% for announcement in data %}
+        idList.push({{ announcement['id'] }})
+    {% endfor %}
+    fetch("/api/announcements?id="+idList).then(b => b.text()).then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        }
+        for (let id of idList) {
+            document.getElementById("announcement-" + id).innerHTML = b["data"][id+"_html"];
+            document.getElementById("announcement-" + id).classList.remove("hidden");
+        }
+        seeMore();
+    });
+    for (let node of document.getElementsByClassName("btn-delete")) {
+        node.addEventListener("click", function() {
+            let id = this.getAttribute("data-id");
+            document.getElementById("confirm").style.display = "block";
+            document.querySelector("#confirm input[name='aid']").setAttribute("value", id);
+        });
+    }
+    document.getElementById("last-week-lb").style.top = (document.getElementById("all-time-lb").offsetHeight + 20) + "px";
+</script>
+{% endblock %}

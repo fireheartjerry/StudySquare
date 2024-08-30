@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Organization{% endblock %}
+{% block active %}Organizations{% endblock %}
+
+{% block preload %}
+<link rel="preload" href="/api/organizations?id={{ data['id'] }}" as="fetch" crossorigin="anonymous">
+{% endblock %}
+
+{% block main %}
+<h1>Edit Organization</h1> <br>
+<form autocomplete="off" method="post">
+    {% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+        <p>Editing the name will change <b>all</b> problem categories related to this organization. It is recommended to not change the name frequently as it may cause confusion to users.</p>
+        <div class="form-floating">
+            <input autofocus
+                class="form-control mb-3"
+                name="name"
+                id="name"
+                placeholder="Name"
+            value="{{ data['name'] }}"
+                required>
+            <label for="name">Name</label>
+        </div>
+    {% endif %}
+    <button class="btn btn-secondary fw-bold" id="open_description" type="button">Open Markdown Editor</button>
+    <div class="row" id="description" style="margin-top: 7px;">
+        <div class="col-sm">
+            <h4><u>Raw Markdown</u></h4>
+            <div id="description_md_raw"></div>
+        </div>
+        <div class="col-sm">
+            <h4><u>Resulting HTML</u></h4>
+            <div id="description_html"></div>
+        </div>
+    </div> <hr>
+    <input type="hidden" id="md_inp_desc" name="description_md">
+    <input type="hidden" id="html_inp_desc" name="description_html">
+
+    <input class="btn btn-primary fw-bold" type="submit" id="submit" name="submit" value="Submit">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+{% endblock %}
+{% block script %}
+<script>
+    const md_raw_description = document.querySelector("#description_md_raw");
+    const html_description = document.querySelector("#description_html");
+    const orgId = "{{ data['id'] }}"
+    var desc_opened = false;
+    !async function() {
+        const md_desc_data = await fetch("/api/organizations?id="+orgId).then(b => b.text())
+        .then(b => JSON.parse(b)).then(b => {
+            if (b['status'] !== "success") {
+                console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+                return;
+            } return b["data"]["description_md"];
+        }).catch(e => { console.error(e); });
+        const html_desc_data = await fetch("/api/organizations?id="+orgId).then(b => b.text())
+        .then(b => JSON.parse(b)).then(b => {
+            if (b['status'] !== "success") {
+                console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+                return;
+            } return b["data"]["description_html"];
+        }).catch(e => { console.error(e); });
+        if (md_desc_data === "") {
+            md_raw_description.innerText = "The markdown for the description goes here...";
+            html_description.innerHTML = "<p>...and rendered <b>HTML</b> goes <i>here</i>.</p";
+        } else {
+            md_raw_description.innerText = md_desc_data;
+            html_description.innerHTML = html_desc_data;
+            renderLatex();
+        } document.querySelector("#open_description").addEventListener("click", function() {
+            let inp_desc_data = md_desc_data;
+            if (desc_opened) inp_desc_data = md_raw_description.innerText;
+            md2html_interactive(inp_desc_data).then((result) => {
+                md_raw_description.innerText = result.md;
+                html_description.innerHTML = result.html;
+                renderLatex();
+                document.querySelector("#md_inp_desc").value = result.md;
+                document.querySelector("#html_inp_desc").value = result.html;
+                if (!desc_opened) desc_opened = true;
+            }).catch((e) => { console.error(e); });
+        });
+    } ();
+</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ data["name"] }} Editorial{% endblock %}
+{% block active %}Practice{% endblock %}
+
+{% block preload %}
+<link rel="preload" href="/api/problem?id={{ request.path.split('/')[2] }}" as="fetch" crossorigin="anonymous">
+{% endblock %}
+
+{% block main %}
+<h1><a href="{{ request.path[:-10] }}">{{ data["name"] }}</a> Editorial</h1>
+<div id="editorial"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+    const problemId = "{{ request.path.split('/')[2] }}";
+    const editorial = document.getElementById("editorial");
+    fetch("/api/publicproblem?id=" + problemId).then(b => b.text())
+            .then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        } if (b["data"]["editorial_html"] != "") {
+            editorial.innerHTML = b["data"]["editorial_html"];
+            renderLatex();
+        } else {
+            editorial.innerHTML =
+                `This problem does not have an editorial.
+                 <a href="/problem/${problemId}">Back to problem</a>`;
+        }
+        editorial.classList.remove("hidden");
+    });
+</script>
+{% endblock %}

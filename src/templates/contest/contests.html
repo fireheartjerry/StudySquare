@@ -1,0 +1,228 @@
+{% extends "layout.html" %}
+
+{% block title %}Contests{% endblock %}
+{% block active %}Contests{% endblock %}
+
+{% block main %}
+<span>Join our <a href="https://discord.gg/zUdmCWPT3f">discord server</a> if you want to host a free public contest!</span>
+<h1>Future Contests</h1>
+{% if future | length == 0 %}
+	<p><em>There are no future contests.</p></em>
+{% endif %}
+{% for contest in future %}
+    <div class="card post-card" style="max-height: 600px;{% if contest['rated'] %} border: 2px solid #00bcd4!important; box-shadow: 0 0 3px #00bcd4, 0 0 6px #00bcd4, 0 0 9px #00bcd4!important;{% endif %}">
+        <div class="see-more-wrapper">
+            <a href="#" class="see-more" style="margin-left: 8px;">See More</a>
+        </div>
+        <h3 id="{{ contest['id'] }}">
+            <a href="/contest/{{ contest['id'] }}">{{ contest["name"] }}</a>
+            <span data-toggle="tooltip" title="This will be a(n) {{ contest['style'] }} contest." class="badge bg-primary rounded-pill growable ml-2">{{ contest['style']|upper }}</span>
+            {% if contest["private"] %}<a href="/organization/{{ contest["private_org"] }}" class="badge bg-secondary rounded-pill growable mx-1" title='This contest is private to the organization "{{ contest["organization_name"] }}"' data-toggle="tooltip">Private</a>{% endif %}
+        </h3>
+        {% if contest['rated'] %}
+            <p style="margin-bottom: 0; font-size: 20px; background: linear-gradient(90deg, #00bcd4, #8e44ad); -webkit-background-clip: text; color: transparent!important;"><b>Rated</b></p>
+        {% else %}
+            <p style="margin-bottom: 0; font-size: 20px; color: gray!important;"><b>Unrated</b></p>
+        {% endif %}
+        <p style="margin-bottom: 0; font-size: 20px;"><b>Start (ET):</b> <a class="dt" href="https://www.timeanddate.com/worldclock/fixedtime.html?msg={{ (contest["name"]+" • Start Time • TopsOJ")|urlencode }}&iso={{ contest["start"].split(' ')[0]+'T'+contest["start"].split(' ')[1] }}">{{ contest["start"] }} Eastern</a></p>
+        <p style="margin-bottom: 0; font-size: 20px;"><b>End (ET)</b> <a class="dt" href="https://www.timeanddate.com/worldclock/fixedtime.html?msg={{ (contest["name"]+" • End Time • TopsOJ")|urlencode }}&iso={{ contest["end"].split(' ')[0]+'T'+contest["end"].split(' ')[1] }}">{{ contest["end"] }} Eastern</a></p><br>
+        <div id="contest-{{ contest['id'] }}" class="hidden smarkdown"></div>
+        {% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+            <a href="/contest/{{ contest['id'] }}/edit"
+            style="position: absolute; top: 12px; right: 36px;">
+                <img src="/assets/images/pencil.svg"
+                    onerror="this.src='/assets/images/pencil.png'"
+                    alt="Edit contest"
+                    class="icon svg-brand growable">
+            </a>
+            <a href="/contest/{{ contest['id'] }}/delete"
+            style="position: absolute; top: 12px; right: 16px;">
+                <img src="/assets/images/trash.svg"
+                    onerror="this.src='/assets/images/trash.png'"
+                    alt="Delete contest"
+                    class="icon svg-brand growable">
+            </a>
+        {% endif %}
+    </div>
+{% endfor %}
+<hr>
+<h1>Ongoing Contests</h1>
+{% if current | length == 0 %}
+    <p><em>There are no ongoing contests.</em></p>
+{% else %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    Note that you cannot change your submission after answering a problem.
+    <button type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close">
+    </button>
+</div>
+{% endif %}
+{% for contest in current %}
+    <div class="card post-card" style="max-height: 600px;{% if contest['rated'] %} border: 2px solid #00bcd4!important; box-shadow: 0 0 3px #00bcd4, 0 0 6px #00bcd4, 0 0 9px #00bcd4!important;{% endif %}">
+    <div class="see-more-wrapper">
+            <a href="#" class="see-more" style="margin-left: 8px;">See More</a>
+        </div>
+        <h3 id="{{ contest['id'] }}">
+            <a href="/contest/{{ contest['id'] }}" id="contest-{{ contest['id'] }}-link">{{ contest["name"] }}</a>
+            {% if contest['first_time'] %}
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const link = document.querySelector('#contest-{{ contest['id'] }}-link');
+                    link.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        const dimmer = document.createElement('div');
+                        dimmer.style.position = 'fixed';
+                        dimmer.style.top = '0';
+                        dimmer.style.left = '0';
+                        dimmer.style.width = '100%';
+                        dimmer.style.height = '100%';
+                        dimmer.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+                        dimmer.style.zIndex = '9999';
+                        document.body.appendChild(dimmer);
+
+                        const alertBox = document.createElement('div');
+                        alertBox.style.position = 'fixed';
+                        alertBox.style.top = '50%';
+                        alertBox.style.left = '50%';
+                        alertBox.style.transform = 'translate(-50%, -50%)';
+                        alertBox.style.backgroundColor = '#fff';
+                        alertBox.style.padding = '40px';
+                        alertBox.style.borderRadius = '15px';
+                        alertBox.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.3)';
+                        alertBox.style.zIndex = '10000';
+                        alertBox.innerHTML = `
+                            <img src="/static/favicon.png" class="icon" style="position: absolute; top: 10px; right: 10px; width: 48px; height: 48px;">
+                            <p style="font-weight: bold; text-align: center; font-size: 24px; color: #741f22!important;">The contest time window (if it exists) starts IMMEDIATELY after clicking, and you will also be added to the scoreboard.{% if contest['rated'] %} If you proceed, your performance will impact your rating as well.{% endif %}</p>
+                            <p style="font-weight: bold; text-align: center; font-size: 24px; color: #741f22!important;">Click the green button when you are ready to start the contest.</p>
+                            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                                <button class="btn btn-lg btn-success" id="ok-button">I understand that my window will immediately start and there is no going back.</button>
+                                <button class="btn btn-lg btn-outline-danger" id="cancel-button" style="margin-left: 10px;">I still need time to prepare, I will start later.</button>
+                            </div>
+                        `;
+                        document.body.appendChild(alertBox);
+
+                        const okButton = document.querySelector('#ok-button');
+                        okButton.addEventListener('click', function() {
+                            document.body.removeChild(dimmer);
+                            document.body.removeChild(alertBox);
+                            window.location.href = link.href;
+                        });
+
+                        const cancelButton = document.querySelector('#cancel-button');
+                        cancelButton.addEventListener('click', function() {
+                            document.body.removeChild(dimmer);
+                            document.body.removeChild(alertBox);
+                        });
+                    });
+                });
+            </script>
+            {% endif %}
+            <span data-toggle="tooltip" title="This is a(n) {{ contest['style'] }} contest." class="badge bg-primary rounded-pill growable ml-2">{{ contest['style']|upper }}</span>
+            <span data-toggle="tooltip" title="{% if contest['first_time'] %}You have not joined this contest yet{% else %}{% if contest['window_ended'] %}Your window has ended for this contest. You can view it after the contest ends.{% else %}You are currently participating in this contest.{% endif %}{% endif %}" class="badge bg-{% if contest['first_time'] %}secondary{% else %}{% if contest['window_ended'] %}danger{% else %}success{% endif %}{% endif %} rounded-pill growable ml-2">{% if contest['first_time'] %}Not Participating{% else %}{% if contest['window_ended'] %}<s style="color: #666; font-weight: normal;">Participating</s>{% else %}Participating{% endif %}{% endif %}</span>
+            {% if contest["private"] %}<a href="/organization/{{ contest["private_org"] }}" class="badge bg-secondary rounded-pill growable mx-1" title='This contest is private to the organization "{{ contest["organization_name"] }}"' data-toggle="tooltip">Private</a>{% endif %}
+        </h3>
+        {% if contest['rated'] %}
+            <p style="margin-bottom: 0; font-size: 20px; background: linear-gradient(90deg, #00bcd4, #8e44ad); -webkit-background-clip: text; color: transparent!important;"><b>Rated</b></p>
+        {% else %}
+            <p style="margin-bottom: 0; font-size: 20px; color: gray!important;"><b>Unrated</b></p>
+        {% endif %}
+        <p style="margin-bottom: 0; font-size: 20px;"><b>Start (ET):</b> <a class="dt" href="https://www.timeanddate.com/worldclock/fixedtime.html?msg={{ (contest["name"]+" • Start Time • TopsOJ")|urlencode }}&iso={{ contest["start"].split(' ')[0]+'T'+contest["start"].split(' ')[1] }}">{{ contest["start"] }} Eastern</a></p>
+        <p style="margin-bottom: 0; font-size: 20px;"><b>End (ET)</b> <a class="dt" href="https://www.timeanddate.com/worldclock/fixedtime.html?msg={{ (contest["name"]+" • End Time • TopsOJ")|urlencode }}&iso={{ contest["end"].split(' ')[0]+'T'+contest["end"].split(' ')[1] }}">{{ contest["end"] }} Eastern</a></p><br>
+        <div id="contest-{{ contest['id'] }}" class="hidden smarkdown"></div>
+        {% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+            <a href="/contest/{{ contest['id'] }}/edit"
+            style="position: absolute; top: 12px; right: 36px;">
+                <img src="/assets/images/pencil.svg"
+                    onerror="this.src='/assets/images/pencil.png'"
+                    alt="Edit contest"
+                    class="icon svg-brand growable">
+            </a>
+            <a href="/contest/{{ contest['id'] }}/delete"
+            style="position: absolute; top: 12px; right: 16px;">
+                <img src="/assets/images/trash.svg"
+                    onerror="this.src='/assets/images/trash.png'"
+                    alt="Delete contest"
+                    class="icon svg-brand growable">
+            </a>
+        {% endif %}
+    </div>
+{% endfor %}
+<hr>
+<h1>Past Contests</h1>
+{% if past | length == 0 %}
+	<p><em>There are no past contests.</p></em>
+{% endif %}
+{% for contest in past %}
+    <div class="card post-card" style="max-height: 600px;{% if contest['rated'] %} border: 2px solid #00bcd4!important; box-shadow: 0 0 3px #00bcd4, 0 0 6px #00bcd4, 0 0 9px #00bcd4!important;{% endif %}">
+        <div class="see-more-wrapper">
+            <a href="#" class="see-more" style="margin-left: 8px;">See More</a>
+        </div>
+        <h3 id="{{ contest['id'] }}">
+            <a href="/contest/{{ contest['id'] }}">{{ contest["name"] }}</a>
+            <span data-toggle="tooltip" title="This was a(n) {{ contest['style'] }} contest." class="badge bg-primary rounded-pill growable ml-2">{{ contest['style']|upper }}</span>
+            {% if contest["private"] %}<a href="/organization/{{ contest["private_org"] }}" class="badge bg-secondary rounded-pill growable mx-1" title='This contest is private to the organization "{{ contest["organization_name"] }}"' data-toggle="tooltip">Private</a>{% endif %}
+        </h3>
+        {% if contest['rated'] %}
+            <p style="margin-bottom: 0; font-size: 20px; background: linear-gradient(90deg, #00bcd4, #8e44ad); -webkit-background-clip: text; color: transparent!important;"><b>Rated</b></p>
+        {% else %}
+            <p style="margin-bottom: 0; font-size: 20px; color: gray!important;"><b>Unrated</b></p>
+        {% endif %}
+        <p style="margin-bottom: 0; font-size: 20px;"><b>Start (ET):</b> <a class="dt" href="https://www.timeanddate.com/worldclock/fixedtime.html?msg={{ (contest["name"]+" • Start Time • TopsOJ")|urlencode }}&iso={{ contest["start"].split(' ')[0]+'T'+contest["start"].split(' ')[1] }}">{{ contest["start"] }} Eastern</a></p>
+        <p style="margin-bottom: 0; font-size: 20px;"><b>End (ET)</b> <a class="dt" href="https://www.timeanddate.com/worldclock/fixedtime.html?msg={{ (contest["name"]+" • End Time • TopsOJ")|urlencode }}&iso={{ contest["end"].split(' ')[0]+'T'+contest["end"].split(' ')[1] }}">{{ contest["end"] }} Eastern</a></p><br>
+        <div id="contest-{{ contest['id'] }}" class="hidden smarkdown"></div>
+        {% if check_perm(["ADMIN", "SUPERADMIN", "CONTENT_MANAGER"]) %}
+            <a href="/contest/{{ contest['id'] }}/edit"
+            style="position: absolute; top: 12px; right: 36px;">
+                <img src="/assets/images/pencil.svg"
+                    onerror="this.src='/assets/images/pencil.png'"
+                    alt="Edit contest"
+                    class="icon svg-brand growable">
+            </a>
+            <a href="/contest/{{ contest['id'] }}/delete"
+            style="position: absolute; top: 12px; right: 16px;">
+                <img src="/assets/images/trash.svg"
+                    onerror="this.src='/assets/images/trash.png'"
+                    alt="Delete contest"
+                    class="icon svg-brand growable">
+            </a>
+        {% endif %}
+    </div>
+{% endfor %}
+{% endblock %}
+{% block script %}
+<script>
+    const idList = []
+    {% for contest in future %}
+        idList.push("{{ contest['id'] }}");
+    {% endfor %}
+    {% for contest in current %}
+        idList.push("{{ contest['id'] }}");
+    {% endfor %}
+    {% for contest in past %}
+        idList.push("{{ contest['id'] }}");
+    {% endfor %}
+    fetch("/api/contests?id=" + idList).then(b => b.text())
+            .then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        }
+        for (let id of idList) {
+	    contest_element = document.querySelector("#contest-" + id)
+            contest_element.innerHTML = b["data"][id+"_html"];
+            contest_element.classList.remove("hidden");
+       	}
+        renderLatex();
+        seeMore();
+    });
+    for (let node of document.getElementsByClassName("btn-delete")) {
+        node.addEventListener("click", function() {
+            let id = this.getAttribute("data-id");
+            document.querySelector("#confirm").style.display = "block";
+            document.querySelector("#confirm input[name='aid']").setAttribute("value", id);
+        });
+    }
+</script>
+{% endblock %}

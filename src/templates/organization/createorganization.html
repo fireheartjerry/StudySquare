@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Organization{% endblock %}
+{% block active %}Organizations{% endblock %}
+
+{% block main %}
+<h1>Create Organization</h1> <br>
+<form autocomplete="off" method="post" id="create" name="create">
+    <div class="form-floating">
+        <input autofocus
+               class="form-control mb-3"
+               name="name"
+               id="name"
+               placeholder="Name"
+               required>
+        <label for="name">Name</label>
+    </div>
+    <div class="form-floating">
+        <input autofocus
+               class="form-control mb-3"
+               type="number"
+               name="owner"
+               id="owner"
+               placeholder="Owner (ID)"
+               required>
+        <label for="owner">Owner (ID)</label>
+    </div>
+    <button class="btn btn-secondary fw-bold" id="open_description" type="button">Open Markdown Editor</button>
+    <div class="row" id="description" style="margin-top: 7px;">
+        <div class="col-sm">
+            <h4><u>Raw Markdown</u></h4>
+            <div id="description_md_raw"></div>
+        </div>
+        <div class="col-sm">
+            <h4><u>Resulting HTML</u></h4>
+            <div id="description_html"></div>
+        </div>
+    </div> <hr>
+    <input type="hidden" id="md_inp_desc" name="description_md">
+    <input type="hidden" id="html_inp_desc" name="description_html">
+    <div>
+        <input type="checkbox" id="private_org" name="private_org">
+        <label for="private_org">Private Organization</label>
+    </div>
+    <div id="private_org_fields"></div>
+    <br>
+    <input class="btn btn-primary fw-bold" type="submit" id="submit" name="submit" value="Create">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+{% endblock %}
+{% block script %}
+<script>
+    const md_raw_description = document.querySelector("#description_md_raw");
+    const html_description = document.querySelector("#description_html");
+    var desc_opened = false;
+    md_raw_description.innerText = "The markdown for the organization description goes here...";
+    html_description.innerHTML = "<p>...and rendered <b>HTML</b> goes <i>here</i>.</p";
+    document.querySelector("#open_description").addEventListener("click", function() {
+        let inp_desc_data = "*No organization description provided.*";
+        if (desc_opened) inp_desc_data = md_raw_description.innerText;
+        md2html_interactive(inp_desc_data).then((result) => {
+            md_raw_description.innerText = result.md;
+            html_description.innerHTML = result.html;
+            renderLatex();
+            document.querySelector("#md_inp_desc").value = result.md;
+            document.querySelector("#html_inp_desc").value = result.html;
+            if (!desc_opened) desc_opened = true;
+        }).catch((e) => { console.error(e); });
+    });
+
+    document.querySelector("#private_org").addEventListener("change", function() {
+        const privateOrgFields = document.querySelector("#private_org_fields");
+        if (this.checked) {
+            const passwordField = document.createElement("div");
+            passwordField.className = "form-floating";
+            passwordField.innerHTML = `
+                <input class="form-control mb-3"
+                       name="password"
+                       id="password"
+                       placeholder="Password"
+                       type="password"
+                       autocomplete="new-password"
+                       required>
+                <label for="password">Password (at least 8 characters)</label>
+            `;
+            const passwordConfirmationField = document.createElement("div");
+            passwordConfirmationField.className = "form-floating";
+            passwordConfirmationField.innerHTML = `
+                <input class="form-control mb-3"
+                       name="password_confirmation"
+                       id="password_confirmation"
+                       placeholder="Password Confirmation"
+                       type="password"
+                       autocomplete="new-password"
+                       required>
+                <label for="password_confirmation">Confirm Password</label>
+            `;
+            privateOrgFields.appendChild(passwordField);
+            privateOrgFields.appendChild(passwordConfirmationField);
+        } else {
+            while (privateOrgFields.firstChild) {
+                privateOrgFields.removeChild(privateOrgFields.firstChild);
+            }
+        }
+    });
+</script>
+{% endblock %}

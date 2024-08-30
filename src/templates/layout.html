@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#0d6efd">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/static/favicon.png" rel="icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+            .nav-link {
+                top: 7%!important;
+            }
+        </style>
+
+        <title>{% block title %}{% endblock %} &middot; {{ CLUB_NAME }}</title>
+
+        {% block preload %}{% endblock %}
+    </head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR1ZCFGEG2"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YR1ZCFGEG2');
+    </script>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand growable" href="/" style="cursor: pointer;"><img src="/static/favicon.png" style="width: 40px; height: 40px;" data-toggle="tooltip" title="Our logo is cool, right?"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbar" aria-controls="navbarText" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar" data-active="{% block active %}{% endblock %}">
+                    {% if session.user_id %}
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-li"><a class="nav-link" href="/">Home</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/mathgym">Math Gym</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/problems">Practice</a></li>
+                            {% if check_perm(["ADMIN", "SUPERADMIN"]) %}<li class="nav-li"><a class="nav-link" href="/courses">Courses</a></li>{% endif %}
+                            <li class="nav-li"><a class="nav-link" href="/mathgym/mockgenerator">Mock Generator</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/contests">Contests</a></li>
+                            {% block contest_leaderboard %}{% endblock %}
+                            <li class="nav-li"><a class="nav-link" href="/rankings">Rankings</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/organizations/public">Organizations</a></li>
+                            <li class="nav-li">
+                                <a id="help-dropdown-release" class="nav-link dropdown-toggle" style="cursor: pointer;">Info</a>
+                                <div id="help-dropdown" class="dropdown-content">
+                                    <a class="nav-link" href="/about">About</a>
+                                    <a class="nav-link" href="/team">Our Team</a>
+                                    <a class="nav-link" href="{% if check_perm(["ADMIN", "SUPERADMIN", "PROBLEM_MANAGER", "CONTENT_MANAGER"]) %}/admin{% endif %}/submissions">Submissions</a>
+                                    <a class="nav-link" href="/discordserver" target="_blank">Discord Server</a>
+                                    <a class="nav-link" href="/changelog">Changelog</a>
+                                    <a class="nav-link" href="/uptime" target="_blank">Server Uptime</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            {% if check_perm(["ADMIN", "SUPERADMIN", "PROBLEM_MANAGER", "CONTENT_MANAGER"]) %}
+                            <li class="nav-li"><a class="nav-link" href="/admin/console" style="margin-top: 5%;">Admin Console</a></li>
+                            {% endif %}
+                            <div class="form-check form-switch nav-link">
+                                <input class="form-check-input dark-toggle"
+                                       type="checkbox" style="margin-top: 12px;">
+                            </div>
+                            <div class="dropdown" style="top: 7%;">
+                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" style="background: transparent; border-color: #DACFBE!important; color: white;"> Hello, <b>{{ session.username }}</b>.<span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-end animate" id="user-dropdown-menu">
+                                    <li class="nav-li"><a class="dropdown-item text-decoration-none" style="margin-bottom: 5px;" href="/users/{{ session.username }}/profile">Profile</a></li>
+                                    <li class="nav-li"><a class="dropdown-item text-decoration-none" style="margin-bottom: 5px;" href="/users/{{ session.username }}/profile/edit">Edit Profile</a></li>
+                                    <li class="nav-li"><a class="dropdown-item text-decoration-none" href="/settings">Settings</a></li>
+                                    <li class="nav-li"><div class="dropdown-divider" style="margin-bottom: 16px;"><div></li>
+                                    <li class="nav-li"><a class="dropdown-item logout" href="/logout">Log Out</a></li>
+                                </ul>
+                            </div>
+                        </ul>
+                    {% else %}
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-li"><a class="nav-link" href="/">Home</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/mathgym">Math Gym</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/problems">Practice</a></li>
+                            {% if check_perm(["ADMIN", "SUPERADMIN"]) %}<li class="nav-li"><a class="nav-link" href="/courses">Courses</a></li>{% endif %}
+                            <li class="nav-li"><a class="nav-link" href="/contests">Contests</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/rankings">Rankings</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/organizations/public">Organizations</a></li>
+                            <li class="nav-li">
+                            <a id="help-dropdown-release" class="nav-link dropdown-toggle" style="cursor: pointer;">Info</a>
+                                <div id="help-dropdown" class="dropdown-content" style="z-index: 9999;">
+                                    <a class="nav-link" href="/team">Our Team</a>
+                                    <a class="nav-link" href="{% if check_perm(["ADMIN", "SUPERADMIN", "PROBLEM_MANAGER", "CONTENT_MANAGER"]) %}/admin{% endif %}/submissions">Submissions</a>
+                                    <a class="nav-link" href="/discordserver" target="_blank">Discord Server</a>
+                                    <a class="nav-link" href="/changelog">Changelog</a>
+                                    <a class="nav-link" href="/uptime" target="_blank">Server Uptime</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ms-auto">
+                            <div class="form-check form-switch nav-link">
+                                <input class="form-check-input dark-toggle"
+                                       type="checkbox">
+                            </div>
+                            <li class="nav-li"><a class="nav-link" href="/register">Register</a></li>
+                            <li class="nav-li"><a class="nav-link" href="/login">Log In</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <main class="container">
+            {% set maintenance = namespace(flag=false) %}
+            {% set testing = namespace(flag=false) %}
+            {% with msg = get_flashed_messages(with_categories=True) %}
+                {% if msg %}
+                    {% for category, message in msg %}
+                        {% if category != "maintenance" and category != "testing" and category != "team" %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show"
+                                role="alert">
+                                <span>{{ message }}</span>
+                                <button type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                            </div>
+                        {% elif category == "maintenance" %}
+                            {% if not maintenance.flag %}
+                                {% set maintenance.flag = true %}
+                                <div class="alert alert-warning alert-dismissible fade show"
+                                    role="alert">
+                                    <span>{{ message }}</span>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                        {% elif category == "testing" %}
+                            {% if not testing.flag %}
+                                {% set testing.flag = true %}
+                                <div class="alert alert-info alert-dismissible fade show"
+                                    role="alert">
+                                    <span>{{ message }}</span>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                        {% elif category == "team" %}
+                            {% if not testing.flag %}
+                                {% set testing.flag = true %}
+                                <div class="alert alert-info alert-dismissible fade show"
+                                    role="alert">
+                                    <span>{{ message }}</span>
+                                    <button type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            {% block main %}{% endblock %}
+            {% block post_main %}{% endblock %}
+        </main>
+        <footer>
+            <hr>
+            <p class="text-center" style="font-family: 'Montserrat', sans-serif;" id="footer-text">
+                &copy; <span id="copyright-year"></span>, {{ CLUB_NAME }} v24.6.1
+                <a href="/terms">Terms of Service</a> &middot;
+                <a href="/privacy">Privacy Policy</a> &middot;
+                <a href="https://discord.gg/zUdmCWPT3f">Discord Server</a>
+            </p>
+        </footer>
+
+        <script src="/assets/js/nav.js"></script>
+        <script src="/assets/js/stackedit.min.js"></script>
+        <script src="/assets/js/katex.min.js"></script>
+        <script src="/assets/js/auto-render.min.js"></script>
+        <script src="/assets/js/renderKatex.js"></script>
+        <script src="/assets/js/convertMD.js"></script>
+        {% block script %}{% endblock %}
+        <script src="/assets/js/seeMore.js"></script>
+        <script src="/assets/js/newPagination.js"></script>
+        <script src="/assets/js/dateConvert.js"></script>
+        <script src="/assets/js/grow.js"></script>
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+        <script src="/assets/js/jquery.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </body>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        window.onload = function() { renderLatex(); };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var currentYear = new Date().getFullYear();
+            document.getElementById('copyright-year').textContent = "2023 - "+currentYear;
+        });
+
+        var dropdownContent = document.querySelector('.dropdown-content');
+        var dropdownRelease = document.querySelector('.dropdown-toggle');
+
+        // Show/hide dropdown on anchor click
+        dropdownRelease.addEventListener('click', function() {
+            if (dropdownContent.style.display === 'none') {
+                dropdownContent.style.display = 'block';
+            } else {
+                dropdownContent.style.display = 'none';
+            }
+        });
+
+        // Hide dropdown when clicking anywhere outside of it
+        function hideDropdown() {
+            dropdownContent.style.display = 'none';
+        }
+
+        dropdownRelease.addEventListener('click', function() {
+            dropdownContent.style.display = 'block';
+        });
+
+        document.addEventListener('click', function(event) {
+            var target = event.target;
+            if (target !== dropdownRelease && !dropdownContent.contains(target)) {
+                hideDropdown();
+            }
+        });
+
+        // Color usernames if they are rated
+        var usernames = document.querySelectorAll('.username');
+        usernames.forEach(function(username) {
+            rating = username.dataset.rating;
+            admin = username.dataset.admin;
+            if (admin == "1") {
+                html = username.innerHTML;
+                username.innerHTML = "<b><b>" + html + "</b></b>";
+                let anchor = username.querySelector('a');
+                anchor.innerText = "[ADM] " + anchor.innerText;
+                anchor.style.cssText = `
+                background: #f12711;
+                background: -webkit-linear-gradient(to right, #f5af19, #f12711);
+                background: linear-gradient(to right, #f5af19, #f12711);
+                -webkit-background-clip: text;
+                color: transparent;`;
+                anchor.title = "Admin";
+            } else if (rating != "None" && rating != null) {
+                rating = parseInt(rating);
+                html = username.innerHTML;
+                username.innerHTML = "<b><b>" + html + "</b></b>";
+                let anchor = username.querySelector('a'), css = "", title="";
+                if (rating <= 1000) {
+                    css += "color: #CD7F32!important";
+                    if (username.dataset.pre != "0") anchor.innerText = "[BRZ] " + anchor.innerText;
+                    title = "Bronze Rank"
+                } else if (rating <= 1200) {
+                    css += "color: #D6BD38!important";
+                    if (username.dataset.pre != "0") anchor.innerText = "[GLD] " + anchor.innerText;
+                    title = "Gold Rank"
+                } else if (rating <= 1400) {
+                    css += "color: #19BE67!important";
+                    if (username.dataset.pre != "0") anchor.innerText = "[EMR] " + anchor.innerText;
+                    title = "Emerald Rank"
+                } else if (rating <= 1600) {
+                    css += "color: #07B4B4!important";
+                    if (username.dataset.pre != "0") anchor.innerText = "[DIA] " + anchor.innerText;
+                    title = "Diamond Rank"
+                } else if (rating <= 1800) {
+                    css += "color: #2576F5!important;";
+                    if (username.dataset.pre != "0") anchor.innerText = "[SAP] " + anchor.innerText;
+                    title = "Sapphire Rank"
+                } else if (rating <= 2200) {
+                    css += "color: #DB5BFF!important;";
+                    if (username.dataset.pre != "0") anchor.innerText = "[CRY] " + anchor.innerText;
+                    title = "Crystal Rank"
+                } else if (rating <= 2600) {
+                    css += "color: #8B3DD9!important;";
+                    if (username.dataset.pre != "0") anchor.innerText = "[AMY] " + anchor.innerText;
+                    title = "Amethyst Rank"
+                } else {
+                    css += "color: black!important; text-shadow: -1px -1px 0 #ff0000, 1px -1px 0 #ff0000, -1px 1px 0 #ff0000, 1px 1px 0 #ff0000!important";
+                    if (username.dataset.pre != "0") anchor.innerText = "[OBS] " + anchor.innerText;
+                    title = "Obsidian Rank"
+                }
+                anchor.style.cssText = css;
+                anchor.title = title;
+            }
+        });
+</script>
+</html>

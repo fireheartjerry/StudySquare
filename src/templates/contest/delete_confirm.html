@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete {{ data }}{% endblock %}
+{% block active %}Contests{% endblock %}
+
+{% block main %}
+<h1 >Delete {{ data }}</h1>
+<p style="color: red;">
+    Are you sure you want to delete the contest {{ data }}?
+    This action is irreversible.
+</p>
+<form method="post">
+    <input class="btn btn-primary problem-submit-button" type="submit" value="Confirm">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block title %}Server Uptime{% endblock %}
+{% block active %}Server Uptime{% endblock %}
+
+{% block main %}
+<h1>TopsOJ Server Uptime</h1><br>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/davidjbradshaw/iframe-resizer@master/js/iframeResizer.min.js"></script>
+<iframe class="htframe" src="https://wl.hetrixtools.com/report/uptime/e575014d7aa861c4b98b9e6819caf51a/" width="100%" scrolling="no" style="border:none; border-radius: 20px;" sandbox="allow-scripts allow-same-origin allow-popups" onload="iFrameResize([{log:false}],'.htframe')"></iframe>
+{% endblock %}

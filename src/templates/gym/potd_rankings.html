@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}POTD Rankings{% endblock %}
+{% block active %}Math Gym{% endblock %}
+
+{% block main %}
+<h1>POTD Rankings</h1>
+{% if is_ongoing_contest %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+        There is currently an ongoing contest. To view it, go to the <a href="/contests">Contests</a> page.
+        These are the <b>global user rankings unrelated to the contest</b>.
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+</div>
+{% endif %}
+<a href="/problems?category=Problem%20of%20the%20Day" class="badge bg-info rounded-pill growable" style="margin-bottom: 10px; font-size: 20px; padding: 10px;">Go to POTDS</a>
+<a href="/mathgym" class="badge bg-secondary rounded-pill growable" style="margin-bottom: 15px; font-size: 20px; padding: 10px; margin-left: 15px;">Back to Math Gym</a><br>
+<div id="point-info" style="border: 2px transparent; border-radius: 10px; display: block; padding: 10px; max-width: 350px; background: linear-gradient(135deg, #a7e9ff, #91a9fa);">
+    Normal and old POTD's are worth <b>1 point.</b>
+    <br>
+    Challenge POTD's are worth <b>2 points.</b>
+</div>
+<div style="overflow-x: auto; margin-top: 15px;">
+    <table class="table table-hover table-full-width">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 10%;">Rank</th>
+                <th scope="col" style="width: 35%;">Username</th>
+                <th title="Normal problems give 1 point, hard problems give 2" scope="col" style="width: 25%;">POTD Points</th>
+                <th scope="col" style="width: 30%;">Most Recent POTD Submission</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(rank_data | length) %}
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td class="username" data-rating="{{ rank_data[i]["rating"] }}" data-admin="{{ rank_data[i]["admin"] }}"><a href="/users/{{ rank_data[i]["username"] }}/profile">{{ rank_data[i]["username"] }}</a></td>
+                <td>{{ rank_data[i]["potd_points"] }}</td>
+                <td>{{ rank_data[i]["most_recent_sub"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

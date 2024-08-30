@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}POTD Rankings{% endblock %}
+{% block active %}Math Gym{% endblock %}
+
+{% block main %}
+<h1>{{problem_name}} Rankings</h1>
+{% if is_ongoing_contest %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+        There is currently an ongoing contest. To view it, go to the <a href="/contests">Contests</a> page.
+        These are the <b>global user rankings unrelated to the contest</b>.
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+</div>
+{% endif %}
+<a href="/problem/{{problem_id}}" class="badge bg-info rounded-pill growable" style="margin-bottom: 10px; font-size: 20px; padding: 10px;">Go back to problem</a>
+<div style="overflow-x: auto; margin-top: 15px;">
+    <table class="table table-hover table-full-width">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 10%;">Rank</th>
+                <th scope="col" style="width: 35%;">Username</th>
+                <th scope="col" style="width: 25%;">Time taken to do this question (sec)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(rank_data | length) %}
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td class="username"><a href="/users/{{ rank_data[i]["username"] }}/profile">{{ rank_data[i]["username"] }}</a></td>
+                <td>{{ rank_data[i]["potd_points"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

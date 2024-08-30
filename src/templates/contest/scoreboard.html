@@ -1,0 +1,217 @@
+{% extends "contest/layout.html" %}
+
+{% block title %}{{ title }} Contest Rankings{% endblock %}
+{% block active %}Contest Rankings{% endblock %}
+
+{% block main %}
+{% if ended %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+    This contest has ended, so solving a question will not contribute to your points or scoreboard.
+    The submission limit has also been lifted.
+    <button type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close">
+    </button>
+</div>
+{% endif %}
+<div style="display: flex; align-items: center;">
+    <h1><a href="{{ request.path[:-11] }}">{{ title }}</a></h1>
+    <div class="dropdown" id="contest-dropdown" style="display: inline-block; margin-left: 15px;">
+        <button class="btn btn-primary dropdown-toggle" data-bs-hover="dropdown"><b>Contest Actions</b><span class="caret"></span></button>
+        <ul class="dropdown-menu dropdown-menu-end animate" id="contest-dropdown-menu" style="width: 200px;">
+                <li><a class="dropdown-item" href="{{ request.path[:-11] }}">Back to Contest</a></li>
+            {% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+                <li><div class="dropdown-divider" style="margin-bottom: 10px;"><div></li>
+                <li><a class="dropdown-item" href="/admin/submissions?contest_id={{ request.path[9:-11] }}">Submissions [ADMIN]</a></li>
+                <li><a class="dropdown-item" href="{{ request.path }}/addproblem">Add Problem</a></li>
+                <li><a class="dropdown-item" href="{{ request.path }}/drafts">View Draft Problems</a></li>
+                <li><a class="dropdown-item" href="{{ request.path }}/notify">Notify Participants</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+{% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+    <div id="confirm" class="hidden">
+        <form method="post" style="margin-bottom: 1rem;">
+            <input type="hidden" name="user_id">
+            <input class="btn btn-danger" style="display: block;" type="submit">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        </form>
+    </div>
+{% endif %}
+
+<div style="overflow-x: auto;">
+    <table class="table table-hover table-full-width">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 12%;">Rank</th>
+                <th scope="col" style="width: 45%;">Username</th>
+                <th scope="col" style="width: 18%;">Points</th>
+                <th scope="col" style="width: 25%;">{% if window_time %}Time Taken (HH:MM:SS){% else %}Latest AC{% endif %}</th>
+                {% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+                    <th scope="col" style="width: 10%">Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(data | length) %}
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td class="username" data-rating="{{ data[i]["rating"] }}" {% if window_time and started and check_perm(["ADMIN", "SUPERADMIN"]) %}title="Started window at {{ data[i]['start_time'] }}, {% if started and data[i]["window_ended"] and check_perm(["ADMIN", "SUPERADMIN"]) %} (window ended){% endif %}" data-toggle="tooltip"{% endif %}><a href="/users/{{ data[i]["username"] }}/profile">{{ data[i]["username"] }}</a></td>
+                <td>{% if style == "amc" %}<b>{{ data[i]["points"] }}</b>/150{% else %}{{ data[i]["points"] }}{% endif %}</td>
+                {% if data[i]["lastAC"] %}
+                    {% if window_time %}
+                        <td><code>{% if started %}{{ data[i]["time_taken"][1] }} ({{ data[i]["time_taken"][0] }} seconds){% endif %}</code></td>
+                    {% else %}
+                        <td class="dt">{{ data[i]["lastAC"] }}</td>
+                    {% endif %}
+                {% else %}
+                    <td>None</td>
+                {% endif %}
+                {% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+                    <td data-id="{{ data[i]['user_id'] }}" data-username="{{ data[i]['username'] }}">
+                        <a href="#">
+                            <img src="/assets/images/restrict.svg"
+                                 onerror="this.src='/assets/images/restrict.png'"
+                                 class="svg-red icon scoreboard-dq"
+                                 data-toggle="tooltip"
+                                 alt="Disqualify user"
+                                 title="Disqualify user">
+                        </a>
+                        <a href="#">
+                            <img src="/assets/images/ghost.svg"
+                                 class="icon scoreboard-hide"
+                                 data-toggle="tooltip"
+                                 alt="Hide user"
+                                 title="Hide user">
+                        </a>
+                        <a href="#">
+                            <img src="/assets/images/reset.svg"
+                                 class="icon scoreboard-reset"
+                                 data-toggle="tooltip"
+                                 alt="Reset user time"
+                                 title="Reset user time">
+                        </a>
+                    </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% if hidden %}
+    <h1>Hidden Users</h1>
+    <div style="overflow-x: auto;">
+        <table class="table table-hover table-full-width">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" style="width: 12%;">Rank</th>
+                    <th scope="col" style="width: 40%;">Username</th>
+                    <th scope="col" style="width: 18%;">Points</th>
+                    <th scope="col" style="width: 30%;">{% if window_time %}Time Taken HH:MM:SS{% else %}Latest AC{% endif %}</th>
+                    {% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+                        <th scope="col" style="width: 10%">Actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in range(hidden | length) %}
+                <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td class="username">{{ hidden[i]["username"] }}</td>
+                    <td>{{ hidden[i]["points"] }}</td>
+                    {% if hidden[i]["lastAC"] %}
+                        <td class="dt">{{ hidden[i]["lastAC"] }}</td>
+                    {% else %}
+                        <td>None</td>
+                    {% endif %}
+                    {% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+                        <td data-id="{{ hidden[i]['user_id'] }}" data-username="{{ hidden[i]['username'] }}">
+                            <a href="#">
+                                <img src="/assets/images/restrict.svg"
+                                     onerror="this.src='/assets/images/restrict.png'"
+                                     class="svg-red icon scoreboard-dq"
+                                     data-toggle="tooltip"
+                                     alt="Disqualify user"
+                                     title="Disqualify user">
+                            </a>
+                            <a href="#">
+                                <img src="/assets/images/ghost.svg"
+                                     class="icon scoreboard-unhide"
+                                     data-toggle="tooltip"
+                                     alt="Unhide user"
+                                     title="Unhide user">
+                            </a>
+                            <a href="#">
+                                <img src="/assets/images/reset.svg"
+                                     class="icon scoreboard-reset"
+                                     data-toggle="tooltip"
+                                     alt="Reset user time"
+                                     title="Reset user time">
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% endblock %}
+{% block script %}
+{% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+    <script>
+        const path = "{{ request.path }}";
+        const confirmDiv = document.getElementById("confirm");
+        for (let node of document.getElementsByClassName("scoreboard-dq")) {
+            node.parentElement.addEventListener("click", function() {
+                var username = this.parentElement.getAttribute("data-username");
+                var userId = this.parentElement.getAttribute("data-id");
+                confirmDiv.style.display = "block";
+                confirmDiv.querySelector(".btn")
+                        .setAttribute("value", `Are you sure you want to disqualify ${username}? ` +
+                                               "This action is irreversible. Click here to confirm");
+                confirmDiv.querySelector("input[name=user_id]").setAttribute("value", userId);
+                confirmDiv.querySelector("form").setAttribute("action", path + "/ban");
+            });
+        }
+        for (let node of document.getElementsByClassName("scoreboard-hide")) {
+            node.parentElement.addEventListener("click", function() {
+                var username = this.parentElement.getAttribute("data-username");
+                var userId = this.parentElement.getAttribute("data-id");
+                confirmDiv.style.display = "block";
+                confirmDiv.querySelector(".btn")
+                        .setAttribute("value", `Are you sure you want to hide ${username}'s score? ` +
+                                               "Click here to confirm");
+                confirmDiv.querySelector("input[name=user_id]").setAttribute("value", userId);
+                confirmDiv.querySelector("form").setAttribute("action", path + "/hide");
+            });
+        }
+        for (let node of document.getElementsByClassName("scoreboard-unhide")) {
+            node.parentElement.addEventListener("click", function() {
+                var username = this.parentElement.getAttribute("data-username");
+                var userId = this.parentElement.getAttribute("data-id");
+                confirmDiv.style.display = "block";
+                confirmDiv.querySelector(".btn")
+                        .setAttribute("value", `Are you sure you want to unhide ${username}'s score? ` +
+                                               "Click here to confirm");
+                confirmDiv.querySelector("input[name=user_id]").setAttribute("value", userId);
+                confirmDiv.querySelector("form").setAttribute("action", path + "/unhide");
+            });
+        }
+        for (let node of document.getElementsByClassName("scoreboard-reset")) {
+            node.parentElement.addEventListener("click", function() {
+                var username = this.parentElement.getAttribute("data-username");
+                var userId = this.parentElement.getAttribute("data-id");
+                confirmDiv.style.display = "block";
+                confirmDiv.querySelector(".btn")
+                        .setAttribute("value", `Are you sure you want to reset ${username}'s window time? ` +
+                                               "Click here to confirm");
+                confirmDiv.querySelector("input[name=user_id]").setAttribute("value", userId);
+                confirmDiv.querySelector("form").setAttribute("action", path + "/reset_timer");
+            });
+        }
+    </script>
+{% endif %}
+{% endblock %}

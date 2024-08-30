@@ -1,0 +1,244 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ user_data["username"] }}{% endblock %}
+
+{% block active %}Profile{% endblock %}
+
+{% block main %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<div class="profileDiv">
+    <h1>User Info - <span class="username" data-rating="{{ user_data["rating"] }}"><a href="#">{{ user_data["username"] }}</a></span></h1>
+    <hr>
+    <a class="badge bg-info rounded-pill growable"
+       style="padding: 10px; font-size: 15px;"
+       href="../profile">
+       Back to profile
+    </a> <br><br>
+    {% if session.username == user_data["username"] or check_perm(["ADMIN", "SUPERADMIN"]) %}
+        <b>[ADMIN AND USER ONLY]</b>
+        <div><b>Email:</b> {{ user_data["email"] }}</div>
+        <div><b>Banned:</b> {{ user_data["banned"] == 1 }}</div>
+        <div><b>Verified:</b> {{ user_data["verified"] == 1 }}</div>
+        <hr>
+    {% endif %}
+
+    <b>Basic Statistics</b><br><br>
+    ⌚ <span data-toggle="tooltip" title="The date that {{ user_data["username"] }} joined TopsOJ.">Joined <b>{{ user_data["join_date"] }}</b></span>
+    <br>
+    🎯 <span data-toggle="tooltip" title="The sum of the points from all the problems {{ user_data["username"]}} has solved.">Collected <b>{{ user_data["total_points"] }}</b> {{ 'point' if user_data["total_points"] == 1 else 'points' }}</span>
+    <br>
+    💪 <span title="The rating of {{ user_data["username"] }}.">Rating: <b>{{ user_data["rating"] }}</b></span>
+    <br>
+    💯 <span data-toggle="tooltip" title="The amount of problems {{ user_data["username"] }} has solved, and the corresponding percentage.">Solved <b>{{ user_data["problems_solved"] }}</b> {{ 'problem' if user_data["problems_solved"] == 1 else 'problems' }}</span>
+    <br>
+    📅 <span title="The current streak of {{ user_data["username"] }}.">Current streak: <b>{{ user_data["streak"] }}</b> {{ 'day' if user_data["streak"] == 1 else 'days' }}</span>
+    <hr>
+
+    <b>Advanced Statistics</b><br><br>
+    📜 <span data-toggle="tooltip" title="How many submissions {{ user_data["username"] }} has.">Has <b>{{ submissions }}</b> submissions</span>
+    <br>
+    💎 <span data-toggle="tooltip" title="How many submissions {{ user_data["username"] }} has per problem">Has <b>{{ "%.2f"|format(submissions/user_data["problems_solved"]) if user_data["problems_solved"] != 0 else "0.00" }}</b> submissions per problem</span>
+    <br>
+    🏆 <span data-toggle="tooltip" title="How many contests {{ user_data["username"] }} has participated in.">Participated in <b>{{ user_data["contests_completed"] }}</b> {{ 'contest' if user_data["contests_completed"] == 1 else 'contests' }}</span>
+    <br>
+    ✨ <span data-toggle="tooltip" title="The regular rating of {{ user_data["username"] }} is an advanced weighted statistic that depends on points, problems solved, and submissions."> Regular rating of <b>{{ "%.3f"|format((3*user_data["total_points"] + 2*user_data["problems_solved"]) / (3*(submissions / user_data["problems_solved"]) + 1)) if user_data["problems_solved"] != 0 else "0.000" }}</b></span>
+    <br>
+    <hr>
+
+    <div id="rank-by-points">
+        <span data-toggle="tooltip" title="The rank of the user by their points. Lower is better." style="font-weight: bold; font-size: 20px;{% if points_gradient %} background: {{ points_gradient }}; padding: 5px; border-radius: 10px;{% endif %}">Rank by Points: <span>{{ rank_by_points }}</span></span>
+        {% if rank_by_points == 1 %}
+            <img src="../../../assets/images/gold.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_points == 2 %}
+            <img src="../../../assets/images/silver.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_points == 3 %}
+            <img src="../../../assets/images/bronze.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_points == 4 %}
+            <img src="../../../assets/images/star.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_points == 5 %}
+            <img src="../../../assets/images/star.png"
+            class="icon growable"
+            style="width: 24px;  display: inline; margin-bottom: 5px;">
+        {% endif %}
+    </div>
+    <br>
+    <div id="rank-by-solved">
+        <span data-toggle="tooltip" title="The rank of the user by their problems solved. Lower is better." style="font-weight: bold; font-size: 20px; {% if solved_gradient %} background: {{ solved_gradient }}; padding: 5px; border-radius: 10px;{% endif %}">Rank by Problems Solved: <span>{{ rank_by_solved }}</span></span>
+        {% if rank_by_solved == 1 %}
+            <img src="../../../assets/images/gold.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_solved == 2 %}
+            <img src="../../../assets/images/silver.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_solved == 3 %}
+            <img src="../../../assets/images/bronze.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_solved == 4 %}
+            <img src="../../../assets/images/star.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% elif rank_by_solved == 5 %}
+            <img src="../../../assets/images/star.png"
+            class="icon growable"
+            style="width: 24px; display: inline; margin-bottom: 5px;">
+        {% endif %}
+    </div>
+    <hr>
+    <h3 class="fw-bold">Percentiles</h3><br>
+    <div class="row">
+        <div class="progress" style="align-items: center;" data-value='{{ percentage_solved }}'>
+            <span class="progress-left">
+                        <span class="progress-bar border-primary"></span>
+            </span>
+            <span class="progress-right">
+                        <span class="progress-bar border-primary"></span>
+            </span>
+            <div style="left: 20%; position: absolute; text-align: center;"><span style="font-size: 15px;">Solved</span><br><span class="h2" style="font-weight: bold;">{{ percentage_solved }}</span><sup class="h4">%</sup><br><span>of all problems</span></div>
+        </div>
+        <div class="progress" style="align-items: center; margin-left: 10px;" data-value='{{ percentage_by_points }}'>
+            <span class="progress-left">
+                        <span class="progress-bar border-primary"></span>
+            </span>
+            <span class="progress-right">
+                        <span class="progress-bar border-primary"></span>
+            </span>
+            <div style="left: 20%; position: absolute; text-align: center;"><span style="font-size: 15px;">Better than</span><br><span class="h2" style="font-weight: bold;">{{ percentage_by_points }}</span><sup class="h4">%</sup><br><span>of all users<br>(by points)</span></div>
+        </div>
+        <div class="progress" style="align-items: center; margin-left: 10px;" data-value='{{ percentage_by_solved }}'>
+            <span class="progress-left">
+                        <span class="progress-bar border-primary"></span>
+            </span>
+            <span class="progress-right">
+                        <span class="progress-bar border-primary"></span>
+            </span>
+            <div style="left: 20%; position: absolute; text-align: center;"><span style="font-size: 15px;">Better than</span><br><span class="h2" style="font-weight: bold;">{{ percentage_by_solved }}</span><sup class="h4">%</sup><br><span>of all users<br>(by solved)</span></div>
+        </div>
+    </div>
+    <hr>
+    <h3 class="fw-bold">Rating Graph</h3>
+    <div id="rating_graph" style="width: 80; height: 500px; background-color: #f8f9fa; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; padding: 20px;"></div>
+
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    var progressElements = document.querySelectorAll(".progress");
+    var animationTriggered = {};
+    progressElements.forEach(function(progressElement) {
+        animationTriggered[progressElement.innerHTML] = false
+    });
+
+    function checkScroll() {
+        var scrollPosition = window.scrollY || window.pageYOffset;
+        var windowHeight = window.innerHeight;
+
+        progressElements.forEach(function(progressElement) {
+            var elementPosition = progressElement.offsetTop;
+            var elementHeight = progressElement.offsetHeight;
+
+            if (scrollPosition + windowHeight >= elementPosition && scrollPosition <= elementPosition + elementHeight) {
+                if (!animationTriggered[progressElement.innerHTML]) {
+                    animateProgress(progressElement);
+                    animationTriggered[progressElement.innerHTML] = true;
+                }
+            } else {
+                animationTriggered[progressElement.innerHTML] = false;
+            }
+        });
+    }
+
+    function animateProgress(progressElement) {
+        var value = progressElement.getAttribute('data-value');
+        var left = progressElement.querySelector('.progress-left .progress-bar');
+        var right = progressElement.querySelector('.progress-right .progress-bar');
+
+        if (value > 0) {
+            if (value <= 50) {
+                right.style.transform = 'rotate(' + percentageToDegrees(value) + 'deg)';
+            } else {
+                right.style.transform = 'rotate(180deg)';
+                left.style.transform = 'rotate(' + percentageToDegrees(value - 50) + 'deg)';
+            }
+        }
+
+        // Add transition
+        right.style.transition = 'transform 0.8s cubic-bezier(0.5, 0, 1, 1)';
+        left.style.transition = 'transform 0.8s cubic-bezier(0, 0, 0.5, 1) 0.8s';
+    }
+
+    function percentageToDegrees(percentage) {
+        return percentage / 100 * 360;
+    }
+
+    window.addEventListener('scroll', checkScroll);
+
+    // Rating graph
+    // Process Data
+    let update_data = {{ rating_updates|safe }};
+    console.log(update_data);
+
+    // Extract x (dates) and y (ratings) arrays
+    const xArray = update_data.map(item => new Date(item.date));
+    const yArray = update_data.map(item => item.rating);
+
+    // Define Data
+    const data = [{
+        x: xArray,
+        y: yArray,
+        mode: "lines+markers",
+        marker: {
+            color: 'blue',
+            size: 8,
+            symbol: 'circle'
+        },
+        line: {
+            color: '#007bff',
+            width: 3
+        }
+    }];
+    console.log(data);
+
+    // Define Layout
+    const layout = {
+        xaxis: {
+            title: "Date",
+            type: "date",
+            tickformat: "%Y-%m-%d",
+            gridcolor: '#e9ecef'
+        },
+        yaxis: {
+            title: "Rating",
+            gridcolor: '#e9ecef'
+        },
+        title: {
+            text: `<a href="#" style="color: #007bff; text-decoration: none;"><b>{{ user_data['username'] }}</b></a>'s Rating Over Time`,
+            font: {
+                size: 24,
+                color: '#343a40'
+            }
+        },
+        plot_bgcolor: '#ffffff',
+        paper_bgcolor: '#f8f9fa',
+        margin: {
+            l: 50,  // Left margin
+            r: 50,  // Right margin
+            t: 70,  // Top margin
+            b: 50   // Bottom margin
+        }
+    };
+
+    // Display using Plotly
+    Plotly.newPlot("rating_graph", data, layout);
+</script>
+{% endblock %}

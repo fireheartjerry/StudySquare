@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Homepage{% endblock %}
+{% block active %}Admin Console{% endblock %}
+
+{% block preload %}
+<link rel="preload" href="/api/homepage" as="fetch" crossorigin="anonymous">
+{% endblock %}
+
+{% block main %}
+<h1>Edit Homepage</h1> <br>
+<form method="post">
+    <div class="mb-3 form-control flex">
+        <div style="flex: 1; min-width: 0">
+            <div>
+                <input id="method1" type="radio" name="method" value="1" checked required>
+                <label for="method1"><b>Layout 1</b> - just the home page info</label>
+            </div>
+        </div>
+        <div style="flex: 1; min-width: 0">
+            <div>
+                <input id="method2" type="radio" name="method" value="2" required>
+                <label for="method2"><b>Layout 2</b> - home page info &amp; announcements</label>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <button class="btn btn-secondary fw-bold" id="open_description" type="button">Open Markdown Editor</button>
+    <div class="row" id="description" style="margin-top: 7px;">
+        <div class="col-sm">
+            <h4><u>Raw Markdown</u></h4>
+            <div id="md_raw"></div>
+        </div>
+	<h4><u>Resulting HTML</u></h4>
+        <div class="card" id="home-container">
+	    <div id="html"></div>
+    	</div>
+    </div>
+
+    <input type="hidden" id="md_inp" name="md">
+    <input type="hidden" id="html_inp" name="html">
+
+    <input class="btn btn-primary fw-bold" type="submit" value="Edit">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+{% endblock %}
+{% block script %}
+<script>
+    const content = document.getElementById("content");
+    const outputDiv = document.getElementById("home");
+
+    const md_raw = document.querySelector("#md_raw");
+    const html = document.querySelector("#html");
+    var opened = false;
+    !async function() {
+        const md_data = await fetch("/api/homepage").then(b => b.text()).then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        } return b["data"]["data_md"];
+        }).catch(e => { console.error(e); });
+        const html_data = await fetch("/api/homepage").then(b => b.text()).then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        } return b["data"]["data_html"];
+        }).catch(e => { console.error(e); });
+        if (md_data === "") {
+            md_raw.innerText = "The markdown for the description goes here...";
+            html.innerHTML = "<p>...and rendered <b>HTML</b> goes <i>here</i>.</p";
+        } else {
+            md_raw.innerText = md_data;
+            html.innerHTML = html_data;
+            document.querySelector("#md_inp").value = md_data;
+            document.querySelector("#html_inp").value = html_data;
+            renderLatex();
+        } document.querySelector("#open_description").addEventListener("click", function() {
+            let inp_desc_data = md_data;
+            if (opened) inp_desc_data = md_raw_description.innerText;
+            md2html_interactive(inp_desc_data).then((result) => {
+                md_raw.innerText = result.md;
+                html.innerHTML = result.html;
+                renderLatex();
+                document.querySelector("#md_inp").value = result.md;
+                document.querySelector("#html_inp").value = result.html;
+                if (!opened) opened = true;
+            }).catch((e) => { console.error(e); });
+        });
+    } ();
+</script>
+{% endblock %}

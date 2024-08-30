@@ -1,0 +1,900 @@
+{% extends "layout.html" %}
+
+{% block title %}Our Team{% endblock %}
+{% block active %}Our Team{% endblock %}
+
+{% block main %}
+
+<style>
+    .custom-card {
+        border: 3px solid #741f22;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .custom-card:hover {
+        transform: scale(1.02);
+    }
+    
+    .banner {
+        color: #fff;
+        background-color: #741f22;
+        padding: 15px;
+    }
+    
+    .info-section {
+        padding: 15px;
+    }
+    
+    .additional-info {
+        border-top: 3px solid #741f22;
+        background-color: #ffbbbd;
+        padding: 15px;
+    }
+    
+    .flex-zone-container {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .flex-zone {
+        width: 100%;
+        background-color:rgb(0, 0, 0);
+        border: 10px solid transparent;
+        border-image: linear-gradient(45deg, #ffd700, #ffff00, #ffcc00, #ffe789 , #ffd700, rgb(255, 187, 0));
+        border-image-slice: 1;
+        padding: 10px;
+        border-radius: 10px;
+        color: white;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .flex-zone:hover {
+        transform: scale(1.02);
+    }
+
+    .list-group-item {
+        background-color: black!important;
+        color: white!important;
+    }
+
+    .dark .additional-info {
+        color: black!important;
+    }
+
+    .dark .additional-info p {
+        color: black!important;
+    }
+
+    p, h4, .badge, .flex-zone, .list-group-item {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    h4 {
+        font-weight: bold;
+    }
+
+    .badge {
+        font-size: 15px!important;
+        font-weight: bold;
+        padding: 10px!important;
+        border: 2px solid black!important;
+        background-image: linear-gradient(45deg, #F0F0F0, #D9D9D9, #C0C0C0, #E6E6E6, #D9D9D9, #C0C0C0);
+    }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+<h1>Our Team</h1>
+<div id="tab-group">
+    <button id="executive-directors-btn" type="button" class="btn btn-lg btn-outline-primary active growable" style="border-width: 0px;">Executive Directors</button>
+    <button id="directors-btn" type="button" class="btn btn-lg btn-outline-primary growable" style="border-width: 0px; margin-left: 5px;">Directors</button>
+    <button id="devs-btn" type="button" class="btn btn-lg btn-outline-primary growable" style="border-width: 0px;margin-left: 5px;">Developers</button>
+    <button id="psetters-btn" type="button" class="btn btn-lg btn-outline-primary growable" style="border-width: 0px; margin-left: 5px;">Problem Setters</button>
+    <button id="ptesters-btn" type="button" class="btn btn-lg btn-outline-primary growable" style="border-width: 0px; margin-left: 5px;">Problem Testers</button>
+    <button id="marketers-btn" type="button" class="btn btn-lg btn-outline-primary growable" style="border-width: 0px; margin-left: 5px;">Marketers+</button>
+</div>
+<div class="row" style="margin-top: 20px;" id="executive-directors">
+    <div class="col-sm">
+        <div class="user-group">
+            <div class="custom-card">
+                <div class="banner">
+                    <h4>Jerry Li</h4>
+                </div>
+                <div class="info-section">
+                    <p><b >Name:</b> Jerry Li</p>
+                    <p><b>Birth Year:</b> 2008</p>
+                    <p><b>School:</b> Marc Garneau C.I. (Canada)</p>
+                    <p><b>TopsOJ Username:</b> fireheartjerry</p>
+                    <p><b>Discord Username:</b> acidstar.com</p>
+                    <a class="badge bg-primary rounded-pill growable" href="https://www.linkedin.com/in/jerry-li-366779281/" target="_blank" style="color: black!important;">Jerry Li's LinkedIn</a>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>I enjoy competitive math, programming, and physics (very tiring). I also like working out and playing basketball.</p>
+                    <p style="color: #656565; font-style: oblique;">Founder &middot; Executive Director &middot; Lead Developer</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>Founder of TopsOJ</b></li>
+                        <li class="list-group-item"><b>USACO - Silver</b></li>
+                        <li class="list-group-item"><b>Pascal 2023 - Top 20</b></li>
+                        <li class="list-group-item"><b>PhysicsBowl 2024 - Top 25 Globally</b></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="custom-card">
+            <div class="banner">
+                <h4>Jerry Yang</h4>
+            </div>
+            <div class="info-section">
+                <p><b>Name:</b> Jerry Yang</p>
+                <p><b>Birth Year:</b> 2008</p>
+                <p><b>School:</b> Marc Garneau C.I. (Canada)</p>
+                <p><b>TopsOJ Username:</b> qgek</p>
+                <p><b>Discord Username:</b> qgek</p>
+                <a class="badge bg-primary rounded-pill growable" href="https://www.linkedin.com/in/jerry-yang-842353252/" target="_blank" style="color: black!important;">Jerry Yang's LinkedIn</a>
+            </div>
+            <div class="additional-info">
+                <h5>Additional Information</h5>
+                <p>I'm Jerry Yang, and I enjoy competitive math, but only when I do well and get to brag about it. Aside from math though, I'm a retired Bedwars sweat and addict on his way to the promised land.</p>
+                <p style="color: #656565; font-style: oblique;">Founder &middot; Executive Director &middot; Problem Setter &middot; Problem Tester</p>
+            </div>
+        </div>
+        <div class="flex-zone-container">
+            <div class="flex-zone">
+                <div class="flex-zone-header">
+                    <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                </div>
+            <ul class="list-group">
+                <li class="list-group-item"><b>Founder of TopsOJ</b></li>
+                <li class="list-group-item"><b>AMC 10 2023 - 136.5 and 138 (Peaked)</b></li>
+                <li class="list-group-item"><b>Fryer 2022 - 36/40</b></li>
+                <li class="list-group-item"><b>Former Minecraft Ranked Bedwars Sapphire Prestige (peak 510 elo), Ranked 533rd globally</b></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="custom-card">
+            <div class="banner">
+            <h4>Alex Zhang</h4>
+            </div>
+            <div class="info-section">
+            <p><b>Name:</b> Alex Zhang</p>
+            <p><b>Birth Year:</b> 2008</p>
+            <p><b>School:</b> Marc Garneau C.I. (Canada)</p>
+            <p><b>TopsOJ Username:</b> excelex</p>
+            <p><b>Discord Username:</b> excelex</p>
+            <a class="badge bg-primary rounded-pill growable" href="https://www.linkedin.com/in/alexander-zhang-24b0ab2a3/" target="_blank" style="color: black!important;">Alex's LinkedIn</a>
+            </div>
+            <div class="additional-info">
+            <h5>Additional Information</h5>
+            <p>Aside from math, music is a big part of my life, and I can be seen walking around Toronto vibing to Taylor Swift. I have been enjoying singing and playing the violin for many years and have been in all sorts of ensembles, including an acapella club.</p>
+            <p style="color: #656565; font-style: oblique;">Founder &middot; Executive Director &middot; Problem Setter &middot; Marketer</p>
+            </div>
+        </div>
+        <div class="flex-zone-container">
+            <div class="flex-zone">
+                <div class="flex-zone-header">
+                    <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>Founder of TopsOJ</b></li>
+                    <li class="list-group-item"><b>AMC 10B - 124.5</b></li>
+                    <li class="list-group-item"><b>AIME II 2024 - 9</b></li>
+                    <li class="list-group-item"><b>Fryer 2022 - 39/40</b></li>
+                    <li class="list-group-item"><b>OMC - Tied for 1st</b></li>
+                    <li class="list-group-item"><b>Cayley 2024 - Perfect Score</b></li>
+                    <li class="list-group-item"><b>2x DECA International Finalist</b></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row hidden mt-3" id="directors">
+    <div class="row">
+        <div class="col-sm">
+            <div class="user-group">
+                <div class="custom-card">
+                    <div class="banner">
+                        <h4>Maxim Mohareb</h4>
+                    </div>
+                    <div class="info-section">
+                        <p><b >Name:</b> Maxim Mohareb</p>
+                        <p><b>Birth Year:</b> 2008</p>
+                        <p><b>School:</b> Marc Garneau C.I. (Canada)</p>
+                        <p><b>TopsOJ Username:</b> Retix</p>
+                        <p><b>Discord Username:</b> retix_</p>
+                    </div>
+                    <div class="additional-info">
+                        <h5>Additional Information</h5>
+                        <p>If Napoleon had time to author math proofs while conquering Europe, why can't you?</p>
+                        <p style="color: #656565; font-style: oblique;">Founder &middot; Director</p>
+                    </div>
+                </div>
+                <div class="flex-zone-container">
+                    <div class="flex-zone">
+                        <div class="flex-zone-header">
+                            <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Founder of TopsOJ</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Tom Sharma</h4>
+                </div>
+                <div class="info-section">
+                <p><b>Name:</b> Tom Sharma</p>
+                <p><b>Birth Year:</b> 2008</p>
+                <p><b>Country:</b> Canada</p>
+                <p><b>TopsOJ Username:</b> botman</p>
+                </div>
+                <div class="additional-info">
+                <h5>Additional Information</h5>
+                <p>Gaming.</p>
+                <p>In time of difficulties, we must not lose sight of our achievements.</p>
+                <p style="color: #656565; font-style: oblique;">Director &middot; Developer</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>USACO - Gold</b></li>
+                        <li class="list-group-item"><b>Fryer 2022 - Perfect Score</b></li>
+                        <li class="list-group-item"><b>AMC 10B 2023 - 139.5</b></li>
+                        <li class="list-group-item"><b>AIME II 2024 - 8</b></li>
+                        <li class="list-group-item"><b>Peak Immortal 2 rank in valorant</b></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Ansh Agarwal</h4>
+                </div>
+                <div class="info-section">
+                    <p><b>Name:</b> Ansh Agarwal</p>
+                    <p><b>Birth Year:</b> 2008</p>
+                    <p><b>School:</b> Marc Garneau C.I. (Canada)</p>
+                    <p><b>TopsOJ Username:</b> Munch</p>
+                    <p><b>Discord Username:</b> lifewrath</p>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>Nickname: munch</p>
+                    <p style="color: #656565; font-style: oblique;">Director &middot; Problem Setter &middot; Problem Tester</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>AMC 10A 2022 - 120</b></li>
+                    <li class="list-group-item"><b>4x AIME Qual (Since g7)</b></li>
+                    <li class="list-group-item"><b>AIME I 2023 - 7</b></li>
+                    <li class="list-group-item"><b>AIME II 2024 - 8</b></li>
+                    <li class="list-group-item"><b>COMC 2022 - 62.5</b></li>
+                    <li class="list-group-item"><b>COMC 2023 - 65 (CMOQR)</b></li>
+                    <li class="list-group-item"><b>CMO 2024 - Top Quartile</b></li>
+                    <li class="list-group-item"><b>AMC 8 2022 - Perfect</b></li>
+                    <li class="list-group-item"><b>Euclid 2024 - 96</b></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Joshua Liu</h4>
+                </div>
+                <div class="info-section">
+                    <p><b>Name:</b> Joshua Liu</p>
+                    <p><b>Birth Year:</b> 2010</p>
+                    <p><b>School:</b> Davidson Academy Online (USA)</p>
+                    <p><b>TopsOJ Username:</b> _blobheart_</p>
+                    <p><b>Discord Username:</b> joshylikesmath</p>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>Math is hard, and life is hard. Therefore math is life!</p>
+                    <p>If a geo problem exists, I will coordbash it.</p>
+                    <p style="color: #656565; font-style: oblique;">Director &middot; Problem Setter &middot; Problem Tester</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>AMC 10A 2023 - Perfect Score</b></li>
+                    <li class="list-group-item"><b>AIME I 2024 - 13</b></li>
+                    <li class="list-group-item"><b>4x AIME Qual</b></li>
+                    <li class="list-group-item"><b>USAJMO - Honorable Mention</b></li>
+                    <li class="list-group-item"><b>3x MATHCOUNTS National Qualifier</b></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row hidden mt-3" id="devs">
+    <div class="col-sm">
+        <div class="custom-card">
+            <div class="banner">
+            <h4>Jonathan Wu</h4>
+            </div>
+            <div class="info-section">
+                <p><b>Name:</b> Jonathan Wu</p>
+                <p><b>School:</b> Harvard University (USA)</p>
+                <p><b>TopsOJ Username:</b> jdabtieu</p>
+            </div>
+            <div class="additional-info">
+                <h5>Additional Information</h5>
+                <p>ctf ctf ctf</p>
+                <p>Currently looking for summer 2025 internships</p>
+                <p style="color: #656565; font-style: oblique;">Honorary Developer</p>
+            </div>
+        </div>
+        <div class="flex-zone-container">
+            <div class="flex-zone">
+                <div class="flex-zone-header">
+                    <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                </div>
+            <ul class="list-group">
+                <li class="list-group-item"><b>1st place (perfect) in multiple waterloo contests</b></li>
+                <li class="list-group-item"><b>Accepted into Harvard</b></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="custom-card">
+            <div class="banner">
+            <h4>NY0</h4>
+            </div>
+            <div class="info-section">
+                <p><b>Discord username:</b> n.y0</p>
+                <p><b>TopsOJ Username:</b> NY0</p>
+            </div>
+            <div class="additional-info">
+                <h5>Additional Information</h5>
+                <p>Something interesting</p>
+                <p style="color: #656565; font-style: oblique;">Developer</p>
+            </div>
+        </div>
+        <div class="flex-zone-container">
+            <div class="flex-zone">
+                <div class="flex-zone-header">
+                    <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                </div>
+            <ul class="list-group">
+                <li class="list-group-item"><b>1st place in provicincial grade for various math and CS competitions.</b></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row hidden mt-3" id="psetters">
+    <div class="row">
+        <div class="col-sm">
+            <div class="user-group">
+                <div class="custom-card">
+                    <div class="banner">
+                        <h4>Ming Yang</h4>
+                    </div>
+                    <div class="info-section">
+                        <p><b >Name:</b> Ming Yang</p>
+                        <p><b>Birth Year:</b> 2007</p>
+                        <p><b>TopsOJ Username:</b> awesomeming327</p>
+                        <p><b>Discord Username:</b> ming327</p>
+                    </div>
+                    <div class="additional-info">
+                        <h5>Additional Information</h5>
+                        <p>I say "xooks" at least 15 times a day.</p>
+                        <p>Xooks.</p>
+                        <p style="color: #656565; font-style: oblique;">Lead Problem Setter &middot; Problem Tester</p>
+                    </div>
+                </div>
+                <div class="flex-zone-container">
+                    <div class="flex-zone">
+                        <div class="flex-zone-header">
+                            <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>IMO 2023 - Silver</b></li>
+                            <li class="list-group-item"><b>APMO 2023 - Silver</b></li>
+                            <li class="list-group-item"><b>USAMO 2023 - Honourable Mention</b></li>
+                            <li class="list-group-item"><b>CMO 2023 - Honourable Mention</b></li>
+                            <li class="list-group-item"><b>CMO 2024 - Bronze Medal (3rd place)</b></li>
+                            <li class="list-group-item"><b>2x COMC Perfect Scores</b></li>
+                            <li class="list-group-item"><b>AIME - 14</b></li>
+                            <li class="list-group-item"><b>2021 AMC 10 - Perfect Score</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="user-group">
+                <div class="custom-card">
+                    <div class="banner">
+                        <h4>Victor Wen</h4>
+                    </div>
+                    <div class="info-section">
+                        <p><b>Name:</b> Victor Wen</p>
+                        <p><b>School:</b> St. Roberts CHS (Canada)</p>
+                        <p><b>TopsOJ Username:</b> pro37_497</p>
+                        <p><b>Discord Username:</b> pro37497</p>
+                    </div>
+                    <div class="additional-info">
+                        <h5>Additional Information</h5>
+                        <p>I play badminton and grind apex >~<</p>
+                        <p>If fish could fly then I'll be good at math</p>
+                        <p style="color: #656565; font-style: oblique;">Problem Setter &middot; Problem Tester</p>
+                    </div>
+                </div>
+                <div class="flex-zone-container">
+                    <div class="flex-zone">
+                        <div class="flex-zone-header">
+                            <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Professional Skier</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Lucas Hao Sun</h4>
+                </div>
+                <div class="info-section">
+                    <p><b>Name:</b> Lucas Hao Sun</p>
+                    <p><b>Birth Year:</b> 2010</p>
+                    <p><b>School:</b> St. Roberts CHS (Canada)</p>
+                    <p><b>TopsOJ Username:</b> htoshiro</p>
+                    <p><b>Discord Username:</b> rizzilinguini</p>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>I play piano and badminton!<br>(I also really really like chem)<br>DMOJ: https://dmoj.ca/user/htoshiro</p>
+                    <p style="color: #656565; font-style: oblique;">Problem Setter &middot; Problem Tester</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>ARCT</b></li>
+                    <li class="list-group-item"><b>Several CEMC contest AKs</b></li>
+                    <li class="list-group-item"><b>Qualified AIME in grade 8</b></li>
+                    <li class="list-group-item"><b>Provincial B Badminton</b></li>
+                    <li class="list-group-item"><b>(in middle school) Joined 14 clubs and (thankfully) balanced them all.
+                    </b></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="row">
+            <div class="col-sm">
+                <div class="user-group">
+                    <div class="custom-card">
+                        <div class="banner">
+                            <h4>Jacob Lu </h4>
+                        </div>
+                        <div class="info-section">
+                            <p><b>Name:</b> Jacob Lu</p>
+                            <p><b>Birth Year:</b> 2007</p>
+                            <p><b>School:</b> Earl Haig S.S. (Canada)</p>
+                            <p><b>TopsOJ Username:</b> JacobLu</p>
+                            <p><b>Discord Username:</b> modern_cat_hastag_3557</p>
+                        </div>
+                        <div class="additional-info">
+                            <h5>Additional Information</h5>
+                            <p>Outside of competitive math, I am heavily involved in music, having an ARCT Diploma in Piano Performance and being part of a choir that won a provincial music festival.</p>
+                            <p style="color: #656565; font-style: oblique;">Problem Setter &middot; Problem Tester</p>
+                        </div>
+                    </div>
+                    <div class="flex-zone-container">
+                        <div class="flex-zone">
+                            <div class="flex-zone-header">
+                                <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item"><b>Euclid 2024 - 86</b></li>
+                                <li class="list-group-item"><b>Hypatia 2024 - 34</b></li>
+                                <li class="list-group-item"><b>CTMC 2nd Place</b></li>
+                                <li class="list-group-item"><b>Won several hackathons</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="user-group">
+                    <div class="custom-card">
+                        <div class="banner">
+                            <h4>Jessica Pu</h4>
+                        </div>
+                        <div class="info-section">
+                            <p><b>Name:</b> Jessica Pu</p>
+                            <p><b>Birth Year:</b> 2009</p>
+                            <p><b>School:</b> St. Roberts CHS (Canada)</p>
+                            <p><b>TopsOJ Username:</b> acise</p>
+                            <p><b>Discord Username:</b> acise</p>
+                        </div>
+                        <div class="additional-info">
+                            <h5>Additional Information</h5>
+                            <p>Blueberries are cool!</p>
+                            <p style="color: #656565; font-style: oblique;">Problem Setter &middot; Problem Tester</p>
+                        </div>
+                    </div>
+                    <div class="flex-zone-container">
+                        <div class="flex-zone">
+                            <div class="flex-zone-header">
+                                <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item"><b>AIME Qualifier</b></li>
+                                <li class="list-group-item"><b>AMC 10B, 2023, 115.5, Distinction</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="custom-card">
+                    <div class="banner">
+                    <h4>Ayush Narayan</h4>
+                    </div>
+                    <div class="info-section">
+                        <p><b>Name:</b> Ayush Narayan</p>
+                        <p><b>Birth Year:</b> 2011</p>
+                        <p><b>State/Country:</b> Dallas, USA</p>
+                        <p><b>TopsOJ Username:</b> apex304</p>
+                        <p><b>Discord Username:</b> teddyjr27</p>
+                    </div>
+                    <div class="additional-info">
+                        <h5>Additional Information</h5>
+                        <p>Hello my name is Ayush N and my interests are coding, math, speech and debate, and robotics. I've participated in a variety of competitions in my district/nearby area and nationally. I aim to in the USACO Gold Division by the end of 8th grade (the grind has already started), USAJMO by the end of 10th grade, be a VEX Worlds Winner and qualify for the NSDA Tournament in high school.</p>
+                        <p style="color: #656565; font-style: oblique;">Problem Setter &middot; Problem Tester</p>
+                    </div>
+                </div>
+                <div class="flex-zone-container">
+                    <div class="flex-zone">
+                        <div class="flex-zone-header">
+                            <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                        </div>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>SSMO - 3rd place</b></li>
+                        <li class="list-group-item"><b>1st place in many district competitions</b></li>
+                        <li class="list-group-item"><b>Purple Comet - 10th place in Texas, HM Nationally</b></li>
+                        <li class="list-group-item"><b>Mathworks Math Contest - Silver Medal (Top 20 nationally</b></li>
+                        <li class="list-group-item"><b>Math Kangaroo National Winner (NJ Virtual Center)</b></li>
+                        <li class="list-group-item"><b>RSM IMC HM</b></li>
+                        <li class="list-group-item"><b>Various debate/speaking awards</b></li>
+                        <li class="list-group-item"><b>Various robotics awards (2x VEX IQ worlds, 2nd place in state)</b></li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row hidden mt-3" id="ptesters">
+    <div class="row mt-3">
+        <div class="col-sm">
+            <div class="user-group">
+                <div class="custom-card">
+                    <div class="banner">
+                        <h4>Bailey Min</h4>
+                    </div>
+                    <div class="info-section">
+                        <p><b >Name:</b> Bailey Min</p>
+                        <p><b>Birth Year:</b> 2008</p>
+                        <p><b>School:</b> Marc Garneau C.I. (Canada)</p>
+                        <p><b>TopsOJ Username:</b> Cheese_is_good</p>
+                        <p><b>Discord Username:</b> cheese_isgood</p>
+                    </div>
+                    <div class="additional-info">
+                        <h5>Additional Information</h5>
+                        <p>I do anywhere from 1-6 hours of math a day depending on how motivated I am at that moment. I also do CS (this one's definitely a work in progress), play guitar, beatbox, snowboard, and talk about cheese slightly more than the average person.</p>
+                        <p style="color: #656565; font-style: oblique;">Problem Tester</p>
+                    </div>
+                </div>
+                <div class="flex-zone-container">
+                    <div class="flex-zone">
+                        <div class="flex-zone-header">
+                            <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>2x AIME Qual</b></li>
+                            <li class="list-group-item"><b>Pascal 2023 - Top 20</b></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Eric Ning</h4>
+                </div>
+                <div class="info-section">
+                    <p><b>Name:</b> Eric Ning</p>
+                    <p><b>Birth Year:</b> 2008</p>
+                    <p><b>School:</b> William Lyon Mackenzie C.I. (Canada)</p>
+                    <p><b>TopsOJ Username:</b> ninja888</p>
+                    <p><b>Discord Username:</b> ninja888</p>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>(failing) on the math / competitive programming / chess grind</p>
+                    <p style="color: #656565; font-style: oblique;">Problem Tester</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>COMC 2022 - 68/80</b></li>
+                    <li class="list-group-item"><b>CSMC 2023 - 50/60</b></li>
+                    <li class="list-group-item"><b>AMC 10A/B 2023 - 120+</b></li>
+                    <li class="list-group-item"><b>Fermat 2024 - Perfect Score</b></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Steven Qiao</h4>
+                </div>
+                <div class="info-section">
+                    <p><b>Name:</b> Steven Qiao</p>
+                    <p><b>Birth Year:</b> 2006</p>
+                    <p><b>School:</b> Bluevale C.I. (Canada)</p>
+                    <p><b>TopsOJ Username:</b> yunz_qiao</p>
+                    <p><b>Discord Username:</b> average.math.noob</p>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>Rank 30 primo</p>
+                    <p>someone who got a 4 in AP calc AB truly needs to improve in math</p>
+                    <p style="color: #656565; font-style: oblique;">Problem Tester</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>AMC 12B - 118.5</b></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Maggie Pang</h4>
+                </div>
+                <div class="info-section">
+                    <p><b>Name:</b> Maggie Pang</p>
+                    <p><b>Birth Year:</b> 2006</p>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>My mathematical interests include group theory (or any mention of symmetry or lack thereof), knot invariants (or topology in general), and all sorts of other interesting geometry (tiles, slices, algebraic varieties, etc.). Although various objects take something like 6 hours to fold, I very much enjoy origami and the math that goes behind things like polypolyhedra, tessellations, crease patterns, and auxetic surfaces.</p>
+                    <p>I'm not insane.</p>
+                    <p style="color: #656565; font-style: oblique;">Problem Tester</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>Can identify EVERY country flag and find them on Sporcle</b></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="custom-card">
+                <div class="banner">
+                <h4>Daniel Chen</h4>
+                </div>
+                <div class="info-section">
+                    <p><b>Name:</b> Daniel Chen</p>
+                    <p><b>Birth Year:</b> 2006</p>
+                    <p><b>School:</b> University of Waterloo (Canada)</p>
+                    <p><b>TopsOJ Username:</b> get-isekaid-by-truck-kun</p>
+                </div>
+                <div class="additional-info">
+                    <h5>Additional Information</h5>
+                    <p>I like physics</p>
+                    <p style="color: #656565; font-style: oblique;">Problem Tester</p>
+                </div>
+            </div>
+            <div class="flex-zone-container">
+                <div class="flex-zone">
+                    <div class="flex-zone-header">
+                        <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                    </div>
+                <ul class="list-group">
+                    <li class="list-group-item"><b>USAMO bronze</b></li>
+                    <li class="list-group-item"><b>CMO top quartile</b></li>
+                    <li class="list-group-item"><b>IYPT training camp invitee (top 18)</b></li>
+                    <li class="list-group-item"><b>Two-time IPHO camp invitee</b></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row hidden mt-3" id="marketers">
+    <div class="col-sm">
+        <div class="custom-card">
+            <div class="banner">
+            <h4>Lucas Fang</h4>
+            </div>
+            <div class="info-section">
+                <p><b>Name:</b> Lucas Fang</p>
+                <p><b>Birth Year:</b> 2009</p>
+                <p><b>School:</b> St Roberts CHS (Canada)</p>
+                <p><b>TopsOJ Username:</b> lucas</p>
+                <p><b>Discord Username:</b> luckuso</p>
+            </div>
+            <div class="additional-info">
+                <h5>Additional Information</h5>
+                <p>Taylor Swift on top.</p>
+                <p>Success is one percent inspiration, 98 percent perspiration, and 2 percent attention to detail.</p>
+                <p style="color: #656565; font-style: oblique;">Marketer &middot; Poster Designer</p>
+            </div>
+        </div>
+        <div class="flex-zone-container">
+            <div class="flex-zone">
+                <div class="flex-zone-header">
+                    <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                </div>
+            <ul class="list-group">
+                <li class="list-group-item"><b>Been on a reality TV show before</b></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm">
+        <div class="custom-card">
+            <div class="banner">
+            <h4>Elizabeth Soutchanski</h4>
+            </div>
+            <div class="info-section">
+                <p><b>Name:</b> Elizabeth Soutchanski</p>
+                <p><b>Birth Year:</b> 2008</p>
+                <p><b>TopsOJ Username:</b> lizzybear</p>
+                <p><b>Discord Username:</b> dinosaeur</p>
+            </div>
+            <div class="additional-info">
+                <h5>Additional Information</h5>
+                <p>Looking forward to competing at SLC again this year! I've participated in a variety of other competitions in my school career, including the Bow Seat Ocean Awareness Art Contest last year, and doing the Junior Breakthrough Contest three years in a row, submitting a high effort digitally hand drawn animation each time. Furthermore, I've participated in business and other STEM competitions, including attending the national FUSE business competition in eight grade. In my free time, I enjoy volunteering at a hospital and utilizing my marketing skills in general. :)</p>
+                <p>"Know all the theories, master all the techniques, but as you touch a human soul be just another human soul ." -Carl Jung</p>
+                <p style="color: #656565; font-style: oblique;">Marketer &middot; Graphic Designer</p>
+            </div>
+        </div>
+        <div class="flex-zone-container">
+            <div class="flex-zone">
+                <div class="flex-zone-header">
+                    <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                </div>
+            <ul class="list-group">
+                <li class="list-group-item"><b>HOSA ILC 2023</b></li>
+                <li class="list-group-item"><a href="https://lizzysart.carrd.co/" style="font-weight: bold;">Art Flex</a></li>
+            </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm">
+        <div class="custom-card">
+            <div class="banner">
+            <h4>Swapnil Kabir</h4>
+            </div>
+            <div class="info-section">
+                <p><b>Name:</b> Swapnil Kabir</p>
+                <p><b>Birth Year:</b> 2008</p>
+                <p><b>School:</b> Marc Garneau C.I. (Canada)</p>
+                <p><b>TopsOJ Username:</b> swapnilkabir</p>
+                <p><b>Discord Username:</b> frenchpeppa</p>
+            </div>
+            <div class="additional-info">
+                <h5>Additional Information</h5>
+                <p>I tend to gravitate towards the social sciences: history, geography, economics, politics, and the like. Maybe that's because most of my family are MPs.</p>
+                <p>"Geography has made us neighbours. History has made us friends. Economics has made us partners. And necessity has made us allies." - John F. Kennedy, Address Before the Canadian Parliament</p>
+                <p style="color: #656565; font-style: oblique;">Marketer &middot; Outreach Manager</p>
+            </div>
+        </div>
+        <div class="flex-zone-container">
+            <div class="flex-zone">
+                <div class="flex-zone-header">
+                    <h1 style="font-size: 40px; font-weight: bold;">Flex Zone</h1>
+                </div>
+            <ul class="list-group">
+                <li class="list-group-item"><b>2x DECA International Finalist</b></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+{% block script %}
+<script>
+    let sections = ["executive-directors", "directors", "devs", "psetters", "ptesters", "marketers"];
+    sections.forEach(section => {
+        section_btn = document.querySelector("#"+section+"-btn");
+        section_btn.addEventListener("click", function () {
+            sections.forEach(function (s) {
+                let currentSection = document.getElementById(s);
+                currentSection.classList.add("hidden");
+                document.getElementById(s + "-btn").classList.remove("active");
+            });
+            document.getElementById(section).classList.remove("hidden");
+            document.getElementById(section+"-btn").classList.add("active");
+        });
+    });
+    /*const elements = document.querySelectorAll('.custom-card, .flex-zone');
+    elements.forEach(element => {
+        element.addEventListener('mouseover', () => {
+        element.style.transition = 'transform 0.25s';
+        element.style.transform = 'scale(1.02)';
+        element.style
+    });
+    element.addEventListener('mouseout', () => {
+        element.style.transition = 'transform 0.25s';
+        element.style.transform = 'scale(1)';
+        element.style
+    });
+});*/
+</script>
+{% endblock %}

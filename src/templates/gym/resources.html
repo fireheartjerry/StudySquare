@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}Resources{% endblock %}
+{% block active %}Math Gym{% endblock %}
+
+{% block main %}
+<h1>Resources</h1>
+<div class="row">
+    <div class="col-sm-6 admin-card">
+        <div class="card bg-ld-green">
+            <div class="card-body">
+                <h5 class="card-title"><b>Quick Links</b></h5>
+                <p class="card-text">Quick and general resources in case you need to quickly find articles.</p>
+                <a title="TopsOJ - solve thousands of problems" class="badge bg-primary rounded-pill growable" href="/problems" role="button" style="font-size: 15px; margin-bottom: 10px; padding: 8px; margin-right: 10px;">TopsOJ Problems</a>
+                <a title="Art of Problem Solving - general contest math" class="badge bg-primary rounded-pill growable" href="https://artofproblemsolving.com/wiki/index.php/Main_Page" role="button" style="font-size: 15px; margin-bottom: 10px; padding: 8px; margin-right: 10px;">AOPS Wiki</a>
+                <a title="Khan Academy - general curriculum math" class="badge bg-primary rounded-pill growable" href="https://www.khanacademy.org/math" role="button" style="font-size: 15px; margin-bottom: 10px; padding: 8px; margin-right: 10px;">Khan Academy</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 admin-card">
+        <div class="card bg-ld-red">
+            <div class="card-body">
+                <h5 class="card-title"><b>Cheat Sheets</b></h5>
+                <p class="card-text">Important formulas and equations to remember.</p>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 admin-card">
+        <div class="card bg-ld-red">
+            <div class="card-body">
+                <h5 class="card-title"><b>Olympiad Insider</b></h5>
+                <p class="card-text">An excellent website for contest preperation. Not limited to just math!</p>
+                <a href="https://olympiadinsider.com/">
+                <img src="https://cdn.discordapp.com/attachments/1248766255822016523/1248812867499724861/olyinsider.png?ex=6665071d&is=6663b59d&hm=0450680bbae0ed4771bf745929c8b6eba8eb11f933102c5b8e7081432e337bf8&" alt="https://olympiadinsider.com/">
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}Nonexistent Contest{% endblock %}
+{% block active %}Contests{% endblock %}
+
+{% block main %}
+<h1>Nonexistent Contest</h1>
+<div>
+    The contest with id <code>{{ request.path.split('/')[2] }}</code> does not exist.
+</div>
+<a href="/">Back to home</a>
+{% endblock %}

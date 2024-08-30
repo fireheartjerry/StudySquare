@@ -1,0 +1,407 @@
+{% extends "layout.html" %}
+
+{% block title %}Mental Math{% endblock %}
+{% block active %}Math Gym{% endblock %}
+
+{% block main %}
+<h1>Mental Math Practice</h1>
+<div id="score" style="display: none;"></div>
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+</form>
+<h2 id="elapsed-time" class="badge bg-primary hidden" style="font-size: 25px;"></h2>
+<div id="mentalmath"><table id="drills" class="table table-bordered table-hover"></table></div>
+<button onclick="clearDrills();" class="badge bg-primary rounded-pill growable" id="clear-drills" style="display: none; padding: 10px; font-size: 20px;">Clear Drills</button>
+<div id="info" class="card">
+    <h3 style="font-weight: bold; color: #741F22">What is this Drill?</h3>
+    <span>Train your mental math skills! The objective of the drill is to answer questions you generate as fast and accurately as you can, without using any paper. Being able to quickly and correctly calculate mathematical expressions is very helpful in math contests. The drills are generated randomly, so the chance of identical drills is very slim. Drills will contain brackets so use order of operations properly.</span>
+    <br>
+    <span><b>Number of drills:</b> how many questions/drills to generate.</span>
+    <span><b>Minimum number:</b> the minimum number to be used in each drill.</span>
+    <span><b>Maximum number:</b> the maximum number to be used in each drill.</span>
+    <span><b>Number of operations:</b> how many operations to use, for example if this was <span class="katex--inline">4</span>, a possible drill would be <span class="katex--inline">3 - 6 \times (5 + 2).</span></span>
+</div> <br>
+<div class="form-floating">
+    <input class="form-control mb-3" id="numDrills" placeholder="Number of Drills" required>
+    <label for="numDrills">Number of Drills</label>
+</div>
+<div class="form-floating">
+    <input class="form-control mb-3" id="minNum" placeholder="Minimum Number" required>
+    <label for="numDrills">Minimum Number</label>
+</div>
+<div class="form-floating">
+    <input class="form-control mb-3" id="maxNum" placeholder="Maximum Number" required>
+    <label for="numDrills">Maximum Number</label>
+</div>
+<div class="form-floating" style="margin-bottom: -10px;">
+    <input class="form-control mb-3" id="numOps" placeholder="Number of Operations" required>
+    <label for="numDrills">Number of Operations</label>
+</div>
+<a onclick="generateDrills();" class="btn btn-primary btn-lg my-2">Generate Drills</button>
+<a href="/mathgym" class="btn btn-secondary btn-lg m-2">Back to Math Gym</a>
+<a href="/mathgym/mentalmathrankings" class="btn btn-secondary btn-lg m-2">Rankings</a>
+
+    <!-- Your custom scripts -->
+    <script>
+        if (localStorage.getItem("mentalmath_num")) {
+            document.querySelector("#numDrills").value = localStorage.getItem("mentalmath_num");
+            document.querySelector("#numOps").value = localStorage.getItem("mentalmath_numOps");
+            document.querySelector("#maxNum").value = localStorage.getItem("mentalmath_maxNum");
+            document.querySelector("#minNum").value = localStorage.getItem("mentalmath_minNum");
+        }
+
+        var maxNum = 100, minNum = 0, numOps, num;
+        var answers = [], num;
+        var generated = false, submitted = false;
+
+        var startTime, endTime;
+    
+        function updateElapsedTime() {
+            var currentTime = new Date();
+            var elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000);
+
+            var hours = Math.floor(elapsedTimeInSeconds / 3600);
+            var minutes = Math.floor((elapsedTimeInSeconds % 3600) / 60);
+            var seconds = elapsedTimeInSeconds % 60;
+
+            // Format the time components to always have two digits
+            var formattedHours = padZero(hours);
+            var formattedMinutes = padZero(minutes);
+            var formattedSeconds = padZero(seconds);
+
+            time_div = document.querySelector("#elapsed-time");
+            time_div.classList.remove("hidden");
+            time_div.innerText = "Time: " + formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+            time_div.style.display = "block";
+        }
+
+        function startTimer() {
+            startTime = new Date();
+            updateElapsedTime(); // Initial update
+            intervalId = setInterval(updateElapsedTime, 1000); // Update every second
+        }
+
+        function stopTimer() {
+            endTime = new Date();
+            clearInterval(intervalId);
+            updateElapsedTime(); // Update one last time to ensure accuracy
+        }
+
+        function calculateTimeTaken() {
+            var timeDiff = endTime - startTime;
+            var seconds = Math.floor(timeDiff / 1000);
+            return seconds;
+        }
+
+        function random() {
+            return (Math.floor(Math.random() * (maxNum - minNum + 1) + minNum)).toString();
+        }
+
+        function isDigit(s) {
+            return s >= "0" && s <= "9";
+        }
+
+        function evaluateExpression(st) {
+            if (window.math !== undefined) {
+                return math.evaluate(st[0]);
+            } else {
+                return (new Function("return " + st[2] + ";"))();
+            }
+        }
+
+        function padZero(num) {
+            return num < 10 ? "0" + num : num;
+        }
+
+        // Driver function
+        function generateDrills() {
+            num = parseInt(document.querySelector("#numDrills").value);
+            numOps = parseInt(document.querySelector("#numOps").value);
+            maxNum = parseInt(document.querySelector("#maxNum").value);
+            minNum = parseInt(document.querySelector("#minNum").value);
+            if (isNaN(num) || isNaN(numOps) || isNaN(maxNum) || isNaN(minNum)) {
+                alert("You must enter values for all fields, or you did not enter valid numbers.");
+                return;
+            }
+
+            if (numOps > 10 || numOps <= 0) {
+                alert("Number of operations must be between 1 and 10 (inclusive).");
+                return;
+            }
+
+            if (num < 0 || maxNum < 0 || minNum < 0) {
+                alert("You cannot have negative field values!");
+                return;
+            }
+
+            if (maxNum <= minNum) {
+                alert("Max number must be strictly greater than the min number!");
+                return;
+            }
+
+            var confirmGenerate = window.confirm("This will immediately start your timer. Press OK when you are ready.");
+            if (!confirmGenerate) {
+                return;
+            }
+            clearDrills();
+            localStorage.setItem("mentalmath_num", num);
+            localStorage.setItem("mentalmath_numOps", numOps);
+            localStorage.setItem("mentalmath_maxNum", maxNum);
+            localStorage.setItem("mentalmath_minNum", minNum);
+
+            var final = "<tr><th>EXPRESSION</th> <th>YOUR ANSWER</th></tr>";
+            answers.splice(0, answers.length);
+
+            for (var i = 0; i < num; i++) {
+                var res, ans;
+                while (1) {
+                    raw = generateDrillsUtil();
+                    res = raw[0];
+                    latex = raw[1];
+                    ans = evaluateExpression(res);
+                    if (!(ans == ans + 1) && !isNaN(ans)) {
+                        break;
+                    }
+                }
+
+                final += "<tr><td>";
+                final += `<span class="katex--inline">${latex}</span>`;
+                final += "</td><td>";
+                answers.push(ans);
+                final += `<input type="text" id="ans_${i}" class="drill-input">`;
+                final += "</td></tr>";
+            }
+
+            document.querySelectorAll('#submit-answers-btn').forEach(e => e.remove());
+            var submit_btn = document.createElement("button");
+            submit_btn.id = "submit-answers-btn";
+            submit_btn.textContent = "Submit Answers";
+            submit_btn.className = "badge bg-primary rounded-pill growable";
+            submit_btn.style.fontSize = "20px";
+            submit_btn.style.padding = "10px";
+
+            submit_btn.onclick = function () {
+                submitAnswers();
+            };
+
+            var drillDiv = document.querySelector("#mentalmath");
+            drillDiv.appendChild(submit_btn);
+            document.querySelector("#drills").innerHTML = final;
+            document.querySelector("#clear-drills").style.display = "block";
+            document.querySelector("#score").innerHTML = "";
+
+            renderLatex();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            generated = true;
+            startTimer();
+        }
+
+        // Generation
+        function generateDrillsUtil() {
+            var st = random();
+            var raw = (" " + st).slice(1);
+            var tokens = [(" " + st).slice(1)];
+            var numOpenBrackets = 0;
+
+            for (var i = 0; i < numOps; i++) {
+                var adjust = -5 / 6 * 1 / (2 ** numOpenBrackets) + 5 / 6;
+
+                if (Math.random() < adjust) {
+                    st += ")";
+                    tokens.push(")");
+                    raw += ")";
+                    var op = ["+", "-", "*"][Math.floor(Math.random() * 3)];
+                    st += op;
+                    raw += op;
+                    tokens.push(st[st.length - 1]);
+                    numOpenBrackets--;
+                } else {
+                    var op = ["(", "+", "-", "*"][Math.floor(Math.random() * 4)];
+                    st += op;
+                    tokens.push(op);
+                    if (op == "(") {
+                        numOpenBrackets++;
+                        raw += "*";
+                    }
+                    raw += op;
+                }
+
+                var rnd = random();
+                raw += rnd;
+                st += rnd;
+                tokens.push(rnd);
+            }
+
+            for (var i = 0; i < numOpenBrackets; i++) {
+                st += ")";
+                raw += ")";
+                tokens.push(")");
+            }
+
+            raw = raw.replaceAll("--", "+");
+            raw = raw.replace(/\(\d+\)/g, match => match.slice(1, -1));
+            raw = raw.replace(/\(\d+\*\d+\)/g, match => match.slice(1, -1));
+            latex = raw.replace(/\*/g, " \\times ");
+
+            return [
+                [st, tokens, raw],
+                [latex]
+            ];
+        }
+
+        function getCSRFToken() {
+            return document.querySelector('input[name="csrf_token"]').value;
+        }
+
+        function sendTimeToServer(timeTaken) {
+            fetch('/submit-time', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken()
+                },
+                body: JSON.stringify({ timeTaken: timeTaken })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function submitAnswers() {
+            console.log("submitting answers")
+            if (!generated) {
+                alert("Must generate drills first!");
+                return;
+            }
+
+            if (submitted) {
+                alert("You have already submitted your answers! Press clear drills and generate new drills to submit answers again.");
+                return;
+            }
+
+            stopTimer();
+            var timeTaken = calculateTimeTaken();
+            submitted = true;
+            alert("Time taken: " + timeTaken + " seconds.");
+
+            time_div = document.getElementById("elapsed-time");
+            var userAnswers = [];
+            for (var i = 0; i < num; i++) {
+                userAnswers.push(parseInt(document.querySelector("#ans_" + i).value))
+            }
+            var score = 0, wrong = 0, blank = 0;
+
+            for (var i = 0; i < num; i++) {
+                var userAnswer = userAnswers[i];
+                var correctAnswer = answers[i];
+                var answerLabel = document.querySelector("#ans_" + i);
+                var questionRow = answerLabel.parentElement.parentElement;
+
+                // Clear existing symbols
+                clearSymbols(questionRow);
+
+                if (isNaN(userAnswer)) {
+                    // User did not answer or invalid input
+                    answerLabel.style.backgroundColor = "#ffb582";
+                    addSymbol(questionRow, "blank");
+                    timeTaken+=1000;
+                    blank++;
+                } else {
+                    if (userAnswer === correctAnswer) {
+                        // Correct answer
+                        answerLabel.style.backgroundColor = "#89faaf";
+                        addSymbol(questionRow, "checkmark");
+                        score++;
+                    } else {
+                        // Wrong answer
+                        answerLabel.style.backgroundColor = "#e8617b";
+                        addSymbol(questionRow, "wrong");
+                        timeTaken+=1000;
+                        wrong++;
+                    }
+                }
+                answerLabel.readOnly = true;
+            }
+
+            // Display the score
+            document.querySelector("#score").style.display = "block";
+            document.querySelector("#score").innerHTML = `<p style="position: relative; z-index: 1; font-size: 30px;" class="mt-4">Your Score: <b>${score} out of ${num} (${Math.trunc(score*100/num)}%)</b>.<br><b style="color: #32BA7C;">${score}</b> correct answers.<br><b style="color: #F15249;">${wrong}</b> wrong answers.<br><b style="color: #D1681F;">${blank}</b> blank answers.</p>`;
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // Send timeTaken to the server
+            console.log("before sending");
+            console.log(numOps);
+            sendTimeToServer(timeTaken/num/numOps);
+            console.log(timeTaken/num/numOps);
+            console.log("after sending");
+
+        }
+
+        function clearSymbols(questionRow) {
+            // Remove existing symbols
+            var symbols = questionRow.querySelectorAll(".symbol");
+            symbols.forEach(symbol => symbol.remove());
+        }
+
+        function addSymbol(questionRow, symbolType) {
+            var symbolContainer = document.createElement("div");
+            symbolContainer.className = "symbol-container";
+            
+            var symbol = document.createElement("img");
+            symbol.className = "symbol";
+            
+            // Result images
+            switch (symbolType) {
+                case "checkmark":
+                    symbol.src = "../../assets/images/checkmark.png";
+                    symbol.setAttribute("title", "You correctly answered this question.")
+                    break;
+                case "wrong":
+                    symbol.src = "../../assets/images/wrong.png";
+                    symbol.setAttribute("title", "You incorrectly answered this question.")
+                    break;
+                case "blank":
+                    symbol.src = "../../assets/images/blank.png";
+                    symbol.setAttribute("title", "You did not answer this question.")
+                    break;
+                default:
+                    break;
+            }
+
+            symbol.style.width = "48px";
+            symbol.style.height = "48px";
+        
+            // Set CSS styles for symbol container
+            symbolContainer.style.display = "flex";
+            symbolContainer.style.alignItems = "center";
+            symbolContainer.style.justifyContent = "center";
+            symbolContainer.style.padding = "15px";
+            symbolContainer.appendChild(symbol);
+            questionRow.appendChild(symbolContainer);
+        }
+
+        function clearDrills() {
+            document.querySelector("#drills").innerHTML = "";
+            document.querySelectorAll('#submit-answers-btn').forEach(e => e.remove());
+            document.querySelector("#clear-drills").style.display = "none";
+            document.querySelector("#score").innerHTML = "";
+            generated = false;
+            submitted = false;
+        }
+    </script>
+{% endblock %}

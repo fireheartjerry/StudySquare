@@ -1,0 +1,27 @@
+{% extends "contest/layout.html" %}
+
+{% block title %}Notify Participants{% endblock %}
+{% block active %}Contests{% endblock %}
+
+{% block main %}
+<h1>Notify Participants</h1>
+<p>This will send an email to all participants in your contest. Use this feature with caution.</p>
+<form autocomplete="off" method="post" id="create" name="create">
+    <div class="form-floating">
+        <input class="form-control mb-3"
+               type="text"
+               name="subject"
+               id="subject"
+               placeholder="Subject"
+               required>
+        <label for="subject">Subject</label>
+    </div>
+    <textarea class="form-control mb-3"
+              name="message"
+              rows="20"
+              placeholder="Message"
+              required></textarea>
+    <input class="btn btn-primary" type="submit" name="submit" value="Notify">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+</form>
+{% endblock %}

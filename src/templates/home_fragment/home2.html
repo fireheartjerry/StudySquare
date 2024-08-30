@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block preload %}
+<link rel="preload" href="/api/homepage" as="fetch" crossorigin="anonymous">
+{% endblock %}
+
+{% block main %}
+<div class="card home2" id="home-container">
+    <div id="home" class="hidden"></div>
+</div>
+<h2>Announcements</h2>
+{% for announcement in data %}
+    <div class="card post-card">
+        <div class="see-more-wrapper">
+            <a href="#" class="see-more" style="margin-left: 8px;">See More</a>
+        </div>
+        <h3>{{ announcement["name"] }}</h3>
+        <p style="margin: 0;">Posted <span class="dt">{{ announcement["date"] }}</span></p>
+        <div id="announcement-{{ announcement['id'] }}" class="hidden smarkdown"></div>
+    </div>
+{% endfor %}
+<div id="pagination" data-pages="{{ length }}"></div>
+{% endblock %}
+{% block script %}
+<script>
+    fetch("/api/homepage").then(b => b.text()).then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        }
+        document.getElementById("home").innerHTML = b["data"]["data_html"];
+        document.getElementById("home").classList.remove("hidden");
+    });
+    const idList = []
+    {% for announcement in data %}
+        idList.push({{ announcement['id'] }})
+    {% endfor %}
+    fetch("/api/announcements?id=" + idList).then(b => b.text()).then(b => JSON.parse(b)).
+    then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        }
+        for (let id of idList) {
+            document.getElementById("announcement-" + id).innerHTML = b["data"][id+"_html"];
+            document.getElementById("announcement-" + id).classList.remove("hidden");
+        }
+        seeMore();
+    });
+</script>
+{% endblock %}

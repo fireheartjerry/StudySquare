@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}Triangulate - Rankings{% endblock %}
+{% block active %}Math Gym{% endblock %}
+
+{% block main %}
+<h1>Triangulate Rankings</h1>
+{% if is_ongoing_contest %}
+<div class="alert alert-info alert-dismissible fade show" role="alert">
+        There is currently an ongoing contest. To view it, go to the <a href="/contests">Contests</a> page.
+        These are the <b>global user rankings unrelated to the contest</b>.
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"></button>
+</div>
+{% endif %}
+<a href="/mathgym/triangulate" class="badge bg-info rounded-pill growable" style="margin-bottom: 10px; font-size: 20px; padding: 10px;">Play Triangulate!</a>
+<a href="/mathgym" class="badge bg-secondary rounded-pill growable" style="margin-bottom: 15px; font-size: 20px; padding: 10px; margin-left: 15px;">Back to Math Gym</a><br>
+<div style="overflow-x: auto; margin-top: 15px;">
+    <table class="table table-hover table-full-width">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="width: 10%;">Rank</th>
+                <th scope="col" style="width: 45%;">Username</th>
+                <th scope="col" style="width: 45%;">Score (lower is better)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in range(rank_data | length) %}
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td class="username" data-rating="{{ rank_data[i]["rating"] }}" data-admin="{{ rank_data[i]["admin"] }}"><a href="/users/{{ rank_data[i]["username"] }}/profile">{{ rank_data[i]["username"] }}</a></td>
+                <td>{{ rank_data[i]["score"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

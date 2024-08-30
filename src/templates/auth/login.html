@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+{% block active %}Log In{% endblock %}
+
+{% block main %}
+<h1 class="text-center">Log In</h1>
+You can still view most of our features without logging in!
+<br><br>
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <div class="form-floating">
+        <input autofocus
+               class="form-control mb-3"
+               name="username"
+               id="username"
+               placeholder="Username"
+               required>
+        <label for="username">Username</label>
+    </div>
+    <div class="form-floating">
+        <input class="form-control mb-3"
+               name="password"
+               id="password"
+               placeholder="Password"
+               type="password"
+               required>
+        <label for="password">Password</label>
+    </div>
+    <button class="btn btn-primary" type="submit" id="log-in-button" style="margin-top: 0px;">Log In</button>
+    <a href="/forgotpassword" class="btn btn-secondary white">Forgot Password</a>
+    <a href="/register" class="btn btn-info white">Register</a>
+    {% if USE_CAPTCHA %}
+        <script src="https://hcaptcha.com/1/api.js" async defer></script>
+        <hr>
+        <div class="h-captcha" data-sitekey= {{ site_key }} ></div>
+    {% endif %}
+    {% if request.args.get('next') %}
+        <input type="hidden" name="next" value="{{ request.args.get('next') }}">
+    {% endif %}
+</form>
+{% endblock %}
+{% block script %}
+<script>
+        var usernameInput = document.getElementById("username");
+        var passwordInput = document.getElementById("password");
+        var logInButton = document.getElementById("log-in-button");
+
+        // Function to update the button style based on input values
+        function updateButtonStyle() {
+            if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
+                logInButton.style.transition = "background-color 0.5s";
+                logInButton.style.backgroundColor = "#741F22";
+            } else {
+                logInButton.style.transition = "background-color 0.5s";
+                logInButton.style.backgroundColor = "";
+            }
+        }
+
+        // Add input event listeners to both fields
+        usernameInput.addEventListener("input", updateButtonStyle);
+        passwordInput.addEventListener("input", updateButtonStyle);
+</script>
+{% endblock %}

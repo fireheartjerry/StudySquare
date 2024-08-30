@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ user_data["username"] }}{% endblock %}
+
+{% block active %}Profile{% endblock %}
+
+{% block main %}
+<div class="profileDiv">
+    <div id="start" style="display: flex;">
+        <h1><span class="username" data-rating="{{ user_data["rating"] }}"><a href="#">{{ user_data["username"] }}</a></span>'s Profile</h1>
+        {% if session.username == user_data["username"] or check_perm(["SUPERADMIN"]) %}
+        <span><a href="./profile/edit" >
+            <img src="/assets/images/pencil.svg"
+                onerror="this.src='/assets/images/pencil.png'"
+                alt="Edit profile"
+                class="icon svg-brand growable"
+                style="width: 32px; height: 32px; margin-left: 20px; margin-top: 10px;">
+        </a></span>
+        {% endif %}
+    </div>
+    <hr>
+    <a class="badge bg-primary rounded-pill growable"
+       style="padding: 10px; font-size: 15px; margin-right: 10px;"
+       href={% if check_perm(["ADMIN", "SUPERADMIN"]) %}
+            "/admin/submissions?username={{ user_data["username"] }}&problem_id=&correct="
+        {% else %}
+            "/submissions?username={{ user_data["username"] }}&problem_id=&correct="
+        {% endif %}>
+        View {{ user_data["username"] }}'s submissions
+    </a>
+    <a class="badge bg-info rounded-pill growable"
+       style="padding: 10px; font-size: 15px;"
+       href="./profile/userinfo">
+       All stats
+    </a>
+    <br><br>
+    {% if session.username == user_data["username"] or check_perm(["ADMIN", "SUPERADMIN"]) %}
+        <details><summary href="#admin_user_info" aria-expanded="false" aria-controls="admin_user_info" data-bs-toggle="collapse" role="button"><u><b>User Info [ADMIN ONLY]</b></u></summary></details>
+        <div class="collapse" id="admin_user_info">
+            <span><b>Email:</b> {{ user_data["email"] }}</span><br>
+            <span><b>Banned:</b> {{ user_data["banned"] == 1 }}</span><br>
+            <span><b>Verified:</b> {{ user_data["verified"] == 1 }}</span>
+        </div>
+        <br>
+    {% endif %}
+
+    <details><summary href="#basic_stats" aria-expanded="false" aria-controls="basic_stats" data-bs-toggle="collapse" role="button"><u><b>Basic Stats</b></u></summary></details>
+    <div class="collapse" id="basic_stats">
+        ⌚ <span title="The date that {{ user_data["username"] }} joined TopsOJ.">Joined <b>{{ user_data["join_date"] }}</b></span>
+        <br>
+        🎯 <span title="The sum of the points from all the problems {{ user_data["username"]}} has solved.">Collected <b>{{ user_data["total_points"] }}</b> {{ 'point' if user_data["total_points"] == 1 else 'points' }}</span>
+        <br>
+        💪 <span title="The rating of {{ user_data["username"] }}.">Rating: <b>{{ user_data["rating"] }}</b></span>
+        <br>
+        💯 <span title="The amount of problems {{ user_data["username"] }} has solved.">Solved <b>{{ user_data["problems_solved"] }}</b> {{ 'problem' if user_data["problems_solved"] == 1 else 'problems' }}</span>
+        <br>
+        📅 <span title="The current streak of {{ user_data["username"] }}.">Current streak: <b>{{ user_data["streak"] }}</b> {{ 'day' if user_data["streak"] == 1 else 'days' }}</span>
+    </div>
+    {% if organizations %}
+        <br>
+        <b>Organizations: </b>
+        {% for org in organizations %}
+            <a href="/organization/{{ org["id"] }}" class="badge bg-primary rounded-pill growable" style="cursor: pointer; padding: 6px; margin-left: 5px;">{{ org["name"] }}</a>
+        {% endfor %}
+    {% endif %}
+    <hr>
+    <div id="user-written"></div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    fetch("/api/profile?id={{ user_data['id'] }}").then(b => b.text())
+            .then(b => JSON.parse(b)).then(b => {
+        if (b["status"] !== "success") {
+            console.log(`API fail: status: ${b["status"]}, message: ${b["message"]}`);
+            return;
+        } document.querySelector("#user-written").innerHTML = b["data"]["profile_html"];
+        renderLatex();
+    });
+</script>
+{% endblock %}
