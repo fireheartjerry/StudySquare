@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="theme-color" content="#0d6efd">
+
+        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/css/style.css" rel="stylesheet">
+        <link href="/static/favicon.png" rel="icon">
+
+        <title>Maintenance | {{ CLUB_NAME }}</title>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/" style="cursor: pointer;">TopsOJ</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbar" aria-controls="navbarText"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav ms-auto">
+                        <div class="form-check form-switch nav-link">
+                            <input class="form-check-input dark-toggle"
+                                   type="checkbox">
+                        </div>
+                        <li><a class="nav-link" href="/login">Log In</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="container">
+            <h1>Under Maintenance</h1><br>
+            <p>
+                We are currently undergoing scheduled maintenance. We will be back soon.
+                Thank you for your patience.
+            </p>
+        </main>
+        <footer>
+            <hr>
+            <p class="text-center">
+                &copy; 2023, {{ CLUB_NAME }} v23.11.3
+                <!--<a href="https://github.com/fireheartjerry/TopsOJ">Source Code</a> - -->
+                <a href="/terms">Terms of Service</a> -
+                <a href="/privacy">Privacy Policy</a> -
+                <a href="https://discord.gg/zUdmCWPT3f">Discord Server</a>
+            </p>
+        </footer>
+        <script src="/assets/js/nav.js"></script>
+        <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
