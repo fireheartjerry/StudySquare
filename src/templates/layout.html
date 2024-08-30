@@ -83,25 +83,6 @@
                             </div>
                         </ul>
                     {% else %}
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-li"><a class="nav-link" href="/">Home</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/mathgym">Math Gym</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/problems">Practice</a></li>
-                            {% if check_perm(["ADMIN", "SUPERADMIN"]) %}<li class="nav-li"><a class="nav-link" href="/courses">Courses</a></li>{% endif %}
-                            <li class="nav-li"><a class="nav-link" href="/contests">Contests</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/rankings">Rankings</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/organizations/public">Organizations</a></li>
-                            <li class="nav-li">
-                            <a id="help-dropdown-release" class="nav-link dropdown-toggle" style="cursor: pointer;">Info</a>
-                                <div id="help-dropdown" class="dropdown-content" style="z-index: 9999;">
-                                    <a class="nav-link" href="/team">Our Team</a>
-                                    <a class="nav-link" href="{% if check_perm(["ADMIN", "SUPERADMIN", "PROBLEM_MANAGER", "CONTENT_MANAGER"]) %}/admin{% endif %}/submissions">Submissions</a>
-                                    <a class="nav-link" href="/discordserver" target="_blank">Discord Server</a>
-                                    <a class="nav-link" href="/changelog">Changelog</a>
-                                    <a class="nav-link" href="/uptime" target="_blank">Server Uptime</a>
-                                </div>
-                            </li>
-                        </ul>
                         <ul class="navbar-nav ms-auto">
                             <div class="form-check form-switch nav-link">
                                 <input class="form-check-input dark-toggle"

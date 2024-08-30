@@ -25,126 +25,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import *  # noqa
 from db import *
-from middlewares import ProxyFix
 import re
 from datetime import datetime, timedelta
-
-from webui import WebUI
 
 #from fuzzywuzzy import fuzz
 
 app = Flask(__name__)
-
-try:
-    app.config.from_object('settings')
-except Exception as e:
-    sys.stderr.write(str(e))
-    app.config.from_object('default_settings')
-app.jinja_env.globals.update(check_perm=check_perm)
-
-# Configure logging
-LOG_HANDLER = logging.FileHandler(app.config['LOGGING_FILE_LOCATION'])
-LOG_HANDLER.setFormatter(
-    logging.Formatter(fmt="[TOPSOJ] [{section}] [{levelname}] [{asctime}] {message}",
-                      style='{'))
-logger = logging.getLogger("TOPSOJ")
-logger.addHandler(LOG_HANDLER)
-logger.propagate = False
-for handler in logging.root.handlers[:]:
-    logging.root.removeHandler(handler)
-logging.basicConfig(
-    filename=app.config['LOGGING_FILE_LOCATION'],
-    level=logging.DEBUG,
-    format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s',
-)
-logging.getLogger().addHandler(logging.StreamHandler())
-
-# Configure flask-session
-Session(app)
-
-# Configure flask-mail
-mail = Mail(app)
-
-# Configure flask-WTF
-csrf = CSRFProtect(app)
-csrf.init_app(app)
-
-# Load API
-from views.api import api as view_api  # noqa
-from views.contest import api as view_contest  # noqa
-from views.course import api as view_course # noqa
-from views.problem import api as view_problem  # noqa
-from views.admin import api as view_admin  # noqa
-from views.organization import api as view_organization  # noqa
-app.register_blueprint(view_api, url_prefix="/api")
-app.register_blueprint(view_contest, url_prefix="/contest")
-app.register_blueprint(view_course, url_prefix="/course")
-app.register_blueprint(view_problem, url_prefix="/problem")
-app.register_blueprint(view_admin, url_prefix="/admin")
-app.register_blueprint(view_organization, url_prefix="/organization")
-
-# Validate settings
-if not app.config['TESTING']:
-    with app.app_context():
-        try:
-            send_email('TOPSOJ Email Setup', app.config['MAIL_DEFAULT_SENDER'],
-                       [app.config['MAIL_DEFAULT_SENDER']],
-                       ('This email tests your configured email settings for TOPSOJ. '
-                        '<b>Please note that HTML is supported.</b> '
-                        'Please ignore this email.'))
-        except Exception as error:
-            logging.warning("Settings validation: Email credentials invalid.")
-            logging.warning(str(error))
-        else:
-            logging.debug("Settings validation: Email credentials valid.")
-        if app.config['USE_CAPTCHA']:
-            captcha = requests.post('https://hcaptcha.com/siteverify', data={
-                'secret': app.config['HCAPTCHA_SECRET'],
-                'response': "placeholder",
-                'sitekey': app.config['HCAPTCHA_SITE']
-            })
-            if len(captcha.json()["error-codes"]) == 1:  # only error is invalid input
-                logging.debug("Settings validation: hCaptcha credentials valid.")
-            else:
-                logging.warning("Settings validation: hCaptcha credentials invalid.")
-        if app.config['USE_HOMEPAGE']:
-            if os.path.isfile(app.config['HOMEPAGE_FILE']):
-                logging.debug("Settings validation: Homepage file exists.")
-            else:
-                logging.warning("Settings validation: Homepage file nonexistent.")
-
-
-@app.before_request
-def check_for_maintenance():
-    # Don't prevent login or getting assets
-    if request.path == '/login' or request.path.startswith('/assets/'):
-        return
-
-    maintenance_mode = bool(os.path.exists('maintenance_mode'))
-    if maintenance_mode:
-        if request.path.startswith('/api/'):
-            if not check_perm(["ADMIN", "SUPERADMIN", "SITE_TESTER"], api_get_perms()):
-                return json_fail("The site is currently undergoing maintenance", 503)
-            else:
-                return
-
-        # Prevent Internal Server error if session only contains CSRF token
-        if not check_perm(["ADMIN", "SUPERADMIN", "SITE_TESTER"]):
-            return render_template("error/maintenance.html"), 503
-        else:
-            flash("Maintenance mode is enabled", "maintenance")
-
-@app.before_request
-def check_for_testing():
-    if check_perm(["SITE_TESTER"]):
-        flash("You are in site testing mode, some features may be broken.", "testing")
-
-@app.before_request
-def check_for_team():
-    if session.get("username"):
-        team_account = db.execute("SELECT team_account AS team FROM users WHERE username=?", session.get("username"))
-        if team_account and team_account[0]['team']:
-            flash("You are using a team account, most features are disabled.", "team")
 
 @app.route("/")
 def index():
