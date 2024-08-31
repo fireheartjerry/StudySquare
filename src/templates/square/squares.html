@@ -14,7 +14,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm rounded">
                     <img src="static/square{{ square.image_type }}.png" class="card-img-top img-fluid" alt="{{ square.name }}">
-                    <div class="card-body">
+                    <div class="card-body border-standard">
                         <h5 class="card-title">{{ square.name }}</h5>
                         <p class="card-text">{{ square.preview }}</p>
                         <p class="card-text"><small class="text-muted">{{ square.members }} Member(s)</small> &middot; <small class="text-muted">{{ square.topic }}</small></p>
@@ -76,33 +76,4 @@
         }
     }
 </style>
-{% endblock %}
-
-{% block sidebar %}
-<div class="nav">
-    <center>
-    <div class="fs-3 fw-bold mt-4 mb-2" style="color: white;">QUICK SEARCH</div>
-    <div class="fs-6 mb-3" style="color: white">Click these to automatically search for similar squares.</div>
-    <ul class="quicksearch-list">
-        <li class="quicksearch-item">
-            <a href="#" class="quicksearch-link">Add a Quick Link</a>
-        </li>
-        <li class="quicksearch-item">
-            <a href="#" class="quicksearch-link">Add a Quick Link</a>
-        </li>
-        <li class="quicksearch-item">
-            <a href="#" class="quicksearch-link">Add a Quick Link</a>
-        </li>
-        <li class="quicksearch-item">
-            <a href="#" class="quicksearch-link">Add a Quick Link</a>
-        </li>
-        <li class="quicksearch-item">
-            <a href="#" class="quicksearch-link">Add a Quick Link</a>
-        </li>
-        <li class="quicksearch-item">
-            <a href="#" class="quicksearch-link">Add a Quick Link</a>
-        </li>
-    </ul>
-</center>
-</div>
 {% endblock %}
