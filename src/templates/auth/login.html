@@ -7,7 +7,10 @@
 <section class="login-container">
     <div class="login-box">
         <h1 class="text-center">Welcome Back!</h1>
-        <p class="text-center lead mb-4">Please log in to continue.</p>
+        <center>
+            <span class="text-center mb-3 fs-5">Please log in to continue.</span><br>
+            <a class="text-center mb-4" href="/">Back to home</a>
+        </center><br>
         <form method="post" class="login-form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-floating mb-3">

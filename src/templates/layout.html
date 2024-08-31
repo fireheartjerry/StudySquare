@@ -11,101 +11,93 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
-
-        <style>
-            .nav-link {
-                top: 7%!important;
-            }
-        </style>
 
         <title>{% block title %}{% endblock %} &middot; StudySquare</title>
 
         {% block preload %}{% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-            <div class="container-fluid">
-                <a class="navbar-brand growable" href="/" style="cursor: pointer;"><img src="/static/favicon.png" style="width: 40px; height: 40px;" data-toggle="tooltip" title="Our logo is cool, right?"></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbar" aria-controls="navbarText" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbar" data-active="{% block active %}{% endblock %}">
-                    {% if session.user_id %}
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-li"><a class="nav-link" href="/">Home</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/mathgym">Math Gym</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/problems">Practice</a></li>
-                            {% if check_perm(["ADMIN", "SUPERADMIN"]) %}<li class="nav-li"><a class="nav-link" href="/courses">Courses</a></li>{% endif %}
-                            <li class="nav-li"><a class="nav-link" href="/mathgym/mockgenerator">Mock Generator</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/contests">Contests</a></li>
-                            {% block contest_leaderboard %}{% endblock %}
-                            <li class="nav-li"><a class="nav-link" href="/rankings">Rankings</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/organizations/public">Organizations</a></li>
-                            <li class="nav-li">
-                                <a id="help-dropdown-release" class="nav-link dropdown-toggle" style="cursor: pointer;">Info</a>
-                                <div id="help-dropdown" class="dropdown-content">
-                                    <a class="nav-link" href="/about">About</a>
-                                    <a class="nav-link" href="/team">Our Team</a>
-                                    <a class="nav-link" href="{% if check_perm(["ADMIN", "SUPERADMIN", "PROBLEM_MANAGER", "CONTENT_MANAGER"]) %}/admin{% endif %}/submissions">Submissions</a>
-                                    <a class="nav-link" href="/discordserver" target="_blank">Discord Server</a>
-                                    <a class="nav-link" href="/changelog">Changelog</a>
-                                    <a class="nav-link" href="/uptime" target="_blank">Server Uptime</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            {% if check_perm(["ADMIN", "SUPERADMIN", "PROBLEM_MANAGER", "CONTENT_MANAGER"]) %}
-                            <li class="nav-li"><a class="nav-link" href="/admin/console" style="margin-top: 5%;">Admin Console</a></li>
-                            {% endif %}
-                            <div class="form-check form-switch nav-link">
-                                <input class="form-check-input dark-toggle"
-                                       type="checkbox" style="margin-top: 12px;">
-                            </div>
-                            <div class="dropdown" style="top: 7%;">
-                                <button class="btn dropdown-toggle" data-bs-toggle="dropdown" style="background: transparent; border-color: #DACFBE!important; color: white;"> Hello, <b>{{ session.username }}</b>.<span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-end animate" id="user-dropdown-menu">
-                                    <li class="nav-li"><a class="dropdown-item text-decoration-none" style="margin-bottom: 5px;" href="/users/{{ session.username }}/profile">Profile</a></li>
-                                    <li class="nav-li"><a class="dropdown-item text-decoration-none" style="margin-bottom: 5px;" href="/users/{{ session.username }}/profile/edit">Edit Profile</a></li>
-                                    <li class="nav-li"><a class="dropdown-item text-decoration-none" href="/settings">Settings</a></li>
-                                    <li class="nav-li"><div class="dropdown-divider" style="margin-bottom: 16px;"><div></li>
-                                    <li class="nav-li"><a class="dropdown-item logout" href="/logout">Log Out</a></li>
-                                </ul>
-                            </div>
-                        </ul>
-                    {% else %}
-                        <ul class="navbar-nav ms-auto">
-                            <div class="form-check form-switch nav-link">
-                                <input class="form-check-input dark-toggle"
-                                       type="checkbox">
-                            </div>
-                            <li class="nav-li"><a class="nav-link" href="/register">Register</a></li>
-                            <li class="nav-li"><a class="nav-link" href="/login">Log In</a></li>
-                        </ul>
-                    {% endif %}
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark py-5">
+            <!-- Navbar Brand-->
+            <a href="/"><img src="static/favicon.png" style="width: 4rem;" class="me-4 ms-4"></a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-lg order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            {% if session.user_id %}
+                <!-- Navbar Search-->
+                <form class="d-none d-md-inline-block form-inline me-auto ms-auto me-md-4 my-2 my-md-0">
+                    <div class="input-group">
+                        <input class="form-control form-control-lg" type="text" placeholder="Search for a Square" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                        <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+                <div class="d-md-inline-block form-inline me-0 ms-auto me-md-4 my-2 my-md-0 btn-group">
+                    <a class="btn btn-primary" href="/createsquare">Start a Square</a>
+                    <a class="btn btn-primary" href="/squares">All Squares</a>
                 </div>
-            </div>
+                <ul class="navbar-nav ms-3 me-3">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">Settings</a></li>
+                            <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            {% else %}
+                <div class="d-md-inline-block form-inline me-0 ms-auto me-md-4 my-2 my-md-0 btn-group">
+                    <a class="btn btn-primary" href="/login">Log In</a>
+                    <a class="btn btn-primary" href="/register">Register</a>
+                </div>
+            {% endif %}
         </nav>
-
-        <main class="container">
-            {% with msg = get_flashed_messages(with_categories=True) %}
-                {% if msg %}
-                    {% for category, message in msg %}
-                        {% if category != "maintenance" and category != "testing" and category != "team" %}
-                            <div class="alert alert-{{ category }} alert-dismissible fade show"
-                                role="alert">
-                                <span>{{ message }}</span>
-                                <button type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Saved</div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Math
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                </nav>
                             </div>
-                        {% elif category == "maintenance" %}
-                            {% if not maintenance.flag %}
-                                {% set maintenance.flag = true %}
-                                <div class="alert alert-warning alert-dismissible fade show"
+
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                Zombiewars
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="layout-static.html">Zombiewars latest</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Old zw</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+                        <div class="small">Logged in as:</div>
+                        Greb
+                    </div>
+                </nav>
+            </div>
+            <div id="layoutSidenav_content">
+                <main class="container-fluid">
+                    {% with msg = get_flashed_messages(with_categories=True) %}
+                        {% if msg %}
+                            {% for category, message in msg %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show"
                                     role="alert">
                                     <span>{{ message }}</span>
                                     <button type="button"
@@ -113,47 +105,25 @@
                                             data-bs-dismiss="alert"
                                             aria-label="Close"></button>
                                 </div>
-                            {% endif %}
-                        {% elif category == "testing" %}
-                            {% if not testing.flag %}
-                                {% set testing.flag = true %}
-                                <div class="alert alert-info alert-dismissible fade show"
-                                    role="alert">
-                                    <span>{{ message }}</span>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
-                                </div>
-                            {% endif %}
-                        {% elif category == "team" %}
-                            {% if not testing.flag %}
-                                {% set testing.flag = true %}
-                                <div class="alert alert-info alert-dismissible fade show"
-                                    role="alert">
-                                    <span>{{ message }}</span>
-                                    <button type="button"
-                                            class="btn-close"
-                                            data-bs-dismiss="alert"
-                                            aria-label="Close"></button>
-                                </div>
-                            {% endif %}
+                            {% endfor %}
                         {% endif %}
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            {% block main %}{% endblock %}
-            {% block post_main %}{% endblock %}
-        </main>
-        <footer>
-            <hr>
-            <p class="text-center" style="font-family: 'Montserrat', sans-serif;" id="footer-text">
-                &copy; StudySquare &middot;
-                <a href="#">Terms of Service</a> &middot;
-                <a href="#">Privacy Policy</a> &middot;
-                <a href="#">Discord Server</a>
-            </p>
-        </footer>
+                    {% endwith %}
+                    {% block main %}{% endblock %}
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; StudySquare 2024</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
 
         {% block script %}{% endblock %}
     </body>

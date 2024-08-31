@@ -7,7 +7,10 @@
 <section class="register-container">
     <div class="register-box">
         <h1 class="text-center">Create an Account</h1>
-        <p class="text-center lead mb-4">Please fill out the form to register.</p>
+        <center>
+            <span class="text-center mb-3 fs-5">Please fill out the form to register.</span><br>
+            <a class="text-center mb-4" href="/">Back to home</a>
+        </center><br>
         <form method="post" class="register-form">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <div class="form-floating mb-3">
