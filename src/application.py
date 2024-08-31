@@ -142,43 +142,6 @@ def settings():
     return render_template("settings.html")
 
 
-@app.route("/settings/changepassword", methods=["GET", "POST"])
-@login_required
-def changepassword():
-    if request.method == "GET":
-        return render_template("auth/changepassword.html")
-
-    # Reached using POST
-
-    old_password = request.form.get("password")
-    new_password = request.form.get("newPassword")
-    confirmation = request.form.get("confirmation")
-
-    # Ensure passwords were submitted and they match
-    if not old_password:
-        flash('Password cannot be blank', 'danger')
-        return render_template("auth/changepassword.html"), 400
-    if not new_password or len(new_password) < 8:
-        flash('New password must be at least 8 characters', 'danger')
-        return render_template("auth/changepassword.html"), 400
-    if not confirmation or new_password != confirmation:
-        flash('Passwords do not match', 'danger')
-        return render_template("auth/changepassword.html"), 400
-
-    # Ensure username exists and password is correct
-    rows = db.execute("SELECT * FROM users WHERE id=:id", id=session["user_id"])
-    if len(rows) != 1 or not check_password_hash(rows[0]["password"], old_password):
-        flash('Incorrect password', 'danger')
-        return render_template("auth/changepassword.html"), 401
-
-    db.execute("UPDATE users SET password=:new WHERE id=:id",
-               new=generate_password_hash(new_password), id=session["user_id"])
-
-    logger.info((f"User #{session['user_id']} ({session['username']}) has changed "
-                 "their password"), extra={"section": "auth"})
-    flash("Password change successful", "success")
-    return redirect("/settings")
-
 # Error handling
 def errorhandler(e):
     if not isinstance(e, HTTPException):
