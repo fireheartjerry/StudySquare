@@ -7,6 +7,7 @@ import zipfile
 from datetime import datetime, timezone
 from io import BytesIO
 import random
+import string
 import pytz
 
 UTC = timezone.utc
@@ -55,6 +56,10 @@ Session(app)
 csrf = CSRFProtect(app)
 csrf.init_app(app)
 
+# Load api
+from views.square import api as view_square
+app.register_blueprint(view_square, url_prefix="/square")
+
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -90,8 +95,9 @@ def login():
     session["user_id"] = rows[0]["id"]
     session["username"] = rows[0]["username"]
     
-    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", session["user_id"], "login")
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", session["user_id"], "Logged in.")
 
+    flash('Logged in successfully!', 'success')
     logger.info((f"User #{session['user_id']} ({session['username']}) logged in "
                  f"on IP {request.remote_addr}"), extra={"section": "auth"})
     # Redirect user to next page
@@ -137,18 +143,73 @@ def register():
             flash('Username already exists', 'danger')
         return render_template("auth/register.html"), 400
     
-    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", db.execute("SELECT id FROM users WHERE username=?", username)[0]["id"], "join")
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", db.execute("SELECT id FROM users WHERE username=?", username)[0]["id"], "Joined StudySquare")
 
     flash(('Account successfully created! Don\'t forget your password'), 'success')
     logger.info((f"User {username} has created an account "
                  f"on IP {request.remote_addr}"), extra={"section": "auth"})
-    return redirect("/login")
+    return redirect("/")
 
 
-@app.route("/settings")
+@app.route("/squares/create", methods=["GET", "POST"])
 @login_required
-def settings():
-    return render_template("settings.html")
+def create_square():
+    if request.method == "GET":
+        return render_template("square/create.html")
+    
+    # Reached via POST
+    id = generate_sq_id()
+    square_name = request.form.get("square_name")
+    preview = request.form.get("preview")
+    description = request.form.get("description")
+    privacy = request.form.get("privacy")
+    meeting_code = request.form.get("meeting_code")
+    image_type = int(request.form.get("image_type"))
+    topic = request.form.get("topic")
+    
+    if not square_name or not description or not preview or not meeting_code:
+        flash('Please enter all required fields', 'danger')
+        return render_template("square/create.html"), 400
+
+    # Ensure a square with this title does not exist already
+    if db.execute("SELECT COUNT(*) AS cnt FROM squares WHERE name=?", square_name)[0]["cnt"] > 0:
+        flash('Square name already exists', 'danger')
+        return render_template("square/create.html"), 400
+    
+    # Add to squares table
+    db.execute(("INSERT INTO squares(id, name, creator, create_date, preview, description, public, meeting_code, image_type, topic) "
+                "VALUES(?, ?, ?, datetime('now'), ?, ?, ?, ?, ?, ?)"),
+               id, square_name, session['user_id'], preview, description, bool(int(privacy)), meeting_code, image_type, topic)
+    
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", session["user_id"], f"Created square \"{square_name}\" ({id}).")
+    
+    logger.info((f"User #{session['user_id']} ({session['username']}) created "
+                    f"square {id}"), extra={"section": "square"})
+    flash('Square created successfully!', 'success')
+    return redirect("/square/" + id)
+
+
+@app.route("/squares")
+def squares():
+    title = request.args.get("title")
+    if not title:
+        title = None
+    
+    query = "SELECT * FROM squares"
+    modifier = ""
+    args = []
+    if title:
+        modifier += " WHERE (LOWER(name) LIKE ?)"
+        args.append('%' + title.lower() + '%')
+    
+    query += modifier
+    data = db.execute(query, *args)
+    
+    if not data:
+        flash("No such squares found.", "warning")
+        return redirect("/")
+    
+    return render_template("square/squares.html", squares=data)
 
 
 # Error handling
@@ -167,6 +228,7 @@ def errorhandler(e):
 
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
+
 
 @app.after_request
 def security_policies(response):

@@ -1,8 +1,10 @@
-import logging, re, json, urllib.parse
+import logging, re, json, urllib.parse, random, string
 
 from functools import wraps
 from flask import redirect, request, session, flash, make_response
 from werkzeug.security import check_password_hash
+
+from db import *
 
 def verify_text(text):
     """
@@ -66,3 +68,14 @@ def register_chk(username, password, confirmation):
         return 400
 
     return 0
+
+def generate_sq_id():
+    def generate_id(length):
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choices(characters, k=length))
+
+    current_ids = set([x["id"] for x in db.execute("SELECT id FROM squares")])
+    id = generate_id(6)
+    while id in current_ids:
+        id = generate_id(6)
+    return id

@@ -16,23 +16,82 @@
 
 
         <title>{% block title %}{% endblock %} &middot; StudySquare</title>
+        <style>
+            .btn {
+                border: none;
+                border-radius: 12px;
+                padding: 0.75rem;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+                font-size: 1.1rem;
+              }
+              
+            .btn-primary {
+              background-color: #4aa280;
+            }
 
+            .btn:hover {
+              transform: scale(1.05);
+            }
+
+            .btn-primary:hover {
+              background-color: #4dbf93;
+            }
+
+            .btn-secondary:hover {
+              background-color: #5a6268;
+            }
+            
+            /* Style for the list */
+            .quicksearch-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            /* Style for each item */
+            .quicksearch-item {
+                margin-bottom: 1em;
+                width: 80%;
+            }
+            
+            /* Style for the link */
+            .quicksearch-link {
+                display: block;
+                padding: 0.5em 1em;
+                background-color: #ffffff;
+                border: 1px solid #e0e0e0;
+                border-radius: 0.5em;
+                color: #333;
+                font-size: 1em;
+                text-align: center;
+                text-decoration: none;
+                transition: background-color 0.3s ease, transform 0.3s ease;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Hover effect for the link */
+            .quicksearch-link:hover {
+                background-color: lightblue;
+                transform: scale(1.02);
+            }            
+        </style>
         {% block preload %}{% endblock %}
     </head>
     <body>
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark py-5">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark py-5" style="background-color: #494073; box-shadow: 0 0.75em 1em rgba(0, 0, 0, 0.3);">
             <!-- Navbar Brand-->
             <a href="/"><img src="static/favicon.png" style="width: 4rem;" class="me-4 ms-4"></a>
+            <a href="/" class="text-decoration-none"><div class="lead text-light fs-3">StudySquare</div></a>
             {% if session.user_id %}
                 <!-- Navbar Search-->
                 <form class="d-none d-md-inline-block form-inline me-auto ms-auto me-md-4 my-2 my-md-0">
                     <div class="input-group">
-                        <input class="form-control form-control-lg" type="text" placeholder="Search for a Square" aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                        <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                        <input class="form-control form-control-lg" type="text" placeholder="Search for Squares" aria-label="Search for..." aria-describedby="btnNavbarSearch" style="width: 400px;"/>
+                        <button class="btn btn-primary" id="square_search" type="button"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
                 <div class="d-md-inline-block form-inline me-0 ms-auto me-md-4 my-2 my-md-0 btn-group">
-                    <a class="btn btn-primary" href="/createsquare">Start a Square</a>
+                    <a class="btn btn-primary" href="/squares/create">Start a Square</a>
                     <a class="btn btn-primary" href="/squares">All Squares</a>
                 </div>
                 <ul class="navbar-nav ms-3 me-3">
@@ -55,7 +114,7 @@
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" style="background-color: #494073;" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         {% block sidebar %}{% endblock %}
                     </div>
@@ -103,5 +162,13 @@
         </div>
 
         {% block script %}{% endblock %}
+        <script>
+            document.querySelector("#square_search").addEventListener("click", function() {
+                const search = document.querySelector("input[type='text']").value;
+                if (search) {
+                    window.location.href = `/squares?title=${search}`;
+                }
+            });
+        </script>
     </body>
 </html>
