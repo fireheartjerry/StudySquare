@@ -6,7 +6,7 @@
         <meta name="theme-color" content="#0d6efd">
 
         <link href="/static/style.css" rel="stylesheet">
-        <link href="/static/favicon.png" rel="icon">
+        <link href="/static/favicon.png" rel="shortcut icon">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -73,14 +73,18 @@
             .quicksearch-link:hover {
                 background-color: lightblue;
                 transform: scale(1.02);
-            }            
+            }
+
+            .border-standard {
+                border-color: #4aa280;
+            }
         </style>
         {% block preload %}{% endblock %}
     </head>
     <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark py-5" style="background-color: #494073; box-shadow: 0 0.75em 1em rgba(0, 0, 0, 0.3);">
             <!-- Navbar Brand-->
-            <a href="/"><img src="static/favicon.png" style="width: 4rem;" class="me-4 ms-4"></a>
+            <a href="/"><img src="/static/favicon.png" style="width: 4rem;" class="me-4 ms-4"></a>
             <a href="/" class="text-decoration-none"><div class="lead text-light fs-3">StudySquare</div></a>
             {% if session.user_id %}
                 <!-- Navbar Search-->
