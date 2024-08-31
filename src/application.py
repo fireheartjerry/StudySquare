@@ -48,7 +48,6 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s',
 )
 logging.getLogger().addHandler(logging.StreamHandler())
-
 # Configure flask-session
 Session(app)
 
