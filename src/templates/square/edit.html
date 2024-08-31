@@ -1,0 +1,245 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Square{% endblock %}
+{% block active %}Edit Square{% endblock %}
+
+{% block main %}
+<section class="square-container">
+    <div class="square-box">
+        <h1 class="text-center">Edit Your Square</h1>
+        <center>
+            <span class="text-center mb-3 fs-5">Update the details of your square. Hover over inputs if you need help.</span><br>
+        </center><br>
+        <form method="post" class="square-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+            <div class="form-floating mb-3" title="The name of your square, will be displayed in a list.">
+                <input autofocus
+                       class="form-control"
+                       name="square_name"
+                       id="square_name"
+                       placeholder="Square Name"
+                       value="{{ data.name }}"
+                       required>
+                <label for="square_name">Square Name</label>
+            </div>
+
+            <div class="form-floating mb-3" title="A short preview displayed in a list.">
+                <textarea class="form-control"
+                          name="preview"
+                          id="preview"
+                          placeholder="Preview"
+                          value="{{ data.preview }}"
+                          required
+                          maxlength="200">{{ data.preview }}</textarea>
+                <label for="preview">Preview <span id="preview-counter" class="text-primary">(0/200)</span></label>
+            </div>
+
+            <div class="form-floating mb-3" title="A longer description that users can see.">
+                <textarea class="form-control"
+                          name="description"
+                          id="description"
+                          placeholder="Description"
+                          style="height: 150px"
+                          value="{{ data.description }}"
+                          required
+                          maxlength="1000">{{ data.description }}</textarea>
+                <label for="description">Description <span id="description-counter" class="text-primary">(0/1000)</span></label>
+            </div>
+
+            Select an image for your square:
+            <div class="form-floating mb-3" title="Select the image type">
+                <div class="row text-center">
+                    {% for i in range(1, 6) %}
+                    <div class="col">
+                        <input type="radio" name="image_type" id="image_type_{{ i }}" value="{{ i }}" class="d-none" {% if data.image_type == i %}checked{% endif %}>
+                        <label for="image_type_{{ i }}" class="card shadow-sm image-option">
+                            <div class="card-body">
+                                <img src="/static/square{{ i }}.png" alt="Square Image {{ i }}" class="img-fluid rounded">
+                            </div>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="form-floating mb-3" title="Anyone can join a public square, while private squares require a URL to be shared.">
+                <select class="form-select"
+                        name="privacy"
+                        id="privacy"
+                        required>
+                    <option value="1" {% if data.privacy == 1 %}selected{% endif %}>Public</option>
+                    <option value="0" {% if data.privacy == 0 %}selected{% endif %}>Private</option>
+                </select>
+                <label for="privacy">Privacy</label>
+            </div>
+
+            <div class="form-floating mb-3" title="Select a topic for your square.">
+                <select class="form-select"
+                        name="topic"
+                        id="topic"
+                        required>
+                        <option value="math" {% if data.topic == "math" %}selected{% endif %}>Math</option>
+                        <option value="physics" {% if data.topic == "physics" %}selected{% endif %}>Physics</option>
+                        <option value="chemistry" {% if data.topic == "chemistry" %}selected{% endif %}>Chemistry</option>
+                        <option value="biology" {% if data.topic == "biology" %}selected{% endif %}>Biology</option>
+                        <option value="english" {% if data.topic == "english" %}selected{% endif %}>English</option>
+                        <option value="history" {% if data.topic == "history" %}selected{% endif %}>History</option>
+                        <option value="geography" {% if data.topic == "geography" %}selected{% endif %}>Geography</option>
+                        <option value="computer_science" {% if data.topic == "computer_science" %}selected{% endif %}>Computer Science</option>
+                        <option value="languages" {% if data.topic == "languages" %}selected{% endif %}>Languages</option>
+                        <option value="other" {% if data.topic == "other" %}selected{% endif %}>Other</option>
+                </select>
+                <label for="topic">Select a Topic</label>
+            </div>
+
+            <span>Please navigate <span><a href="https://meet.google.com/landing">here</a></span> to create a google meets and get the meeting code.</span>
+            <div class="form-floating mb-3" title="Please create a google meets and add the meeting code here. An example is qzi-aepz-nxq.">
+                <input class="form-control"
+                       name="meeting_code"
+                       id="meeting_code"
+                       placeholder="Meeting Code"
+                       value="{{ data.meeting_code }}"
+                       required
+                       maxlength="12">
+                <label for="meeting_code">Meeting Code</label>
+            </div>
+
+            <button class="btn btn-primary w-100 fw-bold" type="submit" id="create-square-button">Update Square</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block preload %}
+<style>
+    .square-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .square-box {
+        position: relative;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        z-index: 2;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .square-box h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .square-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-floating {
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+
+    .form-control, .form-select {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #0072ff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 114, 255, 0.25);
+    }
+
+    label {
+        color: gray!important;
+        font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .square-box {
+            padding: 1.5rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .square-box {
+            width: 90%;
+        }
+    }
+
+    .image-option {
+        cursor: pointer;
+        transition: background-color 0.3s, border 0.2s;
+    }
+
+    input[type="radio"]:checked + label {
+        background-color: lightblue;
+        border: 2px solid #007bff; /* Add a border to highlight selection */
+    }
+
+    .card {
+        margin: 0;
+        border: 1px solid #ddd;
+        border-radius: 0.375rem;
+    }
+</style>
+{% endblock %}
+
+{% block script %}
+<script>
+    // Same JavaScript logic as create.html
+    document.addEventListener("DOMContentLoaded", function () {
+        // Code for updating counters
+        const previewTextarea = document.getElementById("preview");
+        const descriptionTextarea = document.getElementById("description");
+        const previewCounter = document.getElementById("preview-counter");
+        const descriptionCounter = document.getElementById("description-counter");
+
+        function updateCounter(textarea, counter, limit) {
+            const currentLength = textarea.value.length;
+            counter.textContent = `(${currentLength}/${limit})`;
+        }
+
+        previewTextarea.addEventListener("input", function () {
+            updateCounter(previewTextarea, previewCounter, 200);
+        });
+
+        descriptionTextarea.addEventListener("input", function () {
+            updateCounter(descriptionTextarea, descriptionCounter, 1000);
+        });
+
+        updateCounter(previewTextarea, previewCounter, 200);
+        updateCounter(descriptionTextarea, descriptionCounter, 1000);
+    });
+</script>
+{% endblock %}
+
+{% block sidebar %}
+<div class="nav">
+    <!-- Similar sidebar to create.html -->
+    <div class="sb-sidenav-menu-heading">Recently Created Squares</div>
+    <!-- Links here -->
+</div>
+{% endblock %}
