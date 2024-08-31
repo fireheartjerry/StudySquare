@@ -63,6 +63,10 @@ def index():
 def square():
     return render_template("square.html")
 
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     # Forget user id
