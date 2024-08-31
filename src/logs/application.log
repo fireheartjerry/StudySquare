@@ -912,6 +912,17 @@
 2024-08-30 22:08:00,957 INFO werkzeug Thread-3 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:08:00] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
 2024-08-30 22:08:00,959 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:08:00] "[33mGET /static/favicon.png HTTP/1.1[0m" 404 -
 2024-08-30 22:08:01,034 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:08:01] "[36mGET /static/loginbg.jpg HTTP/1.1[0m" 304 -
+2024-08-30 22:11:59,645 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-30 22:11:59,646 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2024-08-30 22:11:59,652 INFO werkzeug MainThread :  * Restarting with stat
+2024-08-30 22:12:00,225 WARNING werkzeug MainThread :  * Debugger is active!
+2024-08-30 22:12:00,228 INFO werkzeug MainThread :  * Debugger PIN: 137-807-915
+2024-08-30 22:12:03,230 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:03] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2024-08-30 22:12:03,540 INFO werkzeug Thread-3 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:03] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2024-08-30 22:12:03,590 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:03] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2024-08-30 22:12:03,931 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:03] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=Nd9Mddq8gO3aSCqCFvBz HTTP/1.1" 200 -
+2024-08-30 22:12:04,193 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:04] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
 2024-08-30 22:10:35,532 INFO werkzeug MainThread :  * Detected change in 'C:\\Jerry\\Important\\Coding\\StudySquare\\src\\application.py', reloading
 2024-08-30 22:10:35,608 INFO werkzeug MainThread :  * Restarting with stat
 2024-08-30 22:15:59,703 INFO werkzeug MainThread :  * Restarting with stat
