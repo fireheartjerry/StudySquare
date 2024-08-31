@@ -923,3 +923,25 @@
 2024-08-30 22:12:03,590 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:03] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
 2024-08-30 22:12:03,931 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:03] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=Nd9Mddq8gO3aSCqCFvBz HTTP/1.1" 200 -
 2024-08-30 22:12:04,193 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:12:04] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2024-08-30 22:25:58,131 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-30 22:25:58,131 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2024-08-30 22:25:58,132 INFO werkzeug MainThread :  * Restarting with stat
+2024-08-30 22:25:58,662 WARNING werkzeug MainThread :  * Debugger is active!
+2024-08-30 22:25:58,665 INFO werkzeug MainThread :  * Debugger PIN: 137-807-915
+2024-08-30 22:26:01,847 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:01] "[33mGET /ihptest HTTP/1.1[0m" 404 -
+2024-08-30 22:26:02,099 INFO werkzeug Thread-3 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:02] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2024-08-30 22:26:02,543 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:02] "[35m[1mGET / HTTP/1.1[0m" 500 -
+2024-08-30 22:26:02,630 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:02] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2024-08-30 22:26:02,787 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:02] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2024-08-30 22:26:03,126 INFO werkzeug Thread-7 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:03] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=u4QepZCmhRzcweM0nZrY HTTP/1.1" 200 -
+2024-08-30 22:26:13,508 INFO werkzeug Thread-8 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:13] "GET /login HTTP/1.1" 200 -
+2024-08-30 22:26:13,827 INFO werkzeug Thread-9 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:13] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
+2024-08-30 22:26:13,828 INFO werkzeug Thread-10 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:13] "[33mGET /static/favicon.png HTTP/1.1[0m" 404 -
+2024-08-30 22:26:14,325 INFO werkzeug Thread-11 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:14] "GET /static/loginbg.jpg HTTP/1.1" 200 -
+2024-08-30 22:26:14,577 INFO werkzeug Thread-12 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:14] "[33mGET /static/favicon.png HTTP/1.1[0m" 404 -
+2024-08-30 22:26:27,458 INFO CTFOJ Thread-13 (process_request_thread) : Incorrect login attempt from IP 127.0.0.1
+2024-08-30 22:26:27,461 INFO werkzeug Thread-13 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:27] "[31m[1mPOST /login HTTP/1.1[0m" 401 -
+2024-08-30 22:26:27,623 INFO werkzeug Thread-14 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:27] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
+2024-08-30 22:26:27,777 INFO werkzeug Thread-15 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:27] "[33mGET /static/favicon.png HTTP/1.1[0m" 404 -
+2024-08-30 22:26:27,935 INFO werkzeug Thread-16 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:27] "[36mGET /static/loginbg.jpg HTTP/1.1[0m" 304 -
