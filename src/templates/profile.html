@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block title %}Home{% endblock %}
+{% block active %}Home{% endblock %}
+
+{% block main %}
+
+<div class="container-fluid px-4">
+    <h1 class="my-5 text-center pt-4">User <p class="d-inline-block fw-bold" style="color: purple;">Greb</p></h1>
+    
+    <div class="row">
+        <div class="col col-xl-6 mx-auto">
+            <div class="card mb-4 mx-auto" style="position: relative; width: 100%;">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <h3 class="card-title mt-3 mb-3">Stats</h3>
+                        <h6>Join Date: </h6> <p>when jerry yang dates ariana</p>
+                        <h6>Squares Created: </h6> <p>69</p>
+                        <h6>Squares Joined: </h6> <p>420</p>
+                        <h6>Total Time: </h6> <p id="timeCounter">Loading...</p>
+                        <script>
+                            var numSeconds = 6969; // do some jinja stuff i think probably
+                            function processNum(a) {
+                                a = Math.floor(a);
+                                if (a < 10) {return "0".concat(a);}
+                                return a;
+                            }
+                            document.getElementById("timeCounter").innerHTML = processNum(numSeconds/3600) + ":" + processNum((numSeconds % 3600) / 60) + ":" + processNum(numSeconds % 60);
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xl-6 mx-auto">
+            <div class="card mb-4 mx-auto" style="position: relative; width: 100%;">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <h3 class="card-title mt-3 mb-3">Last 10 Squares:</h3>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Gyat size</th>
+                                    <th scope="col">Deviousness</th>
+                                    <th scope="col">Social Skills</th>
+                                    <th scope="col">Overall Attractiveness</th>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <th scope="row">Jerry Yang</td>
+                                <td>10</td>
+                                <td>3</td>
+                                <td>5</td>
+                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Alvin Pan</td>
+                                <td>9.5</td>
+                                <td>11</td>
+                                <td>6</td>
+                                <td>7.5</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Jerry Li</td>
+                                <td>-1</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>3</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-xl-6 mx-auto">
+            <div class="card mb-4 mx-auto" style="position: relative; width: 100%;">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <h3 class="card-title mt-3 mb-3">Hotkeys</h3>
+                        <h5>Hot key 1</h5>
+                        <h5>Hot key 2</h5>
+                        <h5>Hot key 3</h5>
+                        <h5>Hot key 4</h5>
+                        <h5>Hot men 5</h5>
+                        <h5>Hot key 6</h5>
+                        <p class="text-primary">Manage Hotkeys</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col col-xl-6 mx-auto">
+            <div class="card mb-4 mx-auto" style="position: relative; width: 100%;">
+                <div class="card-body">
+                    <div class="container-fluid">
+                        <h3 class="card-title mt-3 mb-3">Settings</h3>
+                        <h4 class="d-inline mb-5">Username: </h4> <input type="text" value="Greb"><br><br>
+                        <h4 class="d-inline me-3">Password: </h4> <input type="password" value="****"><br><br>
+                        <h4 class="d-inline me-3">Email: </h4> <input type="text" value="greb@zombiewars.net"><br><br>
+                        <button class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

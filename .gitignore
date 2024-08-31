@@ -1,3 +1,4 @@
 src/session
 src/logs
 src/__pycache__
+src/views/__pycache__
