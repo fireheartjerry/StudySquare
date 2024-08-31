@@ -354,7 +354,7 @@ def login_chk(rows):
 
     return 0
 
-def register_chk(username, password, confirmation, email):
+def register_chk(username, password, confirmation):
     """
     Determines if the user is allowed to register
     Used by register() in application.py
@@ -369,10 +369,6 @@ def register_chk(username, password, confirmation, email):
 
     if not confirmation or password != confirmation:
         flash('Passwords do not match', 'danger')
-        return 400
-
-    if "+" in email:
-        flash('Plus character not allowed in email', 'danger')
         return 400
 
     return 0

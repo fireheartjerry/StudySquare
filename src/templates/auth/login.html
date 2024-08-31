@@ -1,64 +1,179 @@
 {% extends "layout.html" %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Log In{% endblock %}
 {% block active %}Log In{% endblock %}
 
 {% block main %}
-<h1 class="text-center">Log In</h1>
-You can still view most of our features without logging in!
-<br><br>
-<form method="post">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    <div class="form-floating">
-        <input autofocus
-               class="form-control mb-3"
-               name="username"
-               id="username"
-               placeholder="Username"
-               required>
-        <label for="username">Username</label>
+<section class="login-container">
+    <div class="login-box">
+        <h1 class="text-center">Welcome Back!</h1>
+        <p class="text-center lead mb-4">Please log in to continue.</p>
+        <form method="post" class="login-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="form-floating mb-3">
+                <input autofocus
+                       class="form-control"
+                       name="username"
+                       id="username"
+                       placeholder="Username"
+                       required>
+                <label for="username">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input class="form-control"
+                       name="password"
+                       id="password"
+                       placeholder="Password"
+                       type="password"
+                       required>
+                <label for="password">Password</label>
+            </div>
+            <button class="btn btn-primary w-100" type="submit" id="log-in-button">Log In</button>
+            <a href="/register" class="btn btn-secondary w-100 mt-2">Register</a>
+            {% if request.args.get('next') %}
+                <input type="hidden" name="next" value="{{ request.args.get('next') }}">
+            {% endif %}
+        </form>
     </div>
-    <div class="form-floating">
-        <input class="form-control mb-3"
-               name="password"
-               id="password"
-               placeholder="Password"
-               type="password"
-               required>
-        <label for="password">Password</label>
-    </div>
-    <button class="btn btn-primary" type="submit" id="log-in-button" style="margin-top: 0px;">Log In</button>
-    <a href="/forgotpassword" class="btn btn-secondary white">Forgot Password</a>
-    <a href="/register" class="btn btn-info white">Register</a>
-    {% if USE_CAPTCHA %}
-        <script src="https://hcaptcha.com/1/api.js" async defer></script>
-        <hr>
-        <div class="h-captcha" data-sitekey= {{ site_key }} ></div>
-    {% endif %}
-    {% if request.args.get('next') %}
-        <input type="hidden" name="next" value="{{ request.args.get('next') }}">
-    {% endif %}
-</form>
+</section>
 {% endblock %}
-{% block script %}
-<script>
-        var usernameInput = document.getElementById("username");
-        var passwordInput = document.getElementById("password");
-        var logInButton = document.getElementById("log-in-button");
 
-        // Function to update the button style based on input values
-        function updateButtonStyle() {
-            if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
-                logInButton.style.transition = "background-color 0.5s";
-                logInButton.style.backgroundColor = "#741F22";
-            } else {
-                logInButton.style.transition = "background-color 0.5s";
-                logInButton.style.backgroundColor = "";
-            }
+{% block preload %}
+<style>
+    body {
+        background: url('/static/loginbg.jpg') no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+        overflow: hidden;
+    }
+
+    .login-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    .blur-overlay {
+        position: absolute;
+        left: 5%;
+        top: 10%;
+        width: 90%;
+        height: 80%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(15px);
+        z-index: 1;
+    }
+
+    .login-box {
+        position: relative;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 400px;
+        z-index: 2;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .login-box h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .login-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-floating {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #0072ff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 114, 255, 0.25);
+    }
+
+    label {
+        color: gray!important;
+        font-weight: bold;
+    }
+
+    .btn {
+        border: none;
+        border-radius: 12px;
+        padding: 0.75rem;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        font-size: 1.1rem;
+    }
+
+    .btn:hover {
+        transform: scale(1.05);
+
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    .btn-link {
+        color: #0072ff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .btn-link:hover {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
         }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
-        // Add input event listeners to both fields
-        usernameInput.addEventListener("input", updateButtonStyle);
-        passwordInput.addEventListener("input", updateButtonStyle);
-</script>
+    @media (max-width: 768px) {
+        .login-box {
+            padding: 1.5rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .login-box {
+            width: 90%;
+        }
+    }
+
+    nav, footer {
+        display: none!important;
+    }
+</style>
 {% endblock %}

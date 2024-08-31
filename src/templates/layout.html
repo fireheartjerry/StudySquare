@@ -5,11 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="theme-color" content="#0d6efd">
 
-        <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
         <link href="/assets/css/style.css" rel="stylesheet">
         <link href="/static/favicon.png" rel="icon">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 
         <style>
             .nav-link {
@@ -17,19 +19,10 @@
             }
         </style>
 
-        <title>{% block title %}{% endblock %} &middot; {{ CLUB_NAME }}</title>
+        <title>{% block title %}{% endblock %} &middot; StudySquare</title>
 
         {% block preload %}{% endblock %}
     </head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR1ZCFGEG2"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-YR1ZCFGEG2');
-    </script>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <div class="container-fluid">
@@ -97,8 +90,6 @@
         </nav>
 
         <main class="container">
-            {% set maintenance = namespace(flag=false) %}
-            {% set testing = namespace(flag=false) %}
             {% with msg = get_flashed_messages(with_categories=True) %}
                 {% if msg %}
                     {% for category, message in msg %}
@@ -157,126 +148,13 @@
         <footer>
             <hr>
             <p class="text-center" style="font-family: 'Montserrat', sans-serif;" id="footer-text">
-                &copy; <span id="copyright-year"></span>, {{ CLUB_NAME }} v24.6.1
-                <a href="/terms">Terms of Service</a> &middot;
-                <a href="/privacy">Privacy Policy</a> &middot;
-                <a href="https://discord.gg/zUdmCWPT3f">Discord Server</a>
+                &copy; StudySquare &middot;
+                <a href="#">Terms of Service</a> &middot;
+                <a href="#">Privacy Policy</a> &middot;
+                <a href="#">Discord Server</a>
             </p>
         </footer>
 
-        <script src="/assets/js/nav.js"></script>
-        <script src="/assets/js/stackedit.min.js"></script>
-        <script src="/assets/js/katex.min.js"></script>
-        <script src="/assets/js/auto-render.min.js"></script>
-        <script src="/assets/js/renderKatex.js"></script>
-        <script src="/assets/js/convertMD.js"></script>
         {% block script %}{% endblock %}
-        <script src="/assets/js/seeMore.js"></script>
-        <script src="/assets/js/newPagination.js"></script>
-        <script src="/assets/js/dateConvert.js"></script>
-        <script src="/assets/js/grow.js"></script>
-        <script src="/assets/js/bootstrap.bundle.min.js"></script>
-        <script src="/assets/js/jquery.min.js"></script>
-        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     </body>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
-
-        window.onload = function() { renderLatex(); };
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var currentYear = new Date().getFullYear();
-            document.getElementById('copyright-year').textContent = "2023 - "+currentYear;
-        });
-
-        var dropdownContent = document.querySelector('.dropdown-content');
-        var dropdownRelease = document.querySelector('.dropdown-toggle');
-
-        // Show/hide dropdown on anchor click
-        dropdownRelease.addEventListener('click', function() {
-            if (dropdownContent.style.display === 'none') {
-                dropdownContent.style.display = 'block';
-            } else {
-                dropdownContent.style.display = 'none';
-            }
-        });
-
-        // Hide dropdown when clicking anywhere outside of it
-        function hideDropdown() {
-            dropdownContent.style.display = 'none';
-        }
-
-        dropdownRelease.addEventListener('click', function() {
-            dropdownContent.style.display = 'block';
-        });
-
-        document.addEventListener('click', function(event) {
-            var target = event.target;
-            if (target !== dropdownRelease && !dropdownContent.contains(target)) {
-                hideDropdown();
-            }
-        });
-
-        // Color usernames if they are rated
-        var usernames = document.querySelectorAll('.username');
-        usernames.forEach(function(username) {
-            rating = username.dataset.rating;
-            admin = username.dataset.admin;
-            if (admin == "1") {
-                html = username.innerHTML;
-                username.innerHTML = "<b><b>" + html + "</b></b>";
-                let anchor = username.querySelector('a');
-                anchor.innerText = "[ADM] " + anchor.innerText;
-                anchor.style.cssText = `
-                background: #f12711;
-                background: -webkit-linear-gradient(to right, #f5af19, #f12711);
-                background: linear-gradient(to right, #f5af19, #f12711);
-                -webkit-background-clip: text;
-                color: transparent;`;
-                anchor.title = "Admin";
-            } else if (rating != "None" && rating != null) {
-                rating = parseInt(rating);
-                html = username.innerHTML;
-                username.innerHTML = "<b><b>" + html + "</b></b>";
-                let anchor = username.querySelector('a'), css = "", title="";
-                if (rating <= 1000) {
-                    css += "color: #CD7F32!important";
-                    if (username.dataset.pre != "0") anchor.innerText = "[BRZ] " + anchor.innerText;
-                    title = "Bronze Rank"
-                } else if (rating <= 1200) {
-                    css += "color: #D6BD38!important";
-                    if (username.dataset.pre != "0") anchor.innerText = "[GLD] " + anchor.innerText;
-                    title = "Gold Rank"
-                } else if (rating <= 1400) {
-                    css += "color: #19BE67!important";
-                    if (username.dataset.pre != "0") anchor.innerText = "[EMR] " + anchor.innerText;
-                    title = "Emerald Rank"
-                } else if (rating <= 1600) {
-                    css += "color: #07B4B4!important";
-                    if (username.dataset.pre != "0") anchor.innerText = "[DIA] " + anchor.innerText;
-                    title = "Diamond Rank"
-                } else if (rating <= 1800) {
-                    css += "color: #2576F5!important;";
-                    if (username.dataset.pre != "0") anchor.innerText = "[SAP] " + anchor.innerText;
-                    title = "Sapphire Rank"
-                } else if (rating <= 2200) {
-                    css += "color: #DB5BFF!important;";
-                    if (username.dataset.pre != "0") anchor.innerText = "[CRY] " + anchor.innerText;
-                    title = "Crystal Rank"
-                } else if (rating <= 2600) {
-                    css += "color: #8B3DD9!important;";
-                    if (username.dataset.pre != "0") anchor.innerText = "[AMY] " + anchor.innerText;
-                    title = "Amethyst Rank"
-                } else {
-                    css += "color: black!important; text-shadow: -1px -1px 0 #ff0000, 1px -1px 0 #ff0000, -1px 1px 0 #ff0000, 1px 1px 0 #ff0000!important";
-                    if (username.dataset.pre != "0") anchor.innerText = "[OBS] " + anchor.innerText;
-                    title = "Obsidian Rank"
-                }
-                anchor.style.cssText = css;
-                anchor.title = title;
-            }
-        });
-</script>
 </html>
