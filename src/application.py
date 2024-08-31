@@ -59,6 +59,10 @@ csrf.init_app(app)
 def index():
     return render_template("index.html")
 
+@app.route("/square")
+def square():
+    return render_template("square.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     # Forget user id
