@@ -10,11 +10,7 @@ db.execute("""CREATE TABLE IF NOT EXISTS 'users' (
                 'join_date' datetime NOT NULL DEFAULT(0),
                 'squares_created' integer NOT NULL DEFAULT(0),
                 'squares_joined' integer NOT NULL DEFAULT(0),
-                'total_seconds' integer NOT NULL DEFAULT(0),
-            );
-            CREATE TABLE IF NOT EXISTS 'squares' (
-                'id' varchar(64).
-                
+                'total_seconds' integer NOT NULL DEFAULT(0)
             );
             """)
 
