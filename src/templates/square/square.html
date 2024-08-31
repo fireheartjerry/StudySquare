@@ -6,7 +6,12 @@
 {% block main %}
 
 <h1 class="my-5 text-center pt-4 display-5">Viewing Study Square "{{ data.name }}"</h1>
-    
+<div id="confirm" style="display: none;">
+    <form method="post" style="margin-bottom: 1rem;" action="">
+        <input class="btn btn-danger" type="submit" value="">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+</div>
 <div class="row g-4">
     <div class="col-xl-6">
         <div class="card shadow-sm border-0">
@@ -14,18 +19,37 @@
                 <img src="/static/square{{ data.image_type }}.png" class="card-img-top rounded-3" alt="{{ data.name }}">
                 <div class="overlay"></div>
             </div>
+            <a href="/squares" class="btn btn-lg btn-info w-100 mt-3">Back to All Squares</a>
         </div>
     </div>
     <div class="col-xl-6">
         <div class="card shadow-sm border-2" style="border-color: #4aa280;">
             <div class="card-body p-4">
-                <div class="text-center">
+                <div class="">
                     <h3 class="card-title fw-bold text-dark mb-3">{{ data.name }}</h3>
                     <p id="preview" class="text-muted fst-italic">{{ data.preview }}</p>
                     <p id="desc" class="text-dark">{{ data.description }}</p>
-                    <div class="d-flex justify-content-center align-items-center mb-3">
+                    {% if data.public %}
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-success fs-6 p-1 me-1">Public</span>
+                            <i class="fas fa-globe d-md-inline-block mx-2"></i>
+                        </div>
+                    {% else %}
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-danger fs-6 p-1 me-1">Private</span>
+                            <i class="fas fa-lock d-md-inline-block mx-2"></i>
+                        </div>
+                    {% endif %}
+                    {% if data.creator == session.user_id %}
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-info fs-6 p-1 me-1">You own this square.</span>
+                            <i class="fas fa-user d-md-inline-block mx-2"></i>
+                        </div>
+                    {% endif %}
+                    <hr>
+                    <div class="d-flex align-items-center mb-3">
                         <span class="badge bg-primary fs-6 p-1 me-2">{{ data.members }}</span>
-                        <span class="text-muted">Members</span>
+                        <span class="text-muted">Member(s)</span>
                         <i class="fas fa-person d-md-inline-block mx-2"></i>
                     </div>
                     <div class="mb-3">
@@ -33,9 +57,16 @@
                         <span class="badge bg-secondary fs-6 p-1 me-2">{{ data.topic }}</span>
                     </div>
                     <a href="#" id="share-link" class="text-primary fw-bold d-block mb-3">Share this square</a>
-                    <p class="text-success fw-bold">Session Length: <span id="session-length"><u>00:00:00</u></span></p>
-                    <a class="btn btn-primary btn-lg mb-3 w-100" href="https://meet.google.com/{{ data.meeting_code }}">Join Session</a>
-                    <button class="btn btn-danger w-100 mb-3">End Session</button>
+                    <div class="mb-3">
+                        Created on <span class="badge bg-info fs-6">{{ data.create_date }}</span>
+                        <i class="far fa-calendar-alt mw-2"></i>
+                    </div>
+                    {% if session.user_id %}
+                        <p class="text-success fw-bold">Session Length: <span id="session-length"><u>00:00:00</u></span></p>
+                    {% endif %}
+                    <hr>
+                    <a class="btn btn-primary btn-lg mb-3 w-100" href="https://meet.google.com/{{ data.meeting_code }}" id="join" target="_blank">Join Session</a>
+                    <button class="btn btn-danger w-100 mb-3 endsession"{% if not in_square %} disabled{% endif %}>End Session</button>
                     {% if data.creator == session.user_id %}
                         <a class="btn btn-secondary w-100" href="/square/{{ data.id }}/ownerview">View as Owner</a>
                     {% endif %}
@@ -43,7 +74,7 @@
             </div>
         </div>
     </div>
-</div>
+</div><br>
 
 {% endblock %}
 
@@ -58,12 +89,40 @@
         }).catch(function(error) {
             console.error('Could not copy text: ', error);
         });
-    });    
+    });
+    document.querySelector(".endsession").addEventListener("click", function () {
+        document.getElementById("confirm").style.display = "";
+        document.querySelector("#confirm form")
+                .setAttribute("action", "/square/{{ data.id }}/endsession");
+        document.querySelector("#confirm form .btn")
+                .setAttribute("value", "Are you sure you want to end your session? " +
+                                       "Click here to confirm.");
+        window.scrollTo(0, 0);
+    });
+    document.getElementById('join').addEventListener('click', function() {
+        // Create a new form element
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/square/${data.id}/join`;
+
+        // Create a hidden input field for CSRF token
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = 'csrfmiddlewaretoken';
+        csrfInput.value = '{{ csrf_token }}'; // Make sure this Django variable is correctly set
+        form.appendChild(csrfInput);
+
+        // Append the form to the body
+        document.body.appendChild(form);
+
+        // Submit the form
+        form.submit();
+    });
 </script>
 {% endblock %}
 
 {% block preload %}
-<script>
+<style>
     .card-img-container {
         position: relative;
         overflow: hidden;
@@ -76,12 +135,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.3);
         transition: background 0.3s ease;
-    }
-    
-    .card-img-container:hover .overlay {
-        background: rgba(0, 0, 0, 0.5);
     }
     
     .card-img-top {
@@ -106,10 +160,6 @@
         font-size: 1.1rem;
         line-height: 1.5;
     }
-    
-    .btn-lg {
-        border-radius: 50px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-</script>
+
+</style>
 {% endblock %}

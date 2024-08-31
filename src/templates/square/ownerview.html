@@ -6,7 +6,13 @@
 {% block main %}
 
 <h1 class="my-5 text-center pt-4 display-5">Owner View of Study Square "{{ data.name }}"</h1>
-    
+
+<div id="confirm" style="display: none;">
+    <form method="post" style="margin-bottom: 1rem;" action="">
+        <input class="btn btn-danger" type="submit" value="">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+</div>
 <div class="row g-4">
     <div class="col-xl-6">
         <div class="card shadow-sm border-0">
@@ -51,7 +57,17 @@
         }).catch(function(error) {
             console.error('Could not copy text: ', error);
         });
-    });    
+    });
+
+    document.querySelector(".delete").addEventListener("click", function () {
+        document.getElementById("confirm").style.display = "";
+        document.querySelector("#confirm form")
+                .setAttribute("action", "/square/{{ data.id }}/delete");
+        document.querySelector("#confirm form .btn")
+                .setAttribute("value", "Are you sure you want to delete this square? " +
+                                       "Click here to confirm.");
+        window.scrollTo(0, 0);
+    });
 </script>
 {% endblock %}
 

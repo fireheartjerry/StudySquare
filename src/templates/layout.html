@@ -89,12 +89,12 @@
             <a href="/" class="text-decoration-none"><div class="lead text-light fs-3">StudySquare</div></a>
             {% if session.user_id %}
                 <!-- Navbar Search-->
-                <form class="d-none d-md-inline-block form-inline me-auto ms-auto me-md-4 my-2 my-md-0">
+                <div class="d-none d-md-inline-block form-inline me-auto ms-auto me-md-4 my-2 my-md-0">
                     <div class="input-group">
-                        <input class="form-control form-control-lg" type="text" placeholder="Search for Squares" aria-label="Search for..." aria-describedby="btnNavbarSearch" style="width: 400px;"/>
+                        <input class="form-control form-control-lg" type="text" placeholder="Search for Squares" aria-label="Search for..." aria-describedby="btnNavbarSearch" style="width: 400px;" id="searchbar"/>
                         <button class="btn btn-primary" id="square_search" type="button"><i class="fas fa-search"></i></button>
                     </div>
-                </form>
+                </div>
                 <div class="d-md-inline-block form-inline me-0 ms-auto me-md-4 my-2 my-md-0 btn-group">
                     <a class="btn btn-primary" href="/squares/create">Start a Square</a>
                     <a class="btn btn-primary" href="/squares">All Squares</a>
@@ -111,6 +111,16 @@
                     </li>
                 </ul>
             {% else %}
+                <div class="d-none d-md-inline-block form-inline me-auto ms-auto me-md-4 my-2 my-md-0">
+                    <div class="input-group">
+                        <input class="form-control form-control-lg" type="text" placeholder="Search for Squares" aria-label="Search for..." aria-describedby="btnNavbarSearch" style="width: 400px;"/>
+                        <button class="btn btn-primary" id="square_search" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="d-md-inline-block form-inline me-0 ms-auto me-md-4 my-2 my-md-0 btn-group">
+                    <a class="btn btn-primary" href="/squares/create">Start a Square</a>
+                    <a class="btn btn-primary" href="/squares">All Squares</a>
+                </div>
                 <div class="d-md-inline-block form-inline me-0 ms-auto me-md-4 my-2 my-md-0 btn-group">
                     <a class="btn btn-primary" href="/login">Log In</a>
                     <a class="btn btn-primary" href="/register">Register</a>
@@ -199,6 +209,16 @@
                     window.location.href = `/squares?title=${search}`;
                 }
             });
+        
+            document.getElementById('searchbar').addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    const search = document.querySelector("input[type='text']").value;
+                    if (search) {
+                        window.location.href = `/squares?title=${search}`;
+                    }
+                }
+            });
         </script>
+        
     </body>
 </html>

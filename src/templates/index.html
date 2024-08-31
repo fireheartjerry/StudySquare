@@ -4,37 +4,20 @@
 {% block active %}Home{% endblock %}
 
 {% block main %}
-<h1 class="display-4 mb-3 text-center mt-3" style="font-size: 3em;">Popular Squares</h1>
+<h1 class="display-4 mb-4 text-center mt-3" style="font-size: 3em;">Popular Squares</h1>
 <div class="row">
+    {% for square in popular_squares %}
     <div class="col-md-4 mb-4">
         <div class="card shadow-sm rounded">
-            <img src="static/square5.png" class="card-img-top img-fluid">
+            <img src="/static/square{{ square.image_type }}.png" class="card-img-top img-fluid" alt="{{ square.name }}">
             <div class="card-body border-standard">
-                <h5 class="card-title">potpotpot</h5>
-                <p class="card-text">potpotpot</p>
-                <a href="#" class="btn btn-primary">View Details</a>
+                <h5 class="card-title">{{ square.name }}</h5>
+                <p class="card-text">{{ square.description }}</p>
+                <a href="/square/{{ square.id }}" class="btn btn-primary">View Details</a>
             </div>
         </div>
     </div>
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm rounded">
-            <img src="static/square3.png" class="card-img-top img-fluid">
-            <div class="card-body border-standard">
-                <h5 class="card-title">Awajiba Generator Art</h5>
-                <p class="card-text">Awajiba Generator Art</p>
-                <a href="#" class="btn btn-primary">View Details</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm rounded">
-            <img src="static/square2.png" class="card-img-top img-fluid">
-            <div class="card-body border-standard">
-                <h5 class="card-title">Awajiba Generator Art</h5>
-                <p class="card-text">Awajiba Generator Art</p>
-                <a href="#" class="btn btn-primary">View Details</a>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 </div>
+
 {% endblock %}
