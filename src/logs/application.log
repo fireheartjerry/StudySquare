@@ -945,3 +945,78 @@
 2024-08-30 22:26:27,623 INFO werkzeug Thread-14 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:27] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
 2024-08-30 22:26:27,777 INFO werkzeug Thread-15 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:27] "[33mGET /static/favicon.png HTTP/1.1[0m" 404 -
 2024-08-30 22:26:27,935 INFO werkzeug Thread-16 (process_request_thread) : 127.0.0.1 - - [30/Aug/2024 22:26:27] "[36mGET /static/loginbg.jpg HTTP/1.1[0m" 304 -
+2024-08-31 08:20:06,968 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-31 08:20:06,968 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2024-08-31 08:20:06,969 INFO werkzeug MainThread :  * Restarting with stat
+2024-08-31 08:20:07,624 WARNING werkzeug MainThread :  * Debugger is active!
+2024-08-31 08:20:07,627 INFO werkzeug MainThread :  * Debugger PIN: 137-807-915
+2024-08-31 08:20:09,390 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:09] "[33mGET /ihptest HTTP/1.1[0m" 404 -
+2024-08-31 08:20:09,723 INFO werkzeug Thread-3 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:09] "GET / HTTP/1.1" 200 -
+2024-08-31 08:20:10,036 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:10] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
+2024-08-31 08:20:10,086 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:10] "[33mGET /assets/img/menu.png HTTP/1.1[0m" 404 -
+2024-08-31 08:20:10,165 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:10] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:20:10,303 INFO werkzeug Thread-7 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:10] "[33mGET /assets/img/cover.png HTTP/1.1[0m" 404 -
+2024-08-31 08:20:10,395 INFO werkzeug Thread-8 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:10] "[36mGET /static/favicon.png HTTP/1.1[0m" 304 -
+2024-08-31 08:20:23,580 INFO werkzeug Thread-9 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:23] "GET / HTTP/1.1" 200 -
+2024-08-31 08:20:23,891 INFO werkzeug Thread-10 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:23] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
+2024-08-31 08:20:23,902 INFO werkzeug Thread-12 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:23] "[33mGET /assets/img/menu.png HTTP/1.1[0m" 404 -
+2024-08-31 08:20:23,902 INFO werkzeug Thread-11 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:23] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:20:24,226 INFO werkzeug Thread-13 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:24] "[33mGET /assets/img/cover.png HTTP/1.1[0m" 404 -
+2024-08-31 08:20:24,483 INFO werkzeug Thread-14 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:20:24] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:21:06,806 INFO werkzeug Thread-15 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:06] "GET /login HTTP/1.1" 200 -
+2024-08-31 08:21:07,119 INFO werkzeug Thread-16 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:07] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
+2024-08-31 08:21:07,134 INFO werkzeug Thread-17 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:07] "[36mGET /static/favicon.png HTTP/1.1[0m" 304 -
+2024-08-31 08:21:07,460 INFO werkzeug Thread-18 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:07] "[36mGET /static/loginbg.jpg HTTP/1.1[0m" 304 -
+2024-08-31 08:21:18,286 INFO werkzeug Thread-19 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:18] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+2024-08-31 08:21:18,519 INFO werkzeug Thread-20 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:18] "GET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2024-08-31 08:21:18,612 INFO werkzeug Thread-21 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:18] "GET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2024-08-31 08:21:18,938 INFO werkzeug Thread-22 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:18] "GET /login?__debugger__=yes&cmd=resource&f=console.png&s=zq1Fv95XTSZNHUpZgHti HTTP/1.1" 200 -
+2024-08-31 08:21:19,201 INFO werkzeug Thread-23 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:19] "GET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2024-08-31 08:21:48,591 INFO werkzeug Thread-24 (process_request_thread) :  * To enable the debugger you need to enter the security pin:
+2024-08-31 08:21:48,592 INFO werkzeug Thread-24 (process_request_thread) :  * Debugger pin code: 137-807-915
+2024-08-31 08:21:48,593 INFO werkzeug Thread-24 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:21:48] "GET /login?__debugger__=yes&cmd=printpin&s=zq1Fv95XTSZNHUpZgHti HTTP/1.1" 200 -
+2024-08-31 08:22:06,705 INFO werkzeug MainThread :  * Detected change in 'c:\\Users\\wangh\\Documents\\misc\\recesshax\\src\\application.py', reloading
+2024-08-31 08:22:06,778 INFO werkzeug MainThread :  * Restarting with stat
+2024-08-31 08:22:07,370 WARNING werkzeug MainThread :  * Debugger is active!
+2024-08-31 08:22:07,373 INFO werkzeug MainThread :  * Debugger PIN: 137-807-915
+2024-08-31 08:22:24,845 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:22:24] "GET /login?__debugger__=yes&cmd=pinauth&pin=137-807-915&s=zq1Fv95XTSZNHUpZgHti HTTP/1.1" 200 -
+2024-08-31 08:22:34,270 INFO werkzeug Thread-3 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:22:34] "GET /login?__debugger__=yes&cmd=pinauth&pin=137807915&s=zq1Fv95XTSZNHUpZgHti HTTP/1.1" 200 -
+2024-08-31 08:22:42,246 INFO flask_wtf.csrf Thread-4 (process_request_thread) : The CSRF tokens do not match.
+2024-08-31 08:22:42,255 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:22:42] "[31m[1mPOST /login HTTP/1.1[0m" 400 -
+2024-08-31 08:22:42,272 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:22:42] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
+2024-08-31 08:22:42,578 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:22:42] "[36mGET /static/favicon.png HTTP/1.1[0m" 304 -
+2024-08-31 08:22:42,899 INFO werkzeug Thread-7 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:22:42] "[36mGET /static/favicon.png HTTP/1.1[0m" 304 -
+2024-08-31 08:22:48,723 INFO werkzeug MainThread :  * Detected change in 'c:\\Users\\wangh\\Documents\\misc\\recesshax\\src\\application.py', reloading
+2024-08-31 08:22:48,790 INFO werkzeug MainThread :  * Restarting with stat
+2024-08-31 08:22:49,297 WARNING werkzeug MainThread :  * Debugger is active!
+2024-08-31 08:22:49,301 INFO werkzeug MainThread :  * Debugger PIN: 137-807-915
+2024-08-31 08:24:23,114 INFO werkzeug MainThread : [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-08-31 08:24:23,114 INFO werkzeug MainThread : [33mPress CTRL+C to quit[0m
+2024-08-31 08:24:23,116 INFO werkzeug MainThread :  * Restarting with stat
+2024-08-31 08:24:23,666 WARNING werkzeug MainThread :  * Debugger is active!
+2024-08-31 08:24:23,670 INFO werkzeug MainThread :  * Debugger PIN: 137-807-915
+2024-08-31 08:24:28,672 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:24:28] "GET / HTTP/1.1" 200 -
+2024-08-31 08:24:28,769 INFO werkzeug Thread-3 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:24:28] "[33mGET /assets/css/style.css HTTP/1.1[0m" 404 -
+2024-08-31 08:24:28,994 INFO werkzeug Thread-5 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:24:28] "[33mGET /assets/img/menu.png HTTP/1.1[0m" 404 -
+2024-08-31 08:24:28,995 INFO werkzeug Thread-6 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:24:28] "[33mGET /assets/img/cover.png HTTP/1.1[0m" 404 -
+2024-08-31 08:24:29,001 INFO werkzeug Thread-4 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:24:29] "[36mGET /static/favicon.png HTTP/1.1[0m" 304 -
+2024-08-31 08:26:03,844 INFO werkzeug Thread-9 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:26:03] "GET / HTTP/1.1" 200 -
+2024-08-31 08:26:03,867 INFO werkzeug Thread-8 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:26:03] "GET /static/style.css HTTP/1.1" 200 -
+2024-08-31 08:26:04,074 INFO werkzeug Thread-10 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:26:04] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:26:04,171 INFO werkzeug Thread-11 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:26:04] "[33mGET /assets/img/menu.png HTTP/1.1[0m" 404 -
+2024-08-31 08:26:04,341 INFO werkzeug Thread-12 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:26:04] "[33mGET /assets/img/cover.png HTTP/1.1[0m" 404 -
+2024-08-31 08:26:04,650 INFO werkzeug Thread-13 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:26:04] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:27:16,893 INFO werkzeug Thread-15 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:16] "GET / HTTP/1.1" 200 -
+2024-08-31 08:27:16,909 INFO werkzeug Thread-16 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:16] "GET /static/style.css HTTP/1.1" 200 -
+2024-08-31 08:27:17,139 INFO werkzeug Thread-17 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:17] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:27:17,239 INFO werkzeug Thread-18 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:17] "GET /static/menu.png HTTP/1.1" 200 -
+2024-08-31 08:27:17,331 INFO werkzeug Thread-19 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:17] "GET /static/cover.png HTTP/1.1" 200 -
+2024-08-31 08:27:17,671 INFO werkzeug Thread-20 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:17] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:27:18,863 INFO werkzeug Thread-21 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:18] "GET / HTTP/1.1" 200 -
+2024-08-31 08:27:19,174 INFO werkzeug Thread-22 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:19] "GET /static/style.css HTTP/1.1" 200 -
+2024-08-31 08:27:19,203 INFO werkzeug Thread-23 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:19] "GET /static/favicon.png HTTP/1.1" 200 -
+2024-08-31 08:27:19,216 INFO werkzeug Thread-24 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:19] "GET /static/menu.png HTTP/1.1" 200 -
+2024-08-31 08:27:19,501 INFO werkzeug Thread-25 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:19] "GET /static/cover.png HTTP/1.1" 200 -
+2024-08-31 08:27:19,828 INFO werkzeug Thread-26 (process_request_thread) : 127.0.0.1 - - [31/Aug/2024 08:27:19] "GET /static/favicon.png HTTP/1.1" 200 -
