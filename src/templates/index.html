@@ -4,32 +4,35 @@
 {% block active %}Home{% endblock %}
 
 {% block main %}
-<h1 class="my-5 text-center pt-4">Popular Squares</h1>
+<h1 class="mb-5 text-center pt-4">Popular Squares</h1>
 <div class="row">
-    <div class="col-xl-6">
-        <div class="card mb-4" style="position: relative;">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm rounded">
+            <img src="static/square5.png" class="card-img-top img-fluid">
             <div class="card-body">
-                <div class="container-fluid text-center">
-                    <img src="/static/menu.png" class="card-img-top">
-                    <h3 class="card-title mt-3"><a href="/square">Zombiewars 0.5</a></h3>
-                    <p class="mb-1">Grinding the latest beta of Zombiewars and having a load of fun</p>
-                    <i class="fas fa-person d-md-inline-block"></i>
-                    <p class="my-1 d-md-inline-block">6969</p>
-                </div>
+                <h5 class="card-title">potpotpot</h5>
+                <p class="card-text">potpotpot</p>
+                <a href="#" class="btn btn-primary">View Details</a>
             </div>
         </div>
     </div>
-    <div class="col-xl-6">
-        <div class="card mb-4" style="position: relative;">
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm rounded">
+            <img src="static/square3.png" class="card-img-top img-fluid">
             <div class="card-body">
-                <div class="container-fluid text-center">
-                    <img src="/static/cover.png" class="card-img-top">
-                    <h3 class="card-title mt-3"><a href="/square">Zombiewars 3</a></h3>
-                    <p>Going back to the old times and grinding the ancient version of Zombiewars blah blah...</p>
-                    <p class="blockquote-footer mb-1">See More</p>
-                    <i class="fas fa-person d-md-inline-block"></i>
-                    <p class="my-1 d-md-inline-block">420</p>
-                </div>
+                <h5 class="card-title">Awajiba Generator Art</h5>
+                <p class="card-text">Awajiba Generator Art</p>
+                <a href="#" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card shadow-sm rounded">
+            <img src="static/square2.png" class="card-img-top img-fluid">
+            <div class="card-body">
+                <h5 class="card-title">Awajiba Generator Art</h5>
+                <p class="card-text">Awajiba Generator Art</p>
+                <a href="#" class="btn btn-primary">View Details</a>
             </div>
         </div>
     </div>
@@ -38,29 +41,30 @@
 
 {% block sidebar %}
 <div class="nav">
-    <div class="sb-sidenav-menu-heading">Saved</div>
-    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-        Math
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-    </a>
-    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-        <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="layout-static.html">Static Navigation</a>
-            <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-        </nav>
-    </div>
-
-    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-        Zombiewars
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-    </a>
-    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-        <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="layout-static.html">Zombiewars latest</a>
-            <a class="nav-link" href="layout-sidenav-light.html">Old zw</a>
-        </nav>
-    </div>
+    <center>
+    <div class="fs-3 fw-bold mt-4 mb-2" style="color: white;">QUICK SEARCH</div>
+    <div class="fs-6 mb-3" style="color: white">Click these to automatically search for similar squares.</div>
+    <ul class="quicksearch-list">
+        <li class="quicksearch-item">
+            <a href="#" class="quicksearch-link">Add a Quick Link</a>
+        </li>
+        <li class="quicksearch-item">
+            <a href="#" class="quicksearch-link">Add a Quick Link</a>
+        </li>
+        <li class="quicksearch-item">
+            <a href="#" class="quicksearch-link">Add a Quick Link</a>
+        </li>
+        <li class="quicksearch-item">
+            <a href="#" class="quicksearch-link">Add a Quick Link</a>
+        </li>
+        <li class="quicksearch-item">
+            <a href="#" class="quicksearch-link">Add a Quick Link</a>
+        </li>
+        <li class="quicksearch-item">
+            <a href="#" class="quicksearch-link">Add a Quick Link</a>
+        </li>
+    </ul>
+</center>
 </div>
+
 {% endblock %}

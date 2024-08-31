@@ -1,219 +1,219 @@
-{% extends "layout.html" %}
-
-{% block title %}Register{% endblock %}
-{% block active %}Register{% endblock %}
-
-{% block main %}
-<section class="register-container">
-    <div class="register-box">
-        <h1 class="text-center">Create an Account</h1>
-        <center>
-            <span class="text-center mb-3 fs-5">Please fill out the form to register.</span><br>
-            <a class="text-center mb-4" href="/">Back to home</a>
-        </center><br>
-        <form method="post" class="register-form">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <div class="form-floating mb-3">
-                <input autocomplete="off"
-                       autofocus
-                       class="form-control"
-                       name="username"
-                       id="username"
-                       placeholder="Username"
-                       required>
-                <label for="username">Username</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input class="form-control"
-                       name="password"
-                       id="password"
-                       placeholder="Password"
-                       type="password"
-                       autocomplete="new-password"
-                       required>
-                <label for="password">Password</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input class="form-control"
-                       name="confirmation"
-                       id="confirmation"
-                       placeholder="Confirm Password"
-                       type="password"
-                       autocomplete="new-password"
-                       required>
-                <label for="confirmation">Confirm Password</label>
-            </div>
-            <button class="btn btn-primary w-100" type="submit" id="register">Register</button>
-            <span class="text-center mt-2">Already have an account? <a href="/login">Login</a></span>
-        </form>
-    </div>
-</section>
-{% endblock %}
-
-{% block preload %}
-<style>
-    body {
-        background: url('/static/regbg.jpg') no-repeat center center fixed;
-        background-size: cover;
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Poppins', sans-serif;
-        overflow: hidden;
-    }
-
-    .register-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .blur-overlay {
-        position: absolute;
-        left: 5%;
-        top: 10%;
-        width: 90%;
-        height: 80%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(15px);
-        z-index: 1;
-    }
-
-    .register-box {
-        position: relative;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-        width: 100%;
-        max-width: 400px;
-        z-index: 2;
-        animation: fadeIn 0.5s ease-in-out;
-    }
-
-    .register-box h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 1rem;
-    }
-
-    .register-form {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .form-floating {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-control {
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .form-control:focus {
-        border-color: #0072ff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 114, 255, 0.25);
-    }
-
-    label {
-        color: gray!important;
-        font-weight: bold;
-    }
-
-    .btn {
-        border: none;
-        border-radius: 12px;
-        padding: 0.75rem;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        font-size: 1.1rem;
-    }
-
-    .btn:hover {
-        transform: scale(1.05);
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-
-    .btn-secondary:hover {
-        background-color: #5a6268;
-    }
-
-    .btn-link {
-        color: #0072ff;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-    }
-
-    .btn-link:hover {
-        color: #0056b3;
-        text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-20px);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register &middot; StudySquare</title>
+    <link href="/static/favicon.png" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background: url('/static/regbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
         }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
 
-    @media (max-width: 768px) {
-        .register-box {
-            padding: 1.5rem;
+        .register-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
-    }
 
-    @media (max-width: 576px) {
-        .register-box {
+        .blur-overlay {
+            position: absolute;
+            left: 5%;
+            top: 10%;
             width: 90%;
+            height: 80%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            z-index: 1;
         }
-    }
 
-    nav, footer {
-        display: none!important;
-    }
-</style>
-{% endblock %}
-
-{% block script %}
-<script>
-    const newPassword = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmation");
-    document.querySelector("form").addEventListener("submit", event => {
-        if (newPassword.value != confirmPassword.value) {
-            makeAlert("Passwords do not match");
-            event.preventDefault();
+        .register-box {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            z-index: 2;
+            animation: fadeIn 0.5s ease-in-out;
         }
-        if (newPassword.value.length < 8) {
-            makeAlert("Password must be at least 8 characters");
-            event.preventDefault();
-        }
-    });
 
-    function makeAlert(message) {
-        var tmp = document.createElement('div');
-        tmp.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                             ${message}
-                             <button type="button"
-                                     class="btn-close"
-                                     data-bs-dismiss="alert"
-                                     aria-label="Close"></button>
-                         </div>`;
-        document.querySelector("main").prepend(tmp.firstChild);
-    }
-</script>
-{% endblock %}
+        .register-box h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-floating {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #0072ff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 114, 255, 0.25);
+        }
+
+        label {
+            color: gray !important;
+            font-weight: bold;
+        }
+
+        .btn-link {
+            color: #0072ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .btn-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .register-box {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .register-box {
+                width: 90%;
+            }
+        }
+
+        .btn {
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-size: 1.1rem;
+          }
+          
+          .btn:hover {
+            transform: scale(1.05);
+          }
+          
+          .btn-primary:hover {
+            background-color: #0056b3;
+          }
+          
+          .btn-secondary:hover {
+            background-color: #5a6268;
+          }
+    </style>
+</head>
+<body>
+    <section class="register-container">
+        <div class="register-box">
+            <h1 class="text-center">Create an Account</h1>
+            <center>
+                <span class="text-center mb-3 fs-5">Please fill out the form to register.</span><br>
+                <a class="text-center mb-4" href="/">Back to home</a>
+            </center><br>
+            <form method="post" class="register-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <div class="form-floating mb-3">
+                    <input autocomplete="off"
+                           autofocus
+                           class="form-control"
+                           name="username"
+                           id="username"
+                           placeholder="Username"
+                           required>
+                    <label for="username">Username</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control"
+                           name="password"
+                           id="password"
+                           placeholder="Password"
+                           type="password"
+                           autocomplete="new-password"
+                           required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control"
+                           name="confirmation"
+                           id="confirmation"
+                           placeholder="Confirm Password"
+                           type="password"
+                           autocomplete="new-password"
+                           required>
+                    <label for="confirmation">Confirm Password</label>
+                </div>
+                <button class="btn btn-primary w-100" type="submit" id="register">Register</button>
+                <span class="text-center mt-2">Already have an account? <a href="/login">Login</a></span>
+            </form>
+        </div>
+    </section>
+    <script>
+        const newPassword = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirmation");
+        document.querySelector("form").addEventListener("submit", event => {
+            if (newPassword.value != confirmPassword.value) {
+                makeAlert("Passwords do not match");
+                event.preventDefault();
+            }
+            if (newPassword.value.length < 8) {
+                makeAlert("Password must be at least 8 characters");
+                event.preventDefault();
+            }
+        });
+
+        function makeAlert(message) {
+            var tmp = document.createElement('div');
+            tmp.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                 ${message}
+                                 <button type="button"
+                                         class="btn-close"
+                                         data-bs-dismiss="alert"
+                                         aria-label="Close"></button>
+                             </div>`;
+            document.querySelector("section").prepend(tmp.firstChild);
+        }
+    </script>
+</body>
+</html>
