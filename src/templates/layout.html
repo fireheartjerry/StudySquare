@@ -104,7 +104,6 @@
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="/profile">Profile</a></li>
-                            <li><a class="dropdown-item" href="/activity">Activity Log</a></li>
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
@@ -137,24 +136,35 @@
                             <div class="fs-6 mb-3" style="color: white">Click these to automatically search for similar squares.</div>
                             <ul class="quicksearch-list">
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link">Add a Quick Link</a>
+                                    <a href="#" class="quicksearch-link" id="qs-1">gleb</a>
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link">Add a Quick Link</a>
+                                    <a href="#" class="quicksearch-link" id="qs-2">Add a Quick Link</a>
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link">Add a Quick Link</a>
+                                    <a href="#" class="quicksearch-link" id="qs-3">Add a Quick Link</a>
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link">Add a Quick Link</a>
+                                    <a href="#" class="quicksearch-link" id="qs-4">Add a Quick Link</a>
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link">Add a Quick Link</a>
+                                    <a href="#" class="quicksearch-link" id="qs-5">Add a Quick Link</a>
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link">Add a Quick Link</a>
+                                    <a href="#" class="quicksearch-link" id="qs-6">Add a Quick Link</a>
                                 </li>
                             </ul>
+                            <script>
+                                for (var i=1; i<=6; i++) {
+                                    let s = document.getElementById("qs-" + i);
+                                    if (s.innerHTML != "Add a Quick Link") {
+                                        s.onclick = function() {
+                                            document.getElementById("searchbar").value = s.innerHTML;
+                                            handleSquareSearch();
+                                        };
+                                    }
+                                }
+                            </script>
                         </center>
                         </div>
                     </div>
@@ -203,12 +213,13 @@
 
         {% block script %}{% endblock %}
         <script>
-            document.querySelector("#square_search").addEventListener("click", function() {
+            function handleSquareSearch() {
                 const search = document.querySelector("input[type='text']").value;
                 if (search) {
                     window.location.href = `/squares?title=${search}`;
                 }
-            });
+            }
+            document.querySelector("#square_search").addEventListener("click", handleSquareSearch);
         
             document.getElementById('searchbar').addEventListener('keydown', function(event) {
                 if (event.key === 'Enter') {

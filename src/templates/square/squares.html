@@ -6,8 +6,8 @@
 {% block main %}
 <section class="squares-container">
     <div class="squares-header text-center">
-        <h1 class="display-4">Squares Gallery</h1>
-        <p class="lead">Explore the collection of squares. Use the search box to filter results.</p>
+        <h1 class="display-4" id="titleHeading">Squares Gallery</h1>
+        <p class="lead" id="desc">Explore the collection of squares. Use the search box to filter results.</p>
     </div>
     <div class="squares-grid row">
         {% for square in squares %}
@@ -25,6 +25,13 @@
         {% endfor %}
     </div>
 </section>
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("title")) {
+        document.getElementById("titleHeading").innerHTML = "Search Results for <strong>" + urlParams.get("title") + "</strong>";
+        document.getElementById("desc").style.display = "none";
+    }
+</script>
 {% endblock %}
 
 {% block preload %}
