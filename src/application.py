@@ -62,7 +62,8 @@ app.register_blueprint(view_square, url_prefix="/square")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    popular_squares = db.execute("SELECT * FROM squares ORDER BY members DESC LIMIT 3")
+    return render_template("index.html", popular_squares=popular_squares)
 
 @app.route("/square")
 def square():
@@ -93,6 +94,7 @@ def login():
                       username=request.form.get("username"))
     code = login_chk(rows)
     if code != 0:
+        flash('Invalid username or password', 'danger')
         return render_template("auth/login.html"), code
 
     # Remember which user has logged in
@@ -198,16 +200,20 @@ def squares():
     title = request.args.get("title")
     if not title:
         title = None
+    print(title)
     
     query = "SELECT * FROM squares"
-    modifier = ""
-    args = []
+    modifier = " WHERE ((public = 1 OR creator = ?)"
+    args = [session["user_id"]] if session.get("user_id") else [-1]
     if title:
-        modifier += " WHERE (LOWER(name) LIKE ?)"
+        modifier += " AND (LOWER(name) LIKE ?)"
         args.append('%' + title.lower() + '%')
-    
+    modifier += ") ORDER BY name ASC"
     query += modifier
+    print(query)
+    print()
     data = db.execute(query, *args)
+    print(data)
     
     if not data:
         flash("No such squares found.", "warning")

@@ -18,7 +18,6 @@ api = Blueprint("square", __name__)
 logger = logging.getLogger("TOPSOJ")
 
 @api.route("/<square_id>")
-@login_required
 def square(square_id):
     data = db.execute("SELECT * FROM squares WHERE id = :sid", sid=square_id)
     
@@ -26,7 +25,9 @@ def square(square_id):
         flash("Square not found", "error")
         return redirect("/squares")
     
-    return render_template("square/square.html", data=data[0])
+    in_square = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session.get("user_id", -1))[0]["cnt"]
+    
+    return render_template("square/square.html", data=data[0], in_square=in_square)
 
 @api.route("/<square_id>/edit", methods=["GET", "POST"])
 @login_required
@@ -84,7 +85,57 @@ def edit_square(square_id):
                     f"square {square_id}"), extra={"section": "square"})
     flash('Square edited successfully!', 'success')
     return redirect(f"/square/{square_id}")
+
+
+@api.route("/<square_id>/join", methods=["POST"])
+@login_required
+def join_square(square_id):
+    data = db.execute("SELECT * FROM squares WHERE id = :sid", sid=square_id)
     
+    if not data:
+        flash("Square not found", "error")
+        return redirect("/squares")
+    
+    in_square = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session.get("user_id", -1))[0]["cnt"]
+    
+    if in_square:
+        flash("You are already in this square", "error")
+        return redirect(f"/square/{square_id}")
+    
+    db.execute("INSERT INTO square_members(square_id, user_id) VALUES(:sid, :uid)", sid=square_id, uid=session["user_id"])
+    
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Joined square \"{data[0]['name']}\" ({square_id}).")
+    
+    logger.info((f"User #{session['user_id']} ({session['username']}) joined "
+                    f"square {square_id}"), extra={"section": "square"})
+    flash('You have joined the square', 'success')
+    return redirect(f"/square/{square_id}")
+
+    
+@api.route("/<square_id>/leave", methods=["POST"])
+@login_required
+def leave_square(square_id):
+    data = db.execute("SELECT * FROM squares WHERE id = :sid", sid=square_id)
+    
+    if not data:
+        flash("Square not found", "error")
+        return redirect("/squares")
+    
+    in_square = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session.get("user_id", -1))[0]["cnt"]
+    
+    if not in_square:
+        flash("You are not in this square", "error")
+        return redirect(f"/square/{square_id}")
+    
+    db.execute("DELETE FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])
+    
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Left square \"{data[0]['name']}\" ({square_id}).")
+    
+    logger.info((f"User #{session['user_id']} ({session['username']}) left "
+                    f"square {square_id}"), extra={"section": "square"})
+    flash('You have left the square', 'success')
+    return redirect("/squares")
+
 
 @api.route("/<square_id>/ownerview")
 @login_required
@@ -100,3 +151,27 @@ def ownerview(square_id):
         return redirect(f"/square/{square_id}")
 
     return render_template("square/ownerview.html", data=data[0])
+
+
+@api.route("/<square_id>/delete", methods=["POST"])
+@login_required
+def delete_square(square_id):
+    data = db.execute("SELECT * FROM squares WHERE id = :sid", sid=square_id)
+    
+    if not data:
+        flash("Square not found", "error")
+        return redirect("/squares")
+    
+    if data[0]['creator'] != session["user_id"]:
+        flash("You do not have permission to delete this square", "error")
+        return redirect(f"/square/{square_id}")
+    
+    # Delete square from database
+    db.execute("DELETE FROM squares WHERE id = :sid", sid=square_id)
+    
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Deleted square \"{data[0]['name']}\" ({square_id}).")
+    
+    logger.info((f"User #{session['user_id']} ({session['username']}) deleted "
+                    f"square {square_id}"), extra={"section": "square"})
+    flash('Square deleted successfully!', 'success')
+    return redirect("/squares")
