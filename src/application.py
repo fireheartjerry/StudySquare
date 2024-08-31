@@ -85,6 +85,8 @@ def login():
     # Remember which user has logged in
     session["user_id"] = rows[0]["id"]
     session["username"] = rows[0]["username"]
+    
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", session["user_id"], "login")
 
     logger.info((f"User #{session['user_id']} ({session['username']}) logged in "
                  f"on IP {request.remote_addr}"), extra={"section": "auth"})
@@ -97,6 +99,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", session["user_id"], "logout")
     session.clear()
     return redirect("/")
 
@@ -129,6 +132,8 @@ def register():
         if db.execute("SELECT COUNT(*) AS cnt FROM users WHERE username=?", username)[0]["cnt"] > 0:
             flash('Username already exists', 'danger')
         return render_template("auth/register.html"), 400
+    
+    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", db.execute("SELECT id FROM users WHERE username=?", username)[0]["id"], "join")
 
     flash(('Account successfully created! Don\'t forget your password'), 'success')
     logger.info((f"User {username} has created an account "

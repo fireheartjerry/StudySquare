@@ -21,7 +21,25 @@ db.execute("""CREATE TABLE IF NOT EXISTS 'users' (
                 'description' TEXT,
                 'public' boolean NOT NULL DEFAULT(1),
                 'members' integer NOT NULL DEFAULT(1),
+                'meeting_code' varchar(64) NOT NULL
             );
-            """)
+            CREATE TABLE IF NOT EXISTS 'square_members' (
+                'id' integer PRIMARY KEY NOT NULL,
+                'square_id' varchar(64) NOT NULL,
+                'user_id' integer NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS 'search_presets' (
+                'id' integer PRIMARY KEY NOT NULL,
+                'user_id' integer NOT NULL,
+                'preset_name' varchar(64) NOT NULL,
+                'preset' TEXT NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS 'activity_log' (
+                'id' integer PRIMARY KEY NOT NULL,
+                'user_id' integer NOT NULL,
+                'square_id' varchar(64),
+                'action' TEXT NOT NULL,
+                'timestamp' datetime NOT NULL DEFAULT(0)
+            );""")
 
 db.execute("COMMIT")
