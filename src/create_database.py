@@ -30,7 +30,8 @@ db.execute("""CREATE TABLE IF NOT EXISTS 'squares' (
 db.execute("""CREATE TABLE IF NOT EXISTS 'square_members' (
                 'id' integer PRIMARY KEY NOT NULL,
                 'square_id' varchar(64) NOT NULL,
-                'user_id' integer NOT NULL
+                'user_id' integer NOT NULL,
+                'join_date' datetime NOT NULL
             );""")
 
 db.execute("""CREATE TABLE IF NOT EXISTS 'search_presets' (

@@ -27,6 +27,9 @@ def square(square_id):
     
     in_square = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session.get("user_id", -1))[0]["cnt"]
     
+    # join = db.execute("SELECT timestamp FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])[0]["timestamp"]
+    # difference_seconds = (datetime.now(UTC) - datetime.strptime(join, "%Y-%m-%d %H:%M:%S.%f")).total_seconds()
+    
     return render_template("square/square.html", data=data[0], in_square=in_square)
 
 @api.route("/<square_id>/edit", methods=["GET", "POST"])
@@ -55,15 +58,6 @@ def edit_square(square_id):
     new_meeting_code = request.form.get("meeting_code")
     new_image_type = int(request.form.get("image_type"))
     new_topic = request.form.get("topic")
-    
-    # print these
-    print("new_name:", new_name)
-    print("new_preview:", new_preview)
-    print("new_description:", new_description)
-    print("new_privacy:", new_privacy)
-    print("new_meeting_code:", new_meeting_code)
-    print("new_image_type:", new_image_type)
-    print("new_topic:", new_topic)
     
     if not new_name or not new_description or not new_preview or not new_meeting_code:
         flash('Please enter all required fields', 'danger')
@@ -99,7 +93,6 @@ def join_square(square_id):
     in_square = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session.get("user_id", -1))[0]["cnt"]
     
     if in_square:
-        flash("You are already in this square", "error")
         return redirect(f"/square/{square_id}")
     
     db.execute("INSERT INTO square_members(square_id, user_id) VALUES(:sid, :uid)", sid=square_id, uid=session["user_id"])
@@ -112,7 +105,7 @@ def join_square(square_id):
     return redirect(f"/square/{square_id}")
 
     
-@api.route("/<square_id>/leave", methods=["POST"])
+@api.route("/<square_id>/endsession", methods=["POST"])
 @login_required
 def leave_square(square_id):
     data = db.execute("SELECT * FROM squares WHERE id = :sid", sid=square_id)
@@ -124,7 +117,7 @@ def leave_square(square_id):
     in_square = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session.get("user_id", -1))[0]["cnt"]
     
     if not in_square:
-        flash("You are not in this square", "error")
+        flash("You are not in this square", "danger")
         return redirect(f"/square/{square_id}")
     
     db.execute("DELETE FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])

@@ -22,8 +22,9 @@
             <a href="/squares" class="btn btn-lg btn-info w-100 mt-3">Back to All Squares</a>
         </div>
     </div>
+    {{ difference_seconds }}
     <div class="col-xl-6">
-        <div class="card shadow-sm border-2" style="border-color: #4aa280;">
+        <div class="card shadow-sm border-2" style="border-color: #2fa174;">
             <div class="card-body p-4">
                 <div class="">
                     <h3 class="card-title fw-bold text-dark mb-3">{{ data.name }}</h3>
@@ -103,13 +104,13 @@
         // Create a new form element
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = `/square/${data.id}/join`;
+        form.action = "/square/{{ data.id }}/join";
 
         // Create a hidden input field for CSRF token
         const csrfInput = document.createElement('input');
         csrfInput.type = 'hidden';
-        csrfInput.name = 'csrfmiddlewaretoken';
-        csrfInput.value = '{{ csrf_token }}'; // Make sure this Django variable is correctly set
+        csrfInput.name = 'csrf_token';
+        csrfInput.value = '{{ csrf_token() }}'; // Make sure this Django variable is correctly set
         form.appendChild(csrfInput);
 
         // Append the form to the body
