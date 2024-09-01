@@ -138,22 +138,46 @@
                             <div class="fs-6 mb-3" style="color: white">Click these to automatically search for similar squares.</div>
                             <ul class="quicksearch-list">
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link" id="qs-1">gleb</a>
+                                    {% if hotkey1 %}
+                                        <a href="/squares?title={{ hotkey1 }}" class="quicksearch-link" id="qs-1">{{ hotkey1 }}</a>
+                                    {% else %}
+                                        <a href="/profile#hotkeys" class="quicksearch-link" id="qs-1">Add a Quick Link</a>
+                                    {% endif %}
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link" id="qs-2">Add a Quick Link</a>
+                                    {% if hotkey2 %}
+                                        <a href="/squares?title={{ hotkey2 }}" class="quicksearch-link" id="qs-2">{{ hotkey2 }}</a>
+                                    {% else %}
+                                        <a href="/profile#hotkeys" class="quicksearch-link" id="qs-2">Add a Quick Link</a>
+                                    {% endif %}
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link" id="qs-3">Add a Quick Link</a>
+                                    {% if hotkey3 %}
+                                        <a href="/squares?title={{ hotkey3 }}" class="quicksearch-link" id="qs-3">{{ hotkey3 }}</a>
+                                    {% else %}
+                                        <a href="/profile#hotkeys" class="quicksearch-link" id="qs-3">Add a Quick Link</a>
+                                    {% endif %}
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link" id="qs-4">Add a Quick Link</a>
+                                    {% if hotkey4 %}
+                                        <a href="/squares?title={{ hotkey4 }}" class="quicksearch-link" id="qs-4">{{ hotkey4 }}</a>
+                                    {% else %}
+                                        <a href="/profile#hotkeys" class="quicksearch-link" id="qs-4">Add a Quick Link</a>
+                                    {% endif %}
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link" id="qs-5">Add a Quick Link</a>
+                                    {% if hotkey5 %}
+                                        <a href="/squares?title={{ hotkey5 }}" class="quicksearch-link" id="qs-5">{{ hotkey5 }}</a>
+                                    {% else %}
+                                        <a href="/profile#hotkeys" class="quicksearch-link" id="qs-5">Add a Quick Link</a>
+                                    {% endif %}
                                 </li>
                                 <li class="quicksearch-item">
-                                    <a href="#" class="quicksearch-link" id="qs-6">Add a Quick Link</a>
+                                    {% if hotkey6 %}
+                                        <a href="/squares?title={{ hotkey6 }}" class="quicksearch-link" id="qs-6">{{ hotkey6 }}</a>
+                                    {% else %}
+                                        <a href="/profile#hotkeys" class="quicksearch-link" id="qs-6">Add a Quick Link</a>
+                                    {% endif %}
                                 </li>
                             </ul>
                             <script>

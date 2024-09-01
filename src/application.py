@@ -62,19 +62,18 @@ app.register_blueprint(view_square, url_prefix="/square")
 
 @app.route("/")
 def index():
+    hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6 = gethotkeys()
+    
     popular_squares = db.execute("SELECT * FROM squares ORDER BY members DESC LIMIT 3")
-    return render_template("index.html", popular_squares=popular_squares)
-
-
-@app.route("/square")
-def square():
-    return render_template("square.html")
+    return render_template("index.html", popular_squares=popular_squares, hotkey1=hotkey1, hotkey2=hotkey2, hotkey3=hotkey3, hotkey4=hotkey4, hotkey5=hotkey5, hotkey6=hotkey6)
 
 
 @app.route("/profile")
 def profile():
+    hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6 = gethotkeys()
     data = db.execute("SELECT * FROM users WHERE id = :uid", uid=session["user_id"])[0]
-    return render_template("profile.html", data=data)
+    recent_10_squares = db.execute("SELECT * FROM square_join_log WHERE user_id = :uid ORDER BY date DESC LIMIT 10", uid=session["user_id"])
+    return render_template("profile.html", data=data, recent_10_squares=recent_10_squares, hotkey1=hotkey1, hotkey2=hotkey2, hotkey3=hotkey3, hotkey4=hotkey4, hotkey5=hotkey5, hotkey6=hotkey6)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -150,6 +149,10 @@ def register():
             flash('Username already exists', 'danger')
         return render_template("auth/register.html"), 400
 
+    user = db.execute("SELECT * FROM users WHERE username=?", username)[0]
+    session["user_id"] = user["id"]
+    session["username"] = user["username"]
+
     flash(('Account successfully created! Don\'t forget your password'), 'success')
     logger.info((f"User {username} has created an account "
                  f"on IP {request.remote_addr}"), extra={"section": "auth"})
@@ -159,8 +162,9 @@ def register():
 @app.route("/squares/create", methods=["GET", "POST"])
 @login_required
 def create_square():
+    hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6 = gethotkeys()
     if request.method == "GET":
-        return render_template("square/create.html")
+        return render_template("square/create.html", hotkey1=hotkey1, hotkey2=hotkey2, hotkey3=hotkey3, hotkey4=hotkey4, hotkey5=hotkey5, hotkey6=hotkey6)
     
     # Reached via POST
     id = generate_sq_id()
@@ -174,12 +178,12 @@ def create_square():
     
     if not square_name or not description or not preview or not meeting_code:
         flash('Please enter all required fields', 'danger')
-        return render_template("square/create.html"), 400
+        return render_template("square/create.html", hotkey1=hotkey1, hotkey2=hotkey2, hotkey3=hotkey3, hotkey4=hotkey4, hotkey5=hotkey5, hotkey6=hotkey6), 400
 
     # Ensure a square with this title does not exist already
     if db.execute("SELECT COUNT(*) AS cnt FROM squares WHERE name=?", square_name)[0]["cnt"] > 0:
         flash('Square name already exists', 'danger')
-        return render_template("square/create.html"), 400
+        return render_template("square/create.html", hotkey1=hotkey1, hotkey2=hotkey2, hotkey3=hotkey3, hotkey4=hotkey4, hotkey5=hotkey5, hotkey6=hotkey6), 400
     
     # Add to squares table
     db.execute(("INSERT INTO squares(id, name, creator, create_date, preview, description, public, meeting_code, image_type, topic) "
@@ -187,8 +191,8 @@ def create_square():
                id, square_name, session['user_id'], preview, description, bool(int(privacy)), meeting_code, image_type, topic)
     
     db.execute("INSERT INTO square_members(square_id, user_id, join_date) VALUES(?, ?, datetime('now'))", id, session["user_id"])
-    
     db.execute("UPDATE users SET squares_created = squares_created + 1 WHERE id = ?", session["user_id"])
+    db.execute("INSERT INTO square_join_log(user_id, square_id, square_title, square_creator_username) VALUES(?, ?, ?, ?)", (session["user_id"], id, square_name, session["username"]))
     
     logger.info((f"User #{session['user_id']} ({session['username']}) created "
                     f"square {id}"), extra={"section": "square"})
@@ -198,34 +202,80 @@ def create_square():
 
 @app.route("/squares")
 def squares():
+    hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6 = gethotkeys()
     title = request.args.get("title")
     if not title:
         title = None
-    
-    query = "SELECT * FROM squares"
-    modifier = " WHERE ((public = 1 OR creator = ?)"
-    args = [session["user_id"]] if session.get("user_id") else [-1]
+
+    query = """
+        SELECT s.*, 
+               COUNT(sm.square_id) AS in_square
+        FROM squares s
+        LEFT JOIN square_members sm ON s.id = sm.square_id AND sm.user_id = ?
+        WHERE (s.public = 1 OR s.creator = ? OR sm.user_id = ?)
+    """
+    args = [session.get("user_id", -1), session.get("user_id", -1), session.get("user_id", -1)]
+
     if title:
-        modifier += " AND (LOWER(name) LIKE ? OR LOWER(topic) LIKE ? OR LOWER(description) LIKE ? OR LOWER(preview) LIKE ?)"
-        args.append('%' + title.lower() + '%')
-        args.append('%' + title.lower() + '%')
-        args.append('%' + title.lower() + '%')
-        args.append('%' + title.lower() + '%')
-        if session.get("user_id"):
-            db.execute("INSERT INTO searches(user_id, search) VALUES(?, ?)", session['user_id'], title)
-    modifier += ") ORDER BY name ASC"
-    query += modifier
+        query += " AND (LOWER(s.name) LIKE ? OR LOWER(s.topic) LIKE ? OR LOWER(s.description) LIKE ? OR LOWER(s.preview) LIKE ?)"
+        title_like = '%' + title.lower() + '%'
+        args.extend([title_like, title_like, title_like, title_like])
+
+    query += " GROUP BY s.id ORDER BY s.name ASC"
+
     data = db.execute(query, *args)
     
     if not data:
         flash("No such squares found.", "warning")
         return redirect("/")
-    
-    for row in data:
-        row['in_square'] = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=row['id'], uid=session.get("user_id", -1))[0]["cnt"]
-    
-    return render_template("square/squares.html", squares=data)
 
+    # 'in_square' is already calculated in the query, so no need for another loop
+    return render_template("square/squares.html", squares=data, hotkey1=hotkey1, hotkey2=hotkey2, hotkey3=hotkey3, hotkey4=hotkey4, hotkey5=hotkey5, hotkey6=hotkey6)
+
+
+@app.route("/changepassword", methods=["POST"])
+@login_required
+def change_password():
+    old_password = request.form.get("old_password")
+    new_password = request.form.get("new_password")
+    confirmation = request.form.get("confirm_new_password")
+
+    current_pwd_hash = db.execute("SELECT password FROM users WHERE id = ?", session["user_id"])[0]["password"]
+    if not check_password_hash(current_pwd_hash, old_password):
+        flash("Current password is incorrect", "danger")
+        return redirect("/profile")
+    elif new_password != confirmation:
+        flash("Passwords do not match", "danger")
+        return redirect("/profile")
+    elif not new_password or len(new_password) < 8:
+        flash("Password must be at least 8 characters", "danger")
+        return redirect("/profile")
+    
+    db.execute("UPDATE users SET password = ? WHERE id = ?", generate_password_hash(new_password), session["user_id"])
+    
+    flash("Password changed successfully", "success")
+    return redirect("/profile")
+
+
+@app.route("/edithotkeys", methods=["POST"])
+@login_required
+def edit_hotkeys():
+    hotkey1 = request.form.get("hotkey1")
+    hotkey2 = request.form.get("hotkey2")
+    hotkey3 = request.form.get("hotkey3")
+    hotkey4 = request.form.get("hotkey4")
+    hotkey5 = request.form.get("hotkey5")
+    hotkey6 = request.form.get("hotkey6")
+
+    existing_hotkeys = db.execute("SELECT * FROM hotkeys WHERE user_id = ?", session["user_id"])
+    
+    if not existing_hotkeys:
+        db.execute("INSERT INTO hotkeys(user_id, hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6) VALUES(?, ?, ?, ?, ?, ?, ?)", session["user_id"], hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6)
+    else:
+        db.execute("UPDATE hotkeys SET hotkey1 = ?, hotkey2 = ?, hotkey3 = ?, hotkey4 = ?, hotkey5 = ?, hotkey6 = ? WHERE user_id = ?", (hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6, session["user_id"]))
+    
+    flash("Hotkeys updated successfully", "success")
+    return redirect("/profile")
 
 # Error handling
 def errorhandler(e):

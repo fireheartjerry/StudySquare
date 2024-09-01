@@ -79,3 +79,13 @@ def generate_sq_id():
     while id in current_ids:
         id = generate_id(6)
     return id
+
+def gethotkeys():
+    hotkey1 = db.execute("SELECT hotkey1 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey1"]
+    hotkey2 = db.execute("SELECT hotkey2 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey2"]
+    hotkey3 = db.execute("SELECT hotkey3 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey3"]
+    hotkey4 = db.execute("SELECT hotkey4 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey4"]
+    hotkey5 = db.execute("SELECT hotkey5 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey5"]
+    hotkey6 = db.execute("SELECT hotkey6 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey6"]
+    
+    return hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6

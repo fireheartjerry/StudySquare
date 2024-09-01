@@ -19,7 +19,7 @@
                         <h6>Squares Joined: </h6> <p>{{ data['squares_joined'] }}</p>
                         <h6>Total Time in Sessions: </h6> <p id="timeCounter">Loading...</p>
                         <script>
-                            var numSeconds = {{ data['total_seconds'] }}; // do some jinja stuff i think probably
+                            var numSeconds = {{ data['total_seconds'] }};
                             function processNum(a) {
                                 a = Math.floor(a);
                                 if (a < 10) {return "0".concat(a);}
@@ -39,34 +39,22 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Gyat size</th>
-                                    <th scope="col">Deviousness</th>
-                                    <th scope="col">Social Skills</th>
-                                    <th scope="col">Overall Attractiveness</th>
+                                    <th scope="col">Square Name</th>
+                                    <th scope="col">Session Start Date</th>
+                                    <th scope="col">Length of Session</th>
+                                    <th scope="col">Square Host</th>
                                 </tr>
                             </thead>
-                            <tr>
-                                <th scope="row">Jerry Yang</td>
-                                <td>10</td>
-                                <td>3</td>
-                                <td>5</td>
-                                <td>8</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Alvin Pan</td>
-                                <td>9.5</td>
-                                <td>11</td>
-                                <td>6</td>
-                                <td>7.5</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Jerry Li</td>
-                                <td>-1</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>3</td>
-                            </tr>
+                            <tbody>
+                                {% for square in recent_10_squares %}
+                                    <tr>
+                                        <td>{{ square['square_title'] }}</td>
+                                        <td>{{ square['date'] }}</td>
+                                        <td>{{ square['length'] }}</td>
+                                        <td>{{ square['square_creator_username'] }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -78,14 +66,17 @@
             <div class="card mb-4 mx-auto" style="position: relative; width: 100%;">
                 <div class="card-body" style="border: 2px solid #2fa174">
                     <div class="container-fluid">
-                        <h3 class="card-title mt-3 mb-3">Hotkeys</h3>
-                        <input type="text" value="Hot key 1"><br><br>
-                        <input type="text" value="Hot key 2"><br><br>
-                        <input type="text" value="Hot key 3"><br><br>
-                        <input type="text" value="Hot key 4"><br><br>
-                        <input type="text" value="Hot key 5"><br><br>
-                        <input type="text" value="Hot key 6"><br><br>
-                        <button class="btn btn-primary">Save Hotkeys</button>
+                        <h3 class="card-title mt-3 mb-3" id="hotkeys">Hotkeys</h3>
+                        <form action="/edithotkeys" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            Hotkey 1: <input type="text" value="" name="hotkey1"><br><br>
+                            Hotkey 2: <input type="text" value="" name="hotkey2"><br><br>
+                            Hotkey 3: <input type="text" value="" name="hotkey3"><br><br>
+                            Hotkey 4: <input type="text" value="" name="hotkey4"><br><br>
+                            Hotkey 5: <input type="text" value="" name="hotkey5"><br><br>
+                            Hotkey 6: <input type="text" value="" name="hotkey6"><br><br>
+                            <button class="btn btn-primary" type="submit">Save Hotkeys</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -95,13 +86,25 @@
                 <div class="card-body" style="border: 2px solid #2fa174">
                     <div class="container-fluid">
                         <h3 class="card-title mt-3 mb-3">Settings</h3>
-                        <h4 class="d-inline mb-5">Username: </h4> <input type="text" value="Greb"><br><br>
-                        <h4 class="d-inline me-3">Password: </h4> <input type="password" value="****"><br><br>
-                        <button class="btn btn-primary">Save Changes</button>
+                        <form action="/changepassword" method="POST">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            
+                            <h4 class="d-inline me-3">Old Password: </h4><br>
+                            <input type="password" name="old_password"><br><br>
+                            
+                            <h4 class="d-inline me-3">New Password: </h4><br>
+                            <input type="password" name="new_password"><br><br>
+                            
+                            <h4 class="d-inline me-3">Confirm New Password: </h4><br>
+                            <input type="password" name="confirm_new_password"><br><br>
+                            
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
 

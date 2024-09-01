@@ -47,13 +47,19 @@ db.execute("""CREATE TABLE IF NOT EXISTS 'square_join_log' (
                 'square_id' varchar(64) NOT NULL,
                 'square_title' varchar(256) NOT NULL,
                 'square_creator_username' varchar(20) NOT NULL,
+                'session_length' integer NOT NULL DEFAULT(0),
                 'date' datetime NOT NULL DEFAULT(datetime('now'))
             );""")
 
-db.execute("""CREATE TABLE IF NOT EXISTS 'searches' (
+db.execute("""CREATE TABLE IF NOT EXISTS 'hotkeys' (
                 'id' integer PRIMARY KEY NOT NULL,
                 'user_id' integer NOT NULL,
-                'search' TEXT NOT NULL
+                'hotkey1' TEXT NOT NULL,
+                'hotkey2' TEXT NOT NULL,
+                'hotkey3' TEXT NOT NULL,
+                'hotkey4' TEXT NOT NULL,
+                'hotkey5' TEXT NOT NULL,
+                'hotkey6' TEXT NOT NULL
             );""")
 
 db.execute("COMMIT")
