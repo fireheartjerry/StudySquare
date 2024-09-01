@@ -6,7 +6,7 @@
 {% block main %}
 
 <div class="container-fluid px-4">
-    <h1 class="my-5 text-center pt-4">User <p class="d-inline-block fw-bold" style="color: purple;">Greb</p></h1>
+    <h1 class="my-5 text-center pt-4">User <p class="d-inline-block fw-bold" style="color: #2fa174;">{{ data['username'] }}</p></h1>
     
     <div class="row">
         <div class="col col-xl-6 mx-auto">
@@ -14,12 +14,12 @@
                 <div class="card-body" style="border: 2px solid #2fa174">
                     <div class="container-fluid">
                         <h3 class="card-title mt-3 mb-3">Stats</h3>
-                        <h6>Join Date: </h6> <p>when jerry yang dates ariana</p>
-                        <h6>Squares Created: </h6> <p>69</p>
-                        <h6>Squares Joined: </h6> <p>420</p>
-                        <h6>Total Time: </h6> <p id="timeCounter">Loading...</p>
+                        <h6>Join Date: </h6> <p>{{ data['join_date'] }}</p>
+                        <h6>Squares Created: </h6> <p>{{ data['squares_created'] }}</p>
+                        <h6>Squares Joined: </h6> <p>{{ data['squares_joined'] }}</p>
+                        <h6>Total Time in Sessions: </h6> <p id="timeCounter">Loading...</p>
                         <script>
-                            var numSeconds = 6969; // do some jinja stuff i think probably
+                            var numSeconds = {{ data['total_seconds'] }}; // do some jinja stuff i think probably
                             function processNum(a) {
                                 a = Math.floor(a);
                                 if (a < 10) {return "0".concat(a);}
@@ -105,4 +105,16 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block preload %}
+<style>
+    .card {
+        transition: transform 0.5s;
+    }
+
+    .card:hover {
+        transform: scale(1.03);
+    }
+</style>
 {% endblock %}
