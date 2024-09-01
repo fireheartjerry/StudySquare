@@ -11,6 +11,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+main {
+  background-image: url("/static/bg.png");
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 *:not(nav):not(#layoutSidenav) {
   border-radius: 0.2rem !important;
 }
