@@ -22,7 +22,6 @@
             <a href="/squares" class="btn btn-lg btn-info w-100 mt-3">Back to All Squares</a>
         </div>
     </div>
-    {{ difference_seconds }}
     <div class="col-xl-6">
         <div class="card shadow-sm border-2" style="border-color: #2fa174;">
             <div class="card-body p-4">
@@ -47,6 +46,17 @@
                             <i class="fas fa-user d-md-inline-block mx-2"></i>
                         </div>
                     {% endif %}
+                    {% if in_square %}
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-success fs-6 p-1 me-1">You are in this square.</span>
+                            <i class="fas fa-user-check d-md-inline-block mx-2"></i>
+                        </div>
+                    {% else %}
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="badge bg-danger fs-6 p-1 me-1">You are not in this square.</span>
+                            <i class="fas fa-user-times d-md-inline-block mx-2"></i>
+                        </div>
+                    {% endif %}
                     <hr>
                     <div class="d-flex align-items-center mb-3">
                         <span class="badge bg-primary fs-6 p-1 me-2">{{ data.members }}</span>
@@ -62,8 +72,8 @@
                         Created on <span class="badge bg-info fs-6">{{ data.create_date }}</span>
                         <i class="far fa-calendar-alt mw-2"></i>
                     </div>
-                    {% if session.user_id %}
-                        <p class="text-success fw-bold">Session Length: <span id="session-length"><u>00:00:00</u></span></p>
+                    {% if session.user_id and in_square %}
+                        <p class="text-success fw-bold">Session Length: <span id="timer"><u>00:00:00</u></span></p>
                     {% endif %}
                     <hr>
                     <a class="btn btn-primary btn-lg mb-3 w-100" href="https://meet.google.com/{{ data.meeting_code }}" id="join" target="_blank">Join Session</a>
@@ -119,6 +129,31 @@
         // Submit the form
         form.submit();
     });
+    {% if session.user_id %}
+        let timerElement = document.querySelector('#timer');
+        let hours = {{ hours }};
+        let minutes = {{ minutes }};
+        let seconds = {{ seconds }};
+        function updateTimer() {
+            timerElement.textContent = `${String(Math.max(hours, 0)).padStart(2, '0')}:${String(Math.max(minutes, 0)).padStart(2, '0')}:${String(Math.max(seconds, 0)).padStart(2, '0')}`;;
+        } updateTimer();
+        function incrementTimer() {
+            function formatDate(raw) {
+                var split = raw.split(" ");
+                var date_split = split[0].split("-");
+                var final = date_split[1] + "/" + date_split[2] + "/" + date_split[0] + " " + split[1];
+                return new Date(final + " UTC");
+            }
+        
+            let currentTime = new Date();
+            var startTime = formatDate("{{ join }}");
+            let timeDiff = Math.floor((currentTime - startTime) / 1000); // time difference in seconds
+            hours = Math.floor(timeDiff / 3600);
+            minutes = Math.floor((timeDiff % 3600) / 60);
+            seconds = timeDiff % 60;
+            updateTimer();
+        } setInterval(incrementTimer, 500);
+    {% endif %}
 </script>
 {% endblock %}
 

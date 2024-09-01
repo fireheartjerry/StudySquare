@@ -4,20 +4,77 @@
 {% block active %}Home{% endblock %}
 
 {% block main %}
-<h1 class="display-4 mb-4 text-center mt-3" style="font-size: 3em;">Popular Squares</h1>
-<div class="row">
-    {% for square in popular_squares %}
-    <div class="col-md-4 mb-4">
-        <div class="card shadow-sm rounded">
-            <img src="/static/square{{ square.image_type }}.png" class="card-img-top img-fluid" alt="{{ square.name }}">
-            <div class="card-body border-standard">
-                <h5 class="card-title">{{ square.name }}</h5>
-                <p class="card-text">{{ square.description }}</p>
-                <a href="/square/{{ square.id }}" class="btn btn-primary">View Details</a>
-            </div>
-        </div>
+<section class="squares-container">
+    <div class="squares-header text-center">
+        <h1 class="display-4" id="titleHeading">Popular Square</h1>
+        <p class="lead" id="desc">Top three squares by members.</p>
     </div>
-    {% endfor %}
-</div>
+    <div class="squares-grid row">
+        {% for square in popular_squares %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm rounded">
+                    <img src="static/square{{ square.image_type }}.png" class="card-img-top img-fluid" alt="{{ square.name }}">
+                    <div class="card-body border-standard">
+                        <h5 class="card-title">{{ square.name }}</h5>
+                        <p class="card-text">{{ square.preview }}</p>
+                        <p class="card-text"><small class="text-muted">{{ square.members }} Member(s)</small> &middot; <small class="text-muted">{{ square.topic }}</small></p>
+                        <a href="/square/{{ square.id }}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
 
+{% endblock %}
+
+{% block preload %}
+<style>
+    .squares-container {
+        padding: 3rem;
+        background: #f8f9fa;
+    }
+
+    .squares-header {
+        margin-bottom: 2rem;
+    }
+
+    .search-form .input-group {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .squares-grid .card {
+        border: none;
+        border-radius: 0.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .squares-grid .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .squares-grid .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    @media (max-width: 768px) {
+        .squares-grid .col-md-4 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+    }
+</style>
 {% endblock %}

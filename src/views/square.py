@@ -5,10 +5,8 @@ import os
 import shutil
 import zipfile
 from io import BytesIO
+import pytz
 from datetime import datetime, timezone
-from math import floor, log
-
-UTC = timezone.utc
 
 from helpers import *  # noqa
 from db import *
@@ -27,10 +25,17 @@ def square(square_id):
     
     in_square = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session.get("user_id", -1))[0]["cnt"]
     
-    # join = db.execute("SELECT timestamp FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])[0]["timestamp"]
-    # difference_seconds = (datetime.now(UTC) - datetime.strptime(join, "%Y-%m-%d %H:%M:%S.%f")).total_seconds()
-    
-    return render_template("square/square.html", data=data[0], in_square=in_square)
+    duration_seconds, time_taken, join = None, None, None
+    hours, minutes, seconds = 0, 0, 0
+    if in_square:
+        join = db.execute("SELECT join_date FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])[0]['join_date']
+        time_taken = int((datetime.now(pytz.UTC) - pytz.utc.localize(datetime.strptime(join, "%Y-%m-%d %H:%M:%S"))).total_seconds())
+        print(time_taken)
+        hours = time_taken // 3600
+        minutes = (time_taken % 3600) // 60
+        seconds = time_taken % 60
+
+    return render_template("square/square.html", data=data[0], in_square=in_square, duration_seconds=duration_seconds, hours=hours, minutes=minutes, seconds=seconds, time_taken=time_taken, join=join)
 
 @api.route("/<square_id>/edit", methods=["GET", "POST"])
 @login_required
@@ -95,7 +100,9 @@ def join_square(square_id):
     if in_square:
         return redirect(f"/square/{square_id}")
     
-    db.execute("INSERT INTO square_members(square_id, user_id) VALUES(:sid, :uid)", sid=square_id, uid=session["user_id"])
+    db.execute("INSERT INTO square_members(square_id, user_id, join_date) VALUES(:sid, :uid, datetime('now'))", sid=square_id, uid=session["user_id"])
+    
+    db.execute("UPDATE squares SET members = members + 1 WHERE id = :sid", sid=square_id)
     
     db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Joined square \"{data[0]['name']}\" ({square_id}).")
     
@@ -121,6 +128,11 @@ def leave_square(square_id):
         return redirect(f"/square/{square_id}")
     
     db.execute("DELETE FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])
+    
+    join = db.execute("SELECT join_date FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])[0]['join_date']
+    time_taken = int((datetime.now(pytz.UTC) - pytz.utc.localize(datetime.strptime(join, "%Y-%m-%d %H:%M:%S"))).total_seconds())
+    db.execute("UPDATE users SET total_seconds = total_seconds + :time WHERE id = :uid", time=time_taken, uid=session["user_id"])
+    db.execute("UPDATE squares SET members = members - 1 WHERE id = :sid", sid=square_id)
     
     db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Left square \"{data[0]['name']}\" ({square_id}).")
     
