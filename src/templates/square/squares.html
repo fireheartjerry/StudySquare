@@ -18,6 +18,17 @@
                         <h5 class="card-title">{{ square.name }}</h5>
                         <p class="card-text">{{ square.preview }}</p>
                         <p class="card-text"><small class="text-muted">{{ square.members }} Member(s)</small> &middot; <small class="text-muted">{{ square.topic }}</small></p>
+                        {% if square['in_square'] %}
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-success fs-6 p-1 me-1">You are in this square.</span>
+                                <i class="fas fa-user-check d-md-inline-block mx-2"></i>
+                            </div>
+                        {% else %}
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-danger fs-6 p-1 me-1">You are not in this square.</span>
+                                <i class="fas fa-user-times d-md-inline-block mx-2"></i>
+                            </div>
+                        {% endif %}
                         <a href="/square/{{ square.id }}" class="btn btn-primary">View Details</a>
                     </div>
                 </div>

@@ -65,14 +65,17 @@ def index():
     popular_squares = db.execute("SELECT * FROM squares ORDER BY members DESC LIMIT 3")
     return render_template("index.html", popular_squares=popular_squares)
 
+
 @app.route("/square")
 def square():
     return render_template("square.html")
+
 
 @app.route("/profile")
 def profile():
     data = db.execute("SELECT * FROM users WHERE id = :uid", uid=session["user_id"])[0]
     return render_template("profile.html", data=data)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -208,7 +211,10 @@ def squares():
     modifier = " WHERE ((public = 1 OR creator = ?)"
     args = [session["user_id"]] if session.get("user_id") else [-1]
     if title:
-        modifier += " AND (LOWER(name) LIKE ?)"
+        modifier += " AND (LOWER(name) LIKE ? OR LOWER(topic) LIKE ? OR LOWER(description) LIKE ? OR LOWER(preview) LIKE ?)"
+        args.append('%' + title.lower() + '%')
+        args.append('%' + title.lower() + '%')
+        args.append('%' + title.lower() + '%')
         args.append('%' + title.lower() + '%')
         if session.get("user_id"):
             db.execute("INSERT INTO searches(user_id, search) VALUES(?, ?)", session['user_id'], title)
@@ -221,7 +227,7 @@ def squares():
         return redirect("/")
     
     for row in data:
-        row['inside_square'] = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=row['id'], uid=session.get("user_id", -1))[0]["cnt"]
+        row['in_square'] = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=row['id'], uid=session.get("user_id", -1))[0]["cnt"]
     
     return render_template("square/squares.html", squares=data)
 

@@ -44,6 +44,24 @@
                 <label for="description">Description <span id="description-counter" class="text-primary">(0/1000)</span></label>
             </div>
 
+            <div class="form-floating mb-3" title="Select a topic for your square.">
+                <select class="form-select"
+                        name="topic"
+                        id="topic"
+                        required>
+                    <option value="math" selected>Math</option>
+                    <option value="physics">Physics</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="biology">Biology</option>
+                    <option value="history">History</option>
+                    <option value="geography">Geography</option>
+                    <option value="computer_science">Computer Science</option>
+                    <option value="languages">Languages</option>
+                    <option value="other">Other</option>
+                </select>
+                <label for="topic">Select a Topic</label>
+            </div>
+
             Select an image for your square:
             <div class="form-floating mb-3" title="Select the image type">
                 <div class="row text-center">
@@ -125,26 +143,7 @@
                 <label for="privacy">Privacy</label>
             </div>
 
-            <div class="form-floating mb-3" title="Select a topic for your square.">
-                <select class="form-select"
-                        name="topic"
-                        id="topic"
-                        required>
-                    <option value="math" selected>Math</option>
-                    <option value="physics">Physics</option>
-                    <option value="chemistry">Chemistry</option>
-                    <option value="biology">Biology</option>
-                    <option value="english">English</option>
-                    <option value="history">History</option>
-                    <option value="geography">Geography</option>
-                    <option value="computer_science">Computer Science</option>
-                    <option value="languages">Languages</option>
-                    <option value="other">Other</option>
-                </select>
-                <label for="topic">Select a Topic</label>
-            </div>
-
-            <span>Please navigate <span><a href="https://meet.google.com/landing">here</a></span> to create a google meets and get the meeting code.</span>
+            <span>Please navigate <span><a href="https://meet.google.com/landing">here</a></span> to create a Google Meet and get the meeting code.</span>
             <div class="form-floating mb-3" title="Please create a google meets and add the meeting code here. An example is qzi-aepz-nxq.">
                 <input class="form-control"
                        name="meeting_code"
