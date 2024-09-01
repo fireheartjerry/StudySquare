@@ -64,7 +64,7 @@ app.register_blueprint(view_square, url_prefix="/square")
 def index():
     hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6 = gethotkeys()
     
-    popular_squares = db.execute("SELECT * FROM squares ORDER BY members DESC LIMIT 3")
+    popular_squares = db.execute("SELECT * FROM squares WHERE public=1 ORDER BY members DESC LIMIT 3")
     return render_template("index.html", popular_squares=popular_squares, hotkey1=hotkey1, hotkey2=hotkey2, hotkey3=hotkey3, hotkey4=hotkey4, hotkey5=hotkey5, hotkey6=hotkey6)
 
 
