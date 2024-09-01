@@ -16,6 +16,19 @@
   font-family: "Roboto Slab" !important;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  background-color: #484070;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2fa174;
+}
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
