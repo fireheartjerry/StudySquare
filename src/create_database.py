@@ -41,12 +41,13 @@ db.execute("""CREATE TABLE IF NOT EXISTS 'search_presets' (
                 'preset' TEXT NOT NULL
             );""")
 
-db.execute("""CREATE TABLE IF NOT EXISTS 'activity_log' (
+db.execute("""CREATE TABLE IF NOT EXISTS 'square_join_log' (
                 'id' integer PRIMARY KEY NOT NULL,
                 'user_id' integer NOT NULL,
-                'square_id' varchar(64),
-                'action' TEXT NOT NULL,
-                'timestamp' datetime NOT NULL DEFAULT(0)
+                'square_id' varchar(64) NOT NULL,
+                'square_title' varchar(256) NOT NULL,
+                'square_creator_username' varchar(20) NOT NULL,
+                'date' datetime NOT NULL DEFAULT(datetime('now'))
             );""")
 
 db.execute("""CREATE TABLE IF NOT EXISTS 'searches' (

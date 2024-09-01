@@ -30,7 +30,6 @@ def square(square_id):
     if in_square:
         join = db.execute("SELECT join_date FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])[0]['join_date']
         time_taken = int((datetime.now(pytz.UTC) - pytz.utc.localize(datetime.strptime(join, "%Y-%m-%d %H:%M:%S"))).total_seconds())
-        print(time_taken)
         hours = time_taken // 3600
         minutes = (time_taken % 3600) // 60
         seconds = time_taken % 60
@@ -77,9 +76,7 @@ def edit_square(square_id):
     db.execute(("UPDATE squares SET name = :name, preview = :preview, description = :description, public = :public, meeting_code = :meeting_code, image_type = :image_type, topic = :topic "
                 "WHERE id = :sid"),
                name=new_name, preview=new_preview, description=new_description, public=bool(int(new_privacy)), meeting_code=new_meeting_code, image_type=new_image_type, topic=new_topic, sid=square_id)
-    
-    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Edited square \"{new_name}\" ({square_id}).")
-    
+        
     logger.info((f"User #{session['user_id']} ({session['username']}) edited "
                     f"square {square_id}"), extra={"section": "square"})
     flash('Square edited successfully!', 'success')
@@ -103,8 +100,7 @@ def join_square(square_id):
     db.execute("INSERT INTO square_members(square_id, user_id, join_date) VALUES(:sid, :uid, datetime('now'))", sid=square_id, uid=session["user_id"])
     
     db.execute("UPDATE squares SET members = members + 1 WHERE id = :sid", sid=square_id)
-    
-    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Joined square \"{data[0]['name']}\" ({square_id}).")
+    db.execute("UPDATE users SET squares_joined = squares_joined + 1 WHERE id = :uid", uid=session["user_id"])
     
     logger.info((f"User #{session['user_id']} ({session['username']}) joined "
                     f"square {square_id}"), extra={"section": "square"})
@@ -127,14 +123,11 @@ def leave_square(square_id):
         flash("You are not in this square", "danger")
         return redirect(f"/square/{square_id}")
     
-    db.execute("DELETE FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])
     
     join = db.execute("SELECT join_date FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])[0]['join_date']
     time_taken = int((datetime.now(pytz.UTC) - pytz.utc.localize(datetime.strptime(join, "%Y-%m-%d %H:%M:%S"))).total_seconds())
     db.execute("UPDATE users SET total_seconds = total_seconds + :time WHERE id = :uid", time=time_taken, uid=session["user_id"])
     db.execute("UPDATE squares SET members = members - 1 WHERE id = :sid", sid=square_id)
-    
-    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Left square \"{data[0]['name']}\" ({square_id}).")
     
     logger.info((f"User #{session['user_id']} ({session['username']}) left "
                     f"square {square_id}"), extra={"section": "square"})
@@ -173,9 +166,7 @@ def delete_square(square_id):
     
     # Delete square from database
     db.execute("DELETE FROM squares WHERE id = :sid", sid=square_id)
-    
-    db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(:uid, :action, datetime('now'))", uid=session["user_id"], action=f"Deleted square \"{data[0]['name']}\" ({square_id}).")
-    
+        
     logger.info((f"User #{session['user_id']} ({session['username']}) deleted "
                     f"square {square_id}"), extra={"section": "square"})
     flash('Square deleted successfully!', 'success')
