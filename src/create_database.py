@@ -34,13 +34,6 @@ db.execute("""CREATE TABLE IF NOT EXISTS 'square_members' (
                 'join_date' datetime NOT NULL
             );""")
 
-db.execute("""CREATE TABLE IF NOT EXISTS 'search_presets' (
-                'id' integer PRIMARY KEY NOT NULL,
-                'user_id' integer NOT NULL,
-                'preset_name' varchar(64) NOT NULL,
-                'preset' TEXT NOT NULL
-            );""")
-
 db.execute("""CREATE TABLE IF NOT EXISTS 'square_join_log' (
                 'id' integer PRIMARY KEY NOT NULL,
                 'user_id' integer NOT NULL,

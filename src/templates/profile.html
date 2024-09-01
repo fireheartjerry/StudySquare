@@ -48,14 +48,28 @@
                             <tbody>
                                 {% for square in recent_10_squares %}
                                     <tr>
-                                        <td>{{ square['square_title'] }}</td>
-                                        <td>{{ square['date'] }}</td>
-                                        <td>{{ square['length'] }}</td>
-                                        <td>{{ square['square_creator_username'] }}</td>
+                                        <td>{{ square.square_title }}</td>
+                                        <td>{{ square.date }}</td>
+                                        <td class="session-length" data-len="{{ square.session_length }}">{% if square.session_length == 0 %}Session not ended{% else %}{{ square.session_length }}{% endif %}</td>
+                                        <td>{{ square.square_creator_username }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
+                        <script>
+                            function processNum(a) {
+                                a = Math.floor(a);
+                                if (a < 10) { return "0".concat(a); }
+                                return a;
+                            }
+                            
+                            document.querySelectorAll('.session-length').forEach(function(element) {
+                                var dataLength = parseInt(element.dataset.len);
+                                if (dataLength !== 0) {
+                                    element.innerHTML = processNum(dataLength / 3600) + ":" + processNum((dataLength % 3600) / 60) + ":" + processNum(dataLength % 60);
+                                }
+                            });                            
+                        </script>
                     </div>
                 </div>
             </div>

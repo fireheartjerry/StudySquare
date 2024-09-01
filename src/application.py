@@ -151,7 +151,7 @@ def register():
 
     user = db.execute("SELECT * FROM users WHERE username=?", username)[0]
 
-    db.execute("INSERT INTO hotkeys(user_id, hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6) VALUES(?, ?, ?, ?, ?, ?, ?)", user['id'], "Math", "SAT", "Physics", "AP", "Contest", "")
+    db.execute("INSERT INTO hotkeys(user_id, hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6) VALUES(?, ?, ?, ?, ?, ?, ?)", user['id'], "Math", "English", "Science", "", "", "")
     
     session["user_id"] = user["id"]
     session["username"] = user["username"]

@@ -35,9 +35,13 @@
                         <i class="fas fa-person d-md-inline-block mx-2"></i>
                     </div>
                     <a href="#" id="share-link" class="text-primary fw-bold d-block mb-3">Share this square</a>
-                    <p class="text-success fw-bold">Square Uptime: <span id="session-length"><u>00:00:00</u></span></p>
+                    <div class="mb-3">
+                        Created on <span class="badge bg-info fs-6">{{ data.create_date }}</span>
+                        <i class="far fa-calendar-alt mw-2"></i>
+                    </div>
                     <a class="btn btn-primary btn-lg mb-3 w-100" href="/square/{{ data.id }}/edit">Edit Square</a>
                     <button class="btn btn-danger w-100 mb-3 delete">Delete Square</button>
+                    <a class="btn btn-secondary btn-lg mb-3 w-100" href="/square/{{ data.id }}">Back to Square</a>
                 </div>
             </div>
         </div>
