@@ -81,6 +81,9 @@ def generate_sq_id():
     return id
 
 def gethotkeys():
+    if not session.get("user_id"):
+        return None, None, None, None, None, None
+    
     hotkey1 = db.execute("SELECT hotkey1 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey1"]
     hotkey2 = db.execute("SELECT hotkey2 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey2"]
     hotkey3 = db.execute("SELECT hotkey3 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey3"]
