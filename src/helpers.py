@@ -84,11 +84,35 @@ def gethotkeys():
     if not session.get("user_id"):
         return None, None, None, None, None, None
     
-    hotkey1 = db.execute("SELECT hotkey1 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey1"]
-    hotkey2 = db.execute("SELECT hotkey2 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey2"]
-    hotkey3 = db.execute("SELECT hotkey3 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey3"]
-    hotkey4 = db.execute("SELECT hotkey4 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey4"]
-    hotkey5 = db.execute("SELECT hotkey5 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey5"]
-    hotkey6 = db.execute("SELECT hotkey6 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))[0]["hotkey6"]
+    hotkey1 = db.execute("SELECT hotkey1 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))
+    if not hotkey1:
+        hotkey1 = ""
+    else:
+        hotkey1 = hotkey1[0]['hotkey1']
+    hotkey2 = db.execute("SELECT hotkey2 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))
+    if not hotkey2:
+        hotkey2 = ""
+    else:
+        hotkey2 = hotkey2[0]['hotkey2']
+    hotkey3 = db.execute("SELECT hotkey3 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))
+    if not hotkey3:
+        hotkey3 = ""
+    else:
+        hotkey3 = hotkey3[0]['hotkey3']
+    hotkey4 = db.execute("SELECT hotkey4 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))
+    if not hotkey4:
+        hotkey4 = ""
+    else:
+        hotkey4 = hotkey4[0]['hotkey4']
+    hotkey5 = db.execute("SELECT hotkey5 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))
+    if not hotkey5:
+        hotkey5 = ""
+    else:
+        hotkey5 = hotkey5[0]['hotkey5']
+    hotkey6 = db.execute("SELECT hotkey6 FROM hotkeys WHERE user_id = ?", session.get("user_id", -1))
+    if not hotkey6:
+        hotkey6 = ""
+    else:
+        hotkey6 = hotkey6[0]['hotkey6']
     
     return hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6

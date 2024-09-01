@@ -130,6 +130,7 @@ def leave_square(square_id):
         time_taken = int((datetime.now(pytz.UTC) - pytz.utc.localize(datetime.strptime(join, "%Y-%m-%d %H:%M:%S"))).total_seconds())
         db.execute("UPDATE users SET total_seconds = total_seconds + :time WHERE id = :uid", time=time_taken, uid=session["user_id"])
         db.execute("UPDATE squares SET members = members - 1 WHERE id = :sid", sid=square_id)
+        db.execute("UPDATE square_join_log SET session_length=:len WHERE user_id=:uid AND square_id=:sid")
         db.execute("DELETE FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=square_id, uid=session["user_id"])
     
     if session.get("user_id"):

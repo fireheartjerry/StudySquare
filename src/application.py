@@ -150,6 +150,9 @@ def register():
         return render_template("auth/register.html"), 400
 
     user = db.execute("SELECT * FROM users WHERE username=?", username)[0]
+
+    db.execute("INSERT INTO hotkeys(user_id, hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6) VALUES(?, ?, ?, ?, ?, ?, ?)", user['id'], "Math", "SAT", "Physics", "AP", "Contest", "")
+    
     session["user_id"] = user["id"]
     session["username"] = user["username"]
 
@@ -192,7 +195,7 @@ def create_square():
     
     db.execute("INSERT INTO square_members(square_id, user_id, join_date) VALUES(?, ?, datetime('now'))", id, session["user_id"])
     db.execute("UPDATE users SET squares_created = squares_created + 1 WHERE id = ?", session["user_id"])
-    db.execute("INSERT INTO square_join_log(user_id, square_id, square_title, square_creator_username) VALUES(?, ?, ?, ?)", (session["user_id"], id, square_name, session["username"]))
+    db.execute("INSERT INTO square_join_log(user_id, square_id, square_title, square_creator_username) VALUES(?, ?, ?, ?)", session["user_id"], id, square_name, session["username"])
     
     logger.info((f"User #{session['user_id']} ({session['username']}) created "
                     f"square {id}"), extra={"section": "square"})
@@ -272,7 +275,7 @@ def edit_hotkeys():
     if not existing_hotkeys:
         db.execute("INSERT INTO hotkeys(user_id, hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6) VALUES(?, ?, ?, ?, ?, ?, ?)", session["user_id"], hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6)
     else:
-        db.execute("UPDATE hotkeys SET hotkey1 = ?, hotkey2 = ?, hotkey3 = ?, hotkey4 = ?, hotkey5 = ?, hotkey6 = ? WHERE user_id = ?", (hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6, session["user_id"]))
+        db.execute("UPDATE hotkeys SET hotkey1 = ?, hotkey2 = ?, hotkey3 = ?, hotkey4 = ?, hotkey5 = ?, hotkey6 = ? WHERE user_id = ?", hotkey1, hotkey2, hotkey3, hotkey4, hotkey5, hotkey6, session["user_id"])
     
     flash("Hotkeys updated successfully", "success")
     return redirect("/profile")
@@ -304,5 +307,5 @@ def security_policies(response):
     return response
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5001)
     
