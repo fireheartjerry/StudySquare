@@ -71,7 +71,8 @@ def square():
 
 @app.route("/profile")
 def profile():
-    return render_template("profile.html")
+    data = db.execute("SELECT * FROM users WHERE id = :uid", uid=session["user_id"])[0]
+    return render_template("profile.html", data=data)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -187,6 +188,8 @@ def create_square():
                 "VALUES(?, ?, ?, datetime('now'), ?, ?, ?, ?, ?, ?)"),
                id, square_name, session['user_id'], preview, description, bool(int(privacy)), meeting_code, image_type, topic)
     
+    db.execute("INSERT INTO square_members(square_id, user_id, join_date) VALUES(?, ?, datetime('now'))", id, session["user_id"])
+    
     db.execute("INSERT INTO activity_log(user_id, action, timestamp) VALUES(?, ?, datetime('now'))", session["user_id"], f"Created square \"{square_name}\" ({id}).")
     
     logger.info((f"User #{session['user_id']} ({session['username']}) created "
@@ -200,7 +203,6 @@ def squares():
     title = request.args.get("title")
     if not title:
         title = None
-    print(title)
     
     query = "SELECT * FROM squares"
     modifier = " WHERE ((public = 1 OR creator = ?)"
@@ -208,16 +210,18 @@ def squares():
     if title:
         modifier += " AND (LOWER(name) LIKE ?)"
         args.append('%' + title.lower() + '%')
+        if session.get("user_id"):
+            db.execute("INSERT INTO searches(user_id, search) VALUES(?, ?)", session['user_id'], title)
     modifier += ") ORDER BY name ASC"
     query += modifier
-    print(query)
-    print()
     data = db.execute(query, *args)
-    print(data)
     
     if not data:
         flash("No such squares found.", "warning")
         return redirect("/")
+    
+    for row in data:
+        row['inside_square'] = db.execute("SELECT COUNT(*) AS cnt FROM square_members WHERE square_id = :sid AND user_id = :uid", sid=row['id'], uid=session.get("user_id", -1))[0]["cnt"]
     
     return render_template("square/squares.html", squares=data)
 
