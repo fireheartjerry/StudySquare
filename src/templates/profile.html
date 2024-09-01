@@ -69,12 +69,12 @@
                         <h3 class="card-title mt-3 mb-3" id="hotkeys">Hotkeys</h3>
                         <form action="/edithotkeys" method="POST">
                             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                            Hotkey 1: <input type="text" value="" name="hotkey1"><br><br>
-                            Hotkey 2: <input type="text" value="" name="hotkey2"><br><br>
-                            Hotkey 3: <input type="text" value="" name="hotkey3"><br><br>
-                            Hotkey 4: <input type="text" value="" name="hotkey4"><br><br>
-                            Hotkey 5: <input type="text" value="" name="hotkey5"><br><br>
-                            Hotkey 6: <input type="text" value="" name="hotkey6"><br><br>
+                            Hotkey 1: <input type="text" value="{{ hotkey1 }}" name="hotkey1"><br><br>
+                            Hotkey 2: <input type="text" value="{{ hotkey2 }}" name="hotkey2"><br><br>
+                            Hotkey 3: <input type="text" value="{{ hotkey3 }}" name="hotkey3"><br><br>
+                            Hotkey 4: <input type="text" value="{{ hotkey4 }}" name="hotkey4"><br><br>
+                            Hotkey 5: <input type="text" value="{{ hotkey5 }}" name="hotkey5"><br><br>
+                            Hotkey 6: <input type="text" value="{{ hotkey6 }}" name="hotkey6"><br><br>
                             <button class="btn btn-primary" type="submit">Save Hotkeys</button>
                         </form>
                     </div>
