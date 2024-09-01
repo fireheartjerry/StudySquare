@@ -117,7 +117,7 @@ def leave_square(square_id):
     data = db.execute("SELECT * FROM squares WHERE id = :sid", sid=square_id)
     
     if not data:
-        flash("Square not found", "error")
+        flash("Square not found", "danger")
         return redirect("/squares")
     
     if session.get("user_id"):
